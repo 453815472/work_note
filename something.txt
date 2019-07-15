@@ -48,8 +48,109 @@ ABS_MT_POSITION_X: (必须)： 报告工具的X坐标
 ABS_MT_POSITION_Y: (必须)： 报告工具的X坐标 
 BTN_TOUCH: (必须) ： 指示工具是否接触触摸设备
 
+/---------------927/926寄存器设置-------------------------
+
+927中gpio设置：
+GPIO Function Enable
+1: Enable GPIO operation		//gpio功能
+0: Enable normal operation		//常规功能，即复用的功能
 
 
+Note: 
+if the DS90UB927Q-Q1 is paired with a DS90UB926Q-Q1 deserializer, the devices must be configured into 18-bit mode to allow usage of
+GPIO pins on the DS90UB927 serializer. To enable 18-bit mode, set serializer register reg_0x12[2] = 1. 18-bit
+mode will be auto-loaded into the deserializer from the serializer. 
+意思是，如果927与926配对使用，必须把0x12寄存器的第[2]位设置为1，配置成 18-bit 模式，才能在927上允许使用GPIO引脚功能。
+
+GPIO[0:3] 这4个gpio是可以用作透传的，其他gpio不可以透传,GPIO_REG[5:8]就不能透传。
+透传的gpio，需要同时设置927和926的gpio寄存器，才能实现透传功能。
+
+
+
+
+Table 1. GPIO Enable and Configuration（透传设置）：
+
+引脚			设备					由927-->926正向透传			由926--->927反向透传
+DESCRIPTION		DEVICE					FORWARD CHANNEL				BACK CHANNEL
+GPIO3 			DS90UB927Q-Q1 			0x0F = 0x03 				0x0F = 0x05
+GPIO3			DS90UB926/8Q-Q1 		0x1F = 0x05 				0x1F = 0x03
+
+GPIO2			DS90UB927Q-Q1 			0x0E = 0x30 				0x0E = 0x50
+GPIO2			DS90UB926/8Q-Q1 		0x1E = 0x50 				0x1E = 0x30	
+
+GPIO1			DS90UB927Q-Q1			0x0E = 0x03 				0x0E = 0x05
+GPIO1			DS90UB926/8Q-Q1 		0x1E = 0x05 				0x1E = 0x03
+
+GPIO0			DS90UB927Q-Q1 			0x0D = 0x03 				0x0D = 0x05
+GPIO0			DS90UB926/8Q-Q1 		0x1D = 0x05 				0x1D = 0x03
+
+
+
+
+
+
+
+
+Table 2. GPIO_REG and GPIO Local Enable and Configuration(本地gpio设置)
+
+DESCRIPTION 			REGISTER CONFIGURATION 				FUNCTION
+GPIO_REG8				0x11 = 0x01 						Output, L
+						0x11 = 0x09 						Output, H
+						0x11 = 0x03 						Input, Read: 0x1D[0]
+
+GPIO_REG7				0x10 = 0x01 						Output, L
+						0x10 = 0x09							Output, H
+						0x10 = 0x03 						Input, Read: 0x1C[7]
+。。。
+
+
+
+IDx 引脚的功能是 配置device I2C Address Select
+
+
+PDB = H, device is enabled (normal operation)
+PDB = L, device is powered down.
+
+INTB	Interrupt
+		INTB = H, normal
+		INTB = L, Interrupt request
+		Recommended pullup: 4.7 kΩ to VDDIO. 
+		
+		
+		
+FPD-Link interface (4 LVDS data channels + 1 LVDS Clock)		
+		
+		
+7.3.12 Interrupt Pin (INTB)
+1. On the DS90UB927Q-Q1 serializer, set register reg_0xC6[5] = 1 and 0xC6[0] = 1 (Table 5) to configure the
+interrupt.
+2. On the serializer, read from ISR register 0xC7 to arm the interrupt for the first time.
+3. When INTB_IN on the deserializer (DS90UB926Q-Q1 or DS90UB928Q-Q1) is set LOW, the INTB pin on the
+serializer also pulls low, indicating an interrupt condition.
+4. The external controller detects INTB = LOW and reads the ISR register (Table 5) to determine the interrupt
+source. Reading this register also clears and resets the interrupt.	
+		
+		
+读取927寄存器0x0c，可查看927/926连接状态。		
+the Link Detect Status is 0 (cable is not detected) on bit 0 of address 0x0C 	
+		
+		
+		
+		
+serializer
+927		----单LVDS输入，单FPD-Link输出， 没有 REM_INTB引脚
+929		----单HDMI输入，单FPD-Link输出， 有   REM_INTB引脚
+949		----单HDMI输入，双FPD-Link输出， 有   REM_INTB引脚
+
+
+
+
+deserializer		
+926		----单FPD-Link输入，单RGB输出
+928		----单FPD-Link输入，单LVDS输出
+948		----双FPD-Link输入，单LVDS输出
+		
+		
 
 插入iPhone手机，并没有点击车机的carlife软件图标，
 1.	create /dev/iap ok
@@ -105,7 +206,7 @@ $ poky/download.sh
     git config --global user.email "yuzp@zhonghongcarav.com.cn"
     git config --global user.name "yuzp"
  
- 
+如果以前下载过ALS，可以执行一次repo sync，在.repo/manifests/中就可看到als_v2.6.0.xml，再执行repo init -m als_v2.6.0.xml && repo sync即可下载v2.6.0版本 
  
  
  黄锐胜:
@@ -409,6 +510,7 @@ require 文件的路径，相当于C语言中的include，也是有默认目录和当前目录 2种搜索路径
 1.以 poky\meta\ 为顶层目录，即默认搜索目录。
 2.以当前目录下搜索
 
+每一个conf目录下的layer.conf文件中的变量都是全局变量
 
 inherit kernel
 note：
@@ -628,8 +730,11 @@ FILES_${PN} += " \
 //这句话是 指定需要放入包中的文件的列表。
 //FILES 相对路径是${D}目录，即$ {WORKDIR} / image 下的目录及文件
 
+${WORKDIR}:	$ {TMPDIR} / work / $ {MULTIMACH_TARGET_SYS} / $ {PN} / $ {EXTENDPE} $ {PV} - $ {PR}
+tmp\work\cortexa7-neon-telechips-linux-gnueabi\mytest\1.0.0-r0
 
-
+${S}:	${WORKDIR} / $ {PN} - $ {PV}
+${D}:	${WORKDIR} / image
 The list of packages to be created from the recipe. The default value is the following:
  ${PN}-dbg ${PN}-staticdev ${PN}-dev ${PN}-doc ${PN}-locale ${PACKAGE_BEFORE_PN} ${PN}
 
@@ -745,4 +850,608 @@ do_set_kernel_defconfig() {
 
 
 
-aaaaaaaaaaaaaaaa
+gst-launch-1.0 filesrc location=/run/media/sda1/http_and_raw_h264_800x416_30sec.bin ! h264parse ! omxh264dec ! v4l2sink
+
+gst-launch-1.0 playbin uri=file:///run/media/sda1/http_and_raw_h264_800x416_30sec.bin video-sink=v4l2sink 
+
+
+
+
+
+
+
+
+
+
+tcc8974 代码管理路径：
+环境，	git@githost:telechips-tcc8971.git
+kernel	git@githost:telechips-tcc8971-kernel.git
+uboot	git@githost:telechips-tcc8971-uboot.git
+
+
+
+
+
+
+
+
+
+
+比较实用的应用
+$ ls | xargs -t -i mv {} {}.bak
+-i 选项告诉 xargs 用每项的名称替换 {}。
+
+find ./ -nama ".git"|xargs rm -rf
+
+
+cat /proc/interrupts
+
+echo 1 > /proc/sys/kernel/printk
+
+
+
+
+$(MAKEFILE_LIST) 会返回最近使用的Makefile文件（如果使用了include 包含了一个Makefile文件那么返回就是这个被include 包含的Makefile文件的路径，如果没有使用include 那么返回的是正在使用的Makefile文件所在的绝对路径）
+
+lastword这个函数表示提取最后一个MAKEFILE_LIST列表里的最后一个元素。元素与元素之间是以空格符分开。 $(lastword $(MAKEFILE_LIST)) 表示提取最后一个Makefile
+--------------------- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CarLife 做 MFI 认证需要通过 IAP2 的认证 
+
+百度 CarLife 手机和车机采用的是 EAP 连接， 
+而 CarPlay 是通过 NCM 端口来传输数据的 
+
+AOA是什么？
+
+
+
+
+
+
+高清屏项目调试触摸屏出现的现象：
+1.CPU占用率高。 当触摸时，CPU占用率瞬间会升高到70%左右
+2.i2c不稳定。	读到的数据，时常会出现校验和错误
+
+
+I2C scl高电平期间, sda读取数据
+	scl低电平期间，sda发送数据
+所有的时钟脉冲包括ACK信号对应的时钟脉冲都是由master产生的。
+        ACK信号：发送者在ACK时钟脉冲期间释放SDA线，接收者可以将SDA拉低并在时钟信号为高时保持低电平。
+
+        NACK信号：当在第9个时钟脉冲的时候SDA线保持高电平，就被定义为NACK信号。Master要么产生STOP条件来放弃这次传输，或者重复START条件来发起一个新的开始。
+--------------------- 
+
+jiffies 的时间单位：
+jiffies的计数增加，是根据HZ的值面而变化的。
+如果 HZ=100， 1个jiffies = 10 ms
+如果 HZ=1000, 1个jiffies = 1 ms 
+
+root@telechips-tcc8971-lcn-2:/opt/data# ./mmc cid read /sys/devices/76020000.sdhc/mmc_host/mmc1/mmc1:59b4
+type: 'SD'
+manufacturer: 'Unlisted' ''
+product: 'SCI  ' 0.0
+serial: 0x00000000
+manfacturing date: 2017 mar
+root@telechips-tcc8971-lcn-2:/opt/data# 
+
+serial 同一个厂家的serial是一样的，不同厂家的serial可能会出现一样。所以需要应用上加上 厂商名称、品牌等信息做区分。
+
+bInterval:	端点数据传输的访问时间间隔。对于全速/低速的中断端点，取值范围为 1~255，对于高速中断端点，取值范围为1~16
+			这个值只有在端点类型是中断类型时才起作用，它是端点中断请求的间隔时间，以毫秒为单位。
+			
+			
+	_ _u8 bInterval;//轮询数据传送端点的时间间隔
+	                       //对于批量传送的端点以及控制传送的端点，此域忽略
+	                    //对于同步传送的端点，此域必须为1			
+			
+			
+			
+			
+一、USB 描述符：（存在于USB 的E2PROM里面）
+
+1、  设备描述符：struct usb_device_descriptor
+
+2、  配置描述符：struct usb_config_descriptor
+
+3、  接口描述符：struct usb_interface_descriptor
+
+4、  端点描述符：struct usb_endpoint_descriptor			
+
+
+
+
+二、USB的传输方式：
+USB_ENDPOINT_XFER_CONTROL（控制传输）（control）
+       用于配置设备、获取设备信息、发送命令或者获取设备的状态报告
+	   
+USB_ENDPOINT_XFER_INT（中断传输）（interrupt）
+       （这里说的中断和硬件上下文的中断不一样，它不是设备主动发送一个中断请求，而是主控制器在保证不大于某个时间间隔interval内安排的一次数据传输）例如USB鼠标、USB键盘
+	   
+USB_ENDPOINT_XFER_BULK（批量传输）（bulk）
+       用于大量数据的可靠传输，如果总线上的空间不足以发送整个批量包，它会被分割成多个包传输。没有固定的传输速率，例如usb打印机、扫描仪、U盘等，对应的端点就叫批量端点
+	   
+USB_ENDPOINT_XFER_ISOC（等时传输）（isochronous）
+       大量数据的不可靠传输，不保证数据的到达，对实时性要求很高， 例如音频、视频等设备（USB摄像头、USB话筒），对应的端点就叫等时端点		
+	   
+	   
+	   
+	   
+git 公钥和私钥 ssh
+https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5
+
+
+下面是设备树中节点属性status的处理代码，位于内核的drivers/of/base.c中
+
+static bool __of_device_is_available(const struct device_node *device)
+{
+    const char *status;
+    int statlen;
+
+    if (!device)
+        return false;
+
+    status = __of_get_property(device, "status", &statlen);
+    if (status == NULL)
+        return true; //默认为使能
+
+    if (statlen > 0) {
+        if (!strcmp(status, "okay") || !strcmp(status, "ok")) //ok和okay都可以
+            return true;
+    }
+    //表中的fail和fail-sss没做具体处理
+    return false;
+}
+--------------------- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+查看某个文件的提交历史
+git log filename
+
+查看某个文件夹的提交历史 ？
+
+
+查看某个历史版本文件的修改内容
+git show commit_id filename
+	   
+
+
+如何制作Ext4文件系统镜像
+https://blog.csdn.net/q123456789098/article/details/51912015
+	   
+mount -t ext4 -o loop test.ext4 mount_test
+
+mkuserimg.sh文件路径：Android sdk中的 out/host/linux-x86/bin/mkuserimg.sh
+
+
+mkuserimg.sh [-s] SRC_DIR OUTPUT_FILE EXT_VARIANT MOUNT_POINT SIZE
+./mkuserimg.sh -s /some/directory/with/files ./factoryfs_custom.img ext4 ./temp 512M
+
+
+
+
+
+
+
+
+meta/classes/image-live.bbclass:46:ROOTFS ?= "${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.ext4"
+meta/classes/image-live.bbclass:48:IMAGE_TYPEDEP_live = "ext4"
+meta/classes/image-live.bbclass:49:IMAGE_TYPEDEP_iso = "ext4"
+meta/classes/image-live.bbclass:50:IMAGE_TYPEDEP_hddimg = "ext4"
+meta/classes/image-vm.bbclass:35:VM_ROOTFS_TYPE ?= "ext4"
+
+
+
+automotive-linux-platform-image-tcc8971-lcn-2.0a.ext4
+
+ROOTFS ?= "${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.ext4"
+IMAGE_LINK_NAME = "${IMAGE_BASENAME}-${MACHINE}"
+${IMAGE_BASENAME}  --> IMAGE_BASENAME = "${PN}" --> automotive-linux-platform-image
+${MACHINE}  --> tcc8971-lcn-2.0a
+
+
+
+ROOTFS ?= "${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.${VM_ROOTFS_TYPE}"
+
+
+
+
+
+poky/meta-telechips/meta-update/recipes-applications/images/automotive-linux-platform-image.bbappend			就是bootloader、dtb、kernel、rootfs 的拷贝到update文件夹 及重命名
+
+
+
+interrupts = <GIC_SPI 66 IRQ_TYPE_LEVEL_HIGH>,
+		 <GIC_SPI 67 IRQ_TYPE_LEVEL_HIGH>;
+		 
+*第一个cell表示中断类型，0代表SPI interrupts，1代表PPI interrupts
+*第二个cell表示中断号码，SPI interrupts的中断号范围是0 ~ 987，而PPI
+*interrupts的中断号范围是0 ~ 15
+*第三个cell表示触发方式，它有4个值，分别为1，2，4，8
+*1表示上升沿触发，2表示下降沿触发
+*4表示高电平触发，8表示低电平触发. 
+--------------------- 
+
+gpio-controller;//表明自己的身份为gpio控制器
+#gpio-cells = <2>;
+//第一个cell表示gpio号，第二个cell表示gpio默认电平
+interrupt-controller;//表明自己的身份为中断控制器
+#interrupt-cells = <2>;
+//第一个cell表示中断号，第二个cell表示中断触发方式 
+--------------------- 
+	 
+	 
+	 
+	 
+	 
+Linux 4.x 之Gpio分析（一）Gpiolib库1	 
+https://blog.csdn.net/zmnqazqaz/article/details/78228180#3%E4%BB%A3%E7%A0%81
+
+
+
+
+
+[Unit] [Service] [Install]
+https://www.jianshu.com/p/a9d61f5be35f
+https://wenku.baidu.com/view/a3d2f911f705cc17552709f4.html
+https://blog.csdn.net/cug_heshun2013/article/details/79632811
+
+
+
+
+
+
+echo "Hello, Systemd! @ $(date)" > /home/test.log
+
+echo w 0x0e 0x30 > ./devices/platform/i2c-gpio.0/i2c-0/0-001a/register_947
+
+echo w 0x1e 0x90 > ./devices/platform/i2c-gpio.0/i2c-0/0-001a/register_948
+
+echo r 0x0e > ./devices/platform/i2c-gpio.0/i2c-0/0-001a/register_947
+
+
+
+
+
+top -m 3 -d 1
+
+
+
+1. struct resouse 实际来源于 .dts中设备节点reg、interrupt属性。
+
+2. /根节点下的所有子节点，内核解析为platform总线。
+	platform总线下的节点，内核解析为某些真实的总线如i2c，spi，usb等。
+	platform总线的节点名字带有“simpile-bus"等字，则其子节点也被解析为platform总线。
+	
+3.	
+
+TP中A/B协议的区别:
+ B协议又称为slot协议,slot直译为位置、槽，有两层含义。一层是位置，还有一层是容器。在Input子系统中。它扮演的就是这两个角色。
+ 它产生于这样一个背景：
+      假设从Device获取的当前数据与上一个数据同样，我们有必要再上报当前数据吗？
+	  假设我们无论两次数据是否一致都上报。那就是A协议；
+	  假设我们选择不上报。那么既然须要比較。总须要把上一次数据存起来吧。slot就是做这个事情的，显然这就是Slot(B)协议。
+	  
+	  
+ESD(Electro-Static discharge),我们常说防止ESD就是这个意思。就是静电防护	  
+
+
+
+一般用户态传递参数是通过main函数，第一个参数表示args个数，即argc，第二个参数表示具体的参数
+
+在kernel态，无法通过这样的方式传递参数，一般使用宏module_param的方式，步骤如下：
+1.使用module_param指定模块的参数
+2.加载driver时给模块传递参数
+--------------------- 
+
+
+#define module_param(name, type, perm)                \
+    module_param_named(name, name, type, perm)
+
+通过命令"modinfo -p ${modulename}"可以得知一个模块有哪些参数可以使用。
+同时，对于已经加载到内核里的模块，它们的模块参数会列举在/sys/module/${modulename}/parameters/目录下面，
+可以使用"echo -n ${value} > /sys/module/$ {modulename}/parameters/${parm}"命令修改。 
+
+
+linux标准log管理：
+cat /var/log/messages
+tail -F /var/log/messages
+
+
+systemd service notify  simple	区别?
+
+
+val是phandle或linux,phandle值的指针。
+np->phandle = be32_to_cpup(val);	//把val指针保存到phandle变量中
+
+
+把runtime.cfg文件读出来修改，然后再写回去
+dd if=/dev/mtdblock16 of=/media/flash/nvm/run.cfg
+dd if=/media/flash/nvm/run.cfg of=/dev/mtdblock16
+
+
+每一个irq_domain都对应一个irq_chip，irq_chip是kernel对中断控制器的软件抽象
+
+
+
+
+root@Gemini:/tmp/sp/usr/local# cat /proc/cmdline 
+console=ttyS0,115200 root=/dev/blockrom8 rootfstype=squashfs init=/init loglevel=7 printk.time=1 lpj=8396800 mtdparts=sp_nand.0:128k(nand_header),128k(xboot1),1m(uboot1),2m(uboot2),512k(env),512k(env_redund),8m(ecos),6m(kernel),5760k(rootfs),54144k(spsdk),110m(spapp),20m(nvm),128k(pq),4m(logo),128k(tcon),2m(iop_car),1m(runtime_cfg),128k(vi),5m(isp_logo),256k(vendordata),20m(pat_logo),128k(version_info),256k(vd_restore),5376k(anm_logo),267m(userdata) res_arm926_addr=0 res_arm926_size=0x7400000 res_linux_addr=0x200000 res_linux_size=0xe00000 res_iop_addr=0x1000000 res_iop_size=0x100000 res_display_addr=0x7400000 res_display_size=0x0 res_rtcfg_addr=0x7400000 res_rtcfg_size=0x100000 res_vd_addr=0x7480000 res_vd_size=0x80000 mem=487M@0x0 res_chunkmem_addr=0x1e700000 res_chunkmem_size=0x1900000 vmalloc=320M  uuid=0000000000000001
+
+
+
+interrupts =  <1  28  0  4>,  <1  28  1  4>;
+
+    <1 28 0 4>
+
+    1：是子控制器
+
+    28：主中断是28
+
+    0：子中断的硬件中断号为0
+
+    4：为高电平触发
+
+    定位到INT_RXD0中断源
+
+    <1 28 1 4>
+
+    1：是子控制器
+
+    28：主中断是28
+
+    1：子中断的硬件中断号为1
+
+    4：为高电平触发
+--------------------- 
+作者：qq_33513098 
+来源：CSDN 
+原文：https://blog.csdn.net/qq_33513098/article/details/88723282 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+
+为什么插入苹果手机,车机usb是做device呢?
+
+
+
+struct samsung_pin_bank_data {
+与
+struct samsung_pin_bank {
+的区别？分别是描述什么的？
+
+
+
+若干个引脚还可以组成一个pin group，形成特定的功能。例如pin number是{ 0, 8, 16, 24 }这四个引脚组合形成一个pin group，提供SPI的功能。
+
+为何又有function这个概念呢？什么是function呢？SPI是function，I2C也是一个function，当然GPIO也是一个function。一个function有可能对应一组或者多组pin。
+
+samsung_gpiolib_register函数就是把各个bank代表的gpio chip注册到GPIO subsystem中
+
+samsung_pinctrl_register函数的主要功能是将本pin controller注册到pin control subsystem。
+
+
+ [root@localhost ntop-4.0.1]# lsusb
+
+//总线号      设备号          厂商ID(vid:pid)
+
+Bus 001      Device 001:   ID 1d6b:0001
+
+struct pinctrl_desc *ctrldesc		//描述设备树中的pinctrl
+struct pinctrl_pin_desc *pindesc,	//描述设备树pinctrl中单个pin 脚。
+struct samsung_pin_bank *bank;		//描述单个bank 
+
+struct pinctrl_dev *pctldev;				//pinctrl 设备
+struct samsung_pinctrl_drv_data *drvdata	//将作为私有数据赋值给pctldev
+
+pinctrl_init_controller(struct pinctrl_desc *pctldesc, struct device *dev, void *driver_data)
+{ 
+	pctldev->desc = pctldesc;
+	pctldev->driver_data = driver_data;
+	pctldev->dev = dev;
+}
+
+
+你说错了 正常开机是只上ACC    一起上B+和ACC 这个操作只有第一次装车才会有   
+正常开机是上ACC   正常关机是掉ACC   
+
+
+root@Gemini:/sys/bus/usb/devices# ls 
+1-0:1.0  2-1      4-0:1.0  6-0:1.0  usb2     usb4     usb6
+2-0:1.0  3-0:1.0  5-0:1.0  usb1     usb3     usb5
+root@Gemini:/sys/bus/usb/devices# 
+
+1-0:1.0就是interface的目录，表示root hub1-port0上的configuration1的interface0,
+
+命名规则是：roothub-port:configuration.interface.
+
+
+
+
+
+
+
+
+
+usb是从usb1开始并非其他的像mmc i2c bus是从0开始。任何usb host controller都是与hub同时存在，这里也不例外，1-0就是
+hub,1-1:说明是在1 port上的，1-1：1.0也就是1 port上第一个接口。
+
+比如电脑主机上前面的2个usb port其实都是一个hub下面的，我的电脑主机usb1上的第5个端口挂了个hub,同时手机插在该hub上的第4个port，那么节点该是啥样？1-5.4：1. ？这些就是linux usb节点规范。
+
+下面是我的主机给出的信息：
+root@hd:~$ ls /sys/bus/usb/devices/1-5.4/
+1-5.4:1.0/           avoid_reset_quirk    bMaxPacketSize0      dev                  ltm_capable          removable            version
+1-5.4:1.1/           bcdDevice            bMaxPower            devnum               manufacturer         remove               
+1-5.4:1.2/           bConfigurationValue  bNumConfigurations   devpath              maxchild             serial               
+1-5.4:1.3/           bDeviceClass         bNumInterfaces       driver/              port/                speed                
+1-5.4:1.4/           bDeviceProtocol      busnum               ep_00/               power/               subsystem/           
+1-5.4:1.5/           bDeviceSubClass      configuration        idProduct            product              uevent               
+authorized           bmAttributes         descriptors          idVendor             quirks               urbnum    
+--------------------- 
+作者：eqwewr 
+来源：CSDN 
+原文：https://blog.csdn.net/linux_devices_driver/article/details/39482363 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+
+
+
+/**
+ * devm_pinctrl_register() - Resource managed version of pinctrl_register().
+ * @dev: parent device for this pin controller
+ * @pctldesc: descriptor for this pin controller
+ * @driver_data: private pin controller data for this pin controller
+ */
+ struct pinctrl_dev *devm_pinctrl_register(struct device *dev, struct pinctrl_desc *pctldesc, void *driver_data)
+ 
+ 
+ 
+  ddr3 1600什么意思
+是指它的频率是1600MHz吗，它的倍频是多少，外频呢，那些pc1600又是什么呢？ 
+
+我告诉你：
+1, 倍频和外频是针对处理器的（主频＝外频X倍频），和内存无关。
+2,内存涉及两个：第一是实际工作频率，第二是等效频率。
+DDR3 1600的实际频率是400MHZ，等效频率是1600MHZ。具体解释：
+DDR已经有1、2、3代了，不过实质没有变。
+DDR内存是取代SDR内存的，因此面世的时候，性能是比较SDR来说的。DDR，第一个D是Double的意思，即同一周期内，数据传输两次（SDR只有一次）。因此，DDR内存的实际频率X2，就是“等效频率”（即同样性能下，SDR需要多少实际频率）。
+DDR266实际频率133MHZ，DDR333实际频率166MHZ，DDR400实际频率200MHZ
+DDR2 533实际频率266.5MHZ，DDR2 667实际频率333.5MHZ，DDR2 800实际频率400MHZ
+DDR2 1066实际频率533MHZ，DDR3 1066实际频率533MHZ
+DDR3 1333实际频率666.5MHZ，DDR3 1600实际频率800MHZ 
+
+
+
+
+
+调试总结：
+1. 中断处理函数中不能加太多打印，会延长中断处理时间，中断处理不及时。
+
+2. 抓波形，查看并分析波形。
+	a. 中断处理是否及时。终端信号后是否立马有i2c读操作	
+	b. 是否有漏中断、中断叠加（中断还没处理完另一个中断又来了）
+
+3. 清中断的时机。
+	a. 中断函数中立即清中断，再读i2c数据，处理中断。
+	b. 中断函数中读i2c数据后，清中断，处理中断。
+	b. 中断函数中读i2c数据后，处理完中断，清中断
+	
+	
+freescal 设备树分析：
+设备树中：arch\arm\boot\dts\imx6q.dtsi中			iomuxc: iomuxc@20e0000 {compatible = "fsl,imx6q-iomuxc";};
+kernel中：drivers\pinctrl\freescale\pinctrl-imx6q.c 中 .compatible = "fsl,imx6q-iomuxc",
+
+
+
+
+三、Linux系统中USB设备的加载与卸载
+
+当把一个USB设备插入到一个USB HUB的某个端口时，集中器就会检测到设备的接入，从而在下一次受到主机通过中断交互查询时就会向其报告。集中器的端口在没有设备接入时都处于关闭状态，插入设备之后也不会自动打开，必须由主机通过控制交互发出命令予以打开。所以，在得到集中器的报告之后，主机的USB驱动程序就会为新插入的设备调度若干个控制交互，并向集中器发出打开这个端口的命令，这样新插入的设备就会出现在USB总线上了，并为该设备分配唯一的地址。
+
+HUB驱动程序调用函数usb_connect(struct usb_device *dev)和usb_new_device(struct usb_device *dev)解析设备的各种描述符信息，分配资源，并与相应的设备驱动程序建立联系。
+
+函数usb_new_device主要完成以下工作：
+
+1.调用usb_set_address把新分配的设备地址传送给设备。
+
+2.调用usb_get_descriptor获得设备的设备描述符，得到设备端点的包的最大长度，接下来的控制传输按这个数据包最大长度进行。
+
+3.调用usb_get_configuration得到设备的所有配置描述符、接口描述符和端点描述符信息。
+
+4.调用usb_set_configuration激活当前的配置作为默认工作配置。
+
+5.在目录“proc/bus/usb”中为设备创建节点。
+
+6.在USB子系统中，通过函数usb_find_drivers和usb_find_interface_driver，为设备的每一个接口寻找相应的驱动程序，驱动程序对接口进行配置并为它们分配所需的资源。当每个接口被成功驱动后，此设备就能正常工作了。
+
+设备拔下时，与之相联的集线器首先检测到设备的拔下信号，通过中断传输将信息传送给集线器的驱动，集线器的驱动先验证设备是否被拔下，如果是则调用usb_disconnect(struct usb_device **pdev)进行处理。设备断开后，USB系统找到设备当前活动配置的每个接口的驱动程序，调用它们提供的disconnect接口函数，中断它们与各个接口的数据传输操作，释放它们为每个接口分配的资源。如果此设备是集线器，则递归调用usb_disconnect来处理它的子设备，释放设备地址，通过usbdevfs_remove_device函数释放给设备创建的文件节点，通过usb_free_dev释放USBD给设备分配的资源。
+
+
+Usb Composite Device（一般称为复合设备）
+USB Accessory（USB 配件）
+
+2.1 USB Accessory底层驱动的设计实现
+2.1.1 什么是USB composite设备
+
+因为目前的Android平台设备在与PC进行连接时，大都表现为USB Composite设备，因此这里有必要对USB Composite设备进行一下介绍。
+什么是USB Composite设备呢？对于大部分USB Device设备来说，它仅仅只有一个功能，比如大部分U盘，单个的USB鼠标等；但是也有些USB设备不止实现一个功能，比如某些USB上网卡有无线上网的功能，同时还有U盘存储的功能；又比如有的鼠标和键盘二合一设备，它只有一个USB接口，却同时支持了鼠标和键盘两个功能。
+
+这种一个USB接口扩展出多个设备功能的实现方法有两种，一种是在设备外部或内部加Hub扩展；另一种就是以Usb Composite Device方式实现（一般称为复合设备）。
+
+复合设备其实只是一个USB设备，只有一个USB设备地址，它实现多个功能的原因主要在于它扩展实现了多个USB接口，每个接口具有不同的设备类型。
+这里涉及到USB协议的一些知识，有兴趣的读者可以去找资料了解一下，这里我们重点是要知道Android下采用了USB Composite Device这种方式来实现一个USB口的情况下扩展出多个功能设备，这种情况下一个USB接口（Interface）便对应一种类型的功能设备，需要实现与之对应的功能驱动。
+
+
+
+
+举个例子：
+当我们手机使用OTG线接U盘时，一般手机OTG线，手机端时mini头，里面的ID被接到了GND，另一端是正常USB的母座，只有4pin，没有ID脚，相当于悬空。手机就是设备A，因为ID脚被连到了GND，所以手机端的USB OTG控制器读取到ID的状态为低，因此手机就作为主设备。而U盘端ID悬空，故被当做从设备B。
+总结：
+当设备检测到USB_ID信号为低时，该设备应作为Host（主机，也称A设备）用。
+当设备检测到USB_ID信号为高时，该设备作为Slave(外设，也称B设备）用。
+实际的USB连接线中，是没有USB_ID这根线的。 都是在接口部分直接拉死的的。
+对于Host端，只需将连接线的USB_ID pin和地短接即可，
+对于Slave端，USB连接线的USB_ID pin是悬空的。（设备内部上拉）。
+--------------------- 
+作者：小菜菜13 
+来源：CSDN 
+原文：https://blog.csdn.net/u010538116/article/details/80173538 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+
+
+
+carplay 与carlife功能相同
+eap 与aoa 功能相同
+
+
+
+
+gpio controller(gc)
+struct gpio_chip *gc;
+
+pinctrl subsystem会维护一个gpio number到pin number的map
+gpio number与 pin number的关系？
+怎么提供gpio number和pin number的map呢？是通过一个名称为gpio range的数据结构(pinctrl subsystem提供的）
+
+
+
+linux大文件分包压缩和批量解压命令tar
+.gz格式
+分包压缩：tar czf - xxx | split -b 1024m - xxx.tar.gz 	//xxx可以是文件也可以是目录， 大小可以是b、k、m这3个单位。
+合包解压：cat xxx.tar.gz* | tar zvxf -
+
+.bz2格式
+分包压缩：tar -jcf - aaa | split -b 1400k - aaa.tar.bz2
+合包解压：cat aaa.tar.bz2* | tar -jx -
+
+
+
+Xargs用法详解
+http://blog.chinaunix.net/uid-29792372-id-5188534.html
+ls zh2.1_20180706.tar.gz* | xargs -i -t mv {} {}.zip
