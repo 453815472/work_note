@@ -1,0 +1,2057 @@
+svn checkout https://192.168.2.124:8443/svn/fsl_imx6/zh_android/imx6_android_kk_c51
+
+
+\\192.168.2.110\yuzp\work\imx6_android_kk_c51\bootable\bootloader\uboot-imx\board\freescale\mx6q_sabresd
+
+cyttsp5_i2c.c中
+static int cyttsp5_i2c_read_default(struct device *dev, void *buf, int size)
+{
+	struct i2c_client *client = to_i2c_client(dev);
+	int rc;
+
+	if (!buf || !size || size > CY_I2C_DATA_SIZE)
+		return -EINVAL;
+
+	rc = i2c_master_recv(client, buf, size);
+
+	return (rc < 0) ? rc : rc != size ? -EIO : 0;
+}
+
+
+atmel_mxt_ts.c中
+init_ti_touch
+
+static int init_ti_touch(struct i2c_client *client)
+{
+	int data;
+    	//tiFPDDeviceInit(client);	
+   	msleep(2);
+	//GTP_RST_PORT output 1
+	data = read_data(client, i2c_rev_slave_addr, 0x1e);
+	data &= 0xF0;
+   	if(write_data(client, i2c_rev_slave_addr,0x1e,data|0x09) ==0)
+    	{
+    		printk("i2c_rev_slave_addr  error\r\n");
+    		return 0;
+    	}	
+	settiFPDINTBRemoteMode(client);
+
+	data =read_data(client, i2c_send_slave_addr, 0x0e);
+	printk("927 0x0e -- %x\r\n",data);
+	data = read_data(client, i2c_rev_slave_addr, 0x1d);
+	printk("926 0x1d -- %x\r\n",data);
+	data = read_data(client, i2c_rev_slave_addr, 0x1e);
+	printk("926 0x1e-- %x\r\n",data);
+	return 1;
+}
+
+
+
+对370N项目atmel_mxt_ts触摸屏 的reset引脚调用过程
+mxt_probe
+	kthread_run(test_kthread_fun, NULL, "test_kthread");
+		test_kthread_fun
+			re_mxt_initialize
+				touch_reset_927_928(client);
+						GTP_GPIO_OUTPUT(GTP_RST_PORT,0);	//START LOW
+			
+//INIT_DELAYED_WORK(&touch_init_work, touch_init_func);		//没被调用	
+	touch_init_func
+		GTP_GPIO_OUTPUT(GTP_RST_PORT,1);	//START HIGH			
+		
+//INIT_WORK(&data->atmel_touch_init_work, atmel_touch_init_func);		//没被调用	
+atmel_touch_init_func		
+	GTP_GPIO_OUTPUT(GTP_RST_PORT,0);	//START LOW
+	
+不确定有没有被调用	
+	gtp_reset_guitar
+		GTP_GPIO_OUTPUT(GTP_RST_PORT, 0);   //begin select I2C slave addr	
+		
+mxt_probe		
+	gtp_request_io_port		
+		GTP_GPIO_OUTPUT(GTP_RST_PORT,0);	//start down
+		
+mxt_probe
+	kthread_run(test_kthread_fun, NULL, "test_kthread");		
+		test_kthread_fun		
+			GTP_GPIO_OUTPUT(GTP_RST_PORT,0);	//START LOW
+			
+			
+			
+			
+			
+fast_init_927文件中	
+ti927_reset(struct i2c_client *client)		//此函数只在cyttsp5触摸中有用到，370N的项目中没有调用到，不管它	
+	gpio_request(SABRESD_TI927_PBD_ENABLE, "ti927_enable");
+	
+	
+check_927_and_928_connecting(struct i2c_client *client){
+	data = fast_init927_read_data(client, i2c_rev_slave_addr,0x1c);	//读0x1c地址有什么意义？
+	else if (0x03 == data )																					//读出来的数据0x03 == data 代表什么意思？
+	
+	
+int check_928_is_connected(struct i2c_client *client)
+{
+	int reg = 0;
+	reg = fast_init927_read_data(client, i2c_rev_slave_addr, 0x1d) & 0x0f;
+	if( reg != 0x05){	//为什么reg != 0x05 就说明ti928 is not connected	？
+		printk("%s: ti928 is not connected!\n",__func__);
+		return -1;
+	}
+	return 0;
+}
+
+
+
+int check_927_is_connected(struct i2c_client *client)
+{
+	int reg = 0;
+	reg = fast_init927_read_data(client, i2c_send_slave_addr, 0x0d) & 0x0f;
+	if( reg != 0x03){	//为什么reg != 0x03 就说明ti927 is not connected	？
+										//答：在ti927_Init中有对0x0d寄存器初始化写入0x03。
+		printk("%s: ti927 is not connected!\n",__func__);
+		return -1;
+	}
+	return 0;
+}	
+
+
+
+#define SABRESD_GPIO_CCD	IMX_GPIO_NR(4, 5)	//这是GPIO_19的引脚
+ static void mx6q_ccd_gpio_direction()
+ {
+// 	iomux_v3_cfg_t ccd_pad_gpio = MX6DL_PAD_GPIO_19__GPIO_4_5;
+//	mxc_iomux_v3_setup_pad(ccd_pad_gpio);
+	gpio_request(SABRESD_GPIO_CCD,"gpio_ccd");
+	gpio_direction_input(SABRESD_GPIO_CCD);
+	//gpio_direction_output(SABRESD_GPIO_CCD,1);
+ }
+ 
+ 
+ 
+ 
+ 
+ MX6Q_PAD_ENET_RXD0__GPIO_1_27,	//scl
+ MX6Q_PAD_ENET_RXD1__GPIO_1_26,	//sda 
+ 
+ 
+ 
+//重点函数 
+static int check_kthread_fun(void *__unused)
+{
+	int retval;
+	msleep(2000);
+
+	mfd_touch_handshake_mfd(touch_i2c_client);
+	while(1)
+	{
+		if(touch_i2c_client != NULL)
+		{
+			if((0 > check_ti9xx_connecting(touch_i2c_client))||g_touch_reset_flag)
+			{
+				ti9xx_Init(touch_i2c_client);	
+				g_touch_reset_flag = false;
+			}
+		}
+		msleep(1000);
+	}	
+}
+
+
+
+
+下面的校验和，好像不对吧。
+case CMD_4B_VERSION:
+if(checksum == temp_point1[NORMAL_CMD_LEN-1])
+
+是不是应该改成下面的
+if(checksum == temp_point1[NORMAL_CMD_LEN-2])
+
+
+有没有文档说明，第二个参数len，应该取多长？
+checksum = touch_cmd_checksum(temp_point1,NORMAL_CMD_LEN -1,CMD_4B_VERSION);		
+
+
+
+
+
+
+
+
+
+~/work/imx6_android_kk_c51/device/fsl/sabresd_6dq/prebuild_src/370N$ vim init.rc
+# ivt
+#service brlinkd /system/bin/brlinkd
+#       class main
+#       socket blueletd stream 0660 bluetooth bluetooth
+
+
+
+include/generated/autoconf.h 分析？
+
+
+
+
+i_make.sh 文件中
+function build_boot_image()
+{
+echo '==================================================='
+	echo 'build boot image'
+	cd kernel_imx
+	if [ "${TARGET_CUSTOMER_MODEL}" = "C51" ];then
+	make imx6_android_C51_defconfig
+       	elif [ "${TARGET_CUSTOMER_MODEL}" = "C32" ];then
+        make imx6_android_C32_defconfig
+        elif [ "${TARGET_CUSTOMER_MODEL}" = "cs75" ];then
+        make imx6_android_cs75_defconfig
+		elif [ "${TARGET_CUSTOMER_MODEL}" = "C217" ];then
+        make imx6_android_C217_defconfig
+	elif [ "${TARGET_CUSTOMER_MODEL}" = "NH4R03A" ];then
+        make imx6_android_NH4R03A_defconfig
+	else
+	make imx6_android_defconfig        
+	fi
+	cd ..
+	make bootimage -j256
+	
+	
+	
+	
+MX6Q_PAD_ENET_RX_ER__ANATOP_USBOTG_ID,
+这个引脚的功能？	
+
+
+imx6_android_kk_c51/packages/apps/Launcher2$ mv Android.mk_ Android.mk
+
+
+
+
+
+
+
+
+
+
+ #endif
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx/drivers/char/zh_dev$ croot
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51$ grep -Rn "FORYOU_S4" ./
+./device/fsl/sabresd_6dq/BoardConfig.mk:193:ifeq ($(TARGET_CUSTOMER_MODEL),FORYOU_S4)
+./device/fsl/sabresd_6dq/BoardConfig.mk:274:ifeq ($(TARGET_CUSTOMER_MODEL),FORYOU_S4)
+./i_make.sh:81:elif [ "${TARGET_CUSTOMER_MODEL}" = "FORYOU_S4" ];then
+grep: ./external/chromium_org/third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api: 没有那个文件或目录
+grep: ./external/chromium_org/build/android/arm-linux-androideabi-gold/ld: 没有那个文件或目录
+grep: ./external/chromium_org/build/android/arm-linux-androideabi-gold/arm-linux-androideabi-ld: 没有那个文件或目录
+grep: ./external/mesa3d/src/gallium/state_trackers/d3d1x/w32api: 没有那个文件或目录
+./out/target/product/sabresd_6dq/.config:1445:# CONFIG_PROJECT_FORYOU_S4 is not set
+./out/target/product/sabresd_6dq/.config:1446:# CONFIG_MX6Q_FORYOU_S4 is not set
+./kernel_imx/.config:1445:# CONFIG_PROJECT_FORYOU_S4 is not set
+./kernel_imx/.config:1446:# CONFIG_MX6Q_FORYOU_S4 is not set
+./kernel_imx/drivers/char/zh_dev/bak_fast_init_927.c:71:#elif defined(CONFIG_PROJECT_FORYOU_S4)
+./kernel_imx/drivers/char/zh_dev/bak_fast_init_927.c:759:               #if (defined(CONFIG_PROJECT_FORYOU_S4)||defined CONFIG_PROJECT_FORYOU_NH4R03A )
+./kernel_imx/drivers/char/zh_dev/bak_fast_init_927.c:1045:#elif defined(CONFIG_PROJECT_FORYOU_S4)
+./kernel_imx/drivers/char/zh_dev/Kconfig:74:config PROJECT_FORYOU_S4
+./kernel_imx/drivers/char/zh_dev/Kconfig:79:config MX6Q_FORYOU_S4
+./kernel_imx/drivers/char/zh_dev/Kconfig:80:        tristate "board version is FORYOU_S4"
+./kernel_imx/drivers/char/zh_dev/Kconfig:82:        Say Y here if you want to use FORYOU_S4 hardward.
+./kernel_imx/drivers/char/zh_dev/Kconfig:84:        tristate "board version is FORYOU_S4"
+./kernel_imx/drivers/char/zh_dev/Kconfig:86:        Say Y here if you want to use FORYOU_S4 hardward.
+./kernel_imx/drivers/char/zh_dev/Kconfig:88:        tristate "board version is FORYOU_S4"
+./kernel_imx/drivers/char/zh_dev/Kconfig:90:        Say Y here if you want to use FORYOU_S4 hardward.
+./kernel_imx/drivers/char/zh_dev/fast_init_927.c:71:#elif defined(CONFIG_PROJECT_FORYOU_S4)
+./kernel_imx/drivers/char/zh_dev/fast_init_927.c:761:           #if (defined(CONFIG_PROJECT_FORYOU_S4)||defined CONFIG_PROJECT_FORYOU_NH4R03A )
+./kernel_imx/drivers/char/zh_dev/fast_init_927.c:1047:#elif defined(CONFIG_PROJECT_FORYOU_S4)
+./kernel_imx/drivers/video/mxc/mxc_ipuv3_fb.c:2888:#if defined(CONFIG_PROJECT_FORYOU_S4)
+./kernel_imx/drivers/video/mxc/mxc_ipuv3_fb.c:2897:#if defined(CONFIG_PROJECT_FORYOU_S4)
+./kernel_imx/.config.old:1445:# CONFIG_PROJECT_FORYOU_S4 is not set
+./kernel_imx/.config.old:1446:# CONFIG_MX6Q_FORYOU_S4 is not set
+./kernel_imx/arch/arm/plat-mxc/system.c:174:    #if (defined(CONFIG_PROJECT_FORYOU_NH4R03A)||defined(CONFIG_PROJECT_FORYOU_S4))
+./kernel_imx/arch/arm/configs/imx6_android_FORYOU_S4_defconfig:1450:CONFIG_PROJECT_FORYOU_S4=y
+./kernel_imx/arch/arm/configs/imx6_android_FORYOU_S4_defconfig:1451:CONFIG_MX6Q_FORYOU_S4=y
+./kernel_imx/arch/arm/mach-mx6/board-mx6q_sabresd_foryou_s7.c:3860:#if 0//defined(CONFIG_PROJECT_FORYOU_S4)
+./kernel_imx/arch/arm/mach-mx6/mx6q_sabresd_pmic_pfuze100.c:528:        #if (defined(CONFIG_MX6Q_TSP) || defined(CONFIG_MX6Q_FORYOU_S4)|| defined(CONFIG_PROJECT_FORYOU_NH4R03A))
+./kernel_imx/arch/arm/mach-mx6/board-mx6q_sabresd_foryou_s4.c:3860:#if 0//defined(CONFIG_PROJECT_FORYOU_S4)
+./kernel_imx/arch/arm/mach-mx6/board-mx6q_sabresd_foryou_nh4r03a.c:3947:#if 0//defined(CONFIG_PROJECT_FORYOU_S4)
+./kernel_imx/arch/arm/mach-mx6/Makefile:23:else ifeq ($(CONFIG_MX6Q_FORYOU_S4),y)
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libaudiofile.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-mainloop-glib.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-browse.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-mainloop-glib.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libaudiofile.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-browse.so.0.1: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libaudiofile.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libpulse-mainloop-glib.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libpulse-browse.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libpulse-mainloop-glib.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libaudiofile.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libpulse-browse.so.0.1: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libaudiofile.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-mainloop-glib.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-browse.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-mainloop-glib.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libaudiofile.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-browse.so.0.1: 没有那个文件或目录
+grep: ./prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1/libexec/gcc/i686-apple-darwin11/4.2.1/ld: 没有那个文件或目录
+grep: ./prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1/libexec/gcc/i686-apple-darwin11/4.2.1/as: 没有那个文件或目录
+grep: ./prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1/libexec/gcc/i686-apple-darwin10/4.2.1/ld: 没有那个文件或目录
+grep: ./prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1/libexec/gcc/i686-apple-darwin10/4.2.1/as: 没有那个文件或目录
+./bootable/bootloader/uboot-imx/board/freescale/mx6q_sabresd/flash_header.S:569:#ifdef CONFIG_MX6Q_FORYOU_S4
+./bootable/bootloader/uboot-imx/board/freescale/mx6q_sabresd/flash_header.S:614:#ifdef CONFIG_MX6Q_FORYOU_S4
+./bootable/bootloader/uboot-imx/include/configs/mx6q_sabresd_foryou_s4_android.h:48:#define CONFIG_MX6Q_FORYOU_S4
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51$ 
+
+
+
+
+
+
+
+
+
+
+"customer_src.mk" [dos] 232L, 9317C 已写入                                                                                                             
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/device/fsl/sabresd_6dq/prebuild_src/NH4R03A$ croot
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51$ grep "4R03" ./
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51$ grep -Rn "4R03" ./
+./device/fsl/sabresd_6dq/BoardConfig.mk:198:ifeq ($(TARGET_CUSTOMER_MODEL),NH4R03A)
+./device/fsl/sabresd_6dq/prebuild_src/NH4R03A/customer_src.mk:213:    ro.zh.model_id = NH4R03A\
+./i_make.sh:47: elif [ "${TARGET_CUSTOMER_MODEL}" = "NH4R03A" ];then
+./i_make.sh:48:        make imx6_android_NH4R03A_defconfig
+./i_make.sh:83:elif [ "${TARGET_CUSTOMER_MODEL}" = "NH4R03A" ];then
+grep: ./external/chromium_org/third_party/mesa/src/src/gallium/state_trackers/d3d1x/w32api: 没有那个文件或目录
+grep: ./external/chromium_org/build/android/arm-linux-androideabi-gold/ld: 没有那个文件或目录
+grep: ./external/chromium_org/build/android/arm-linux-androideabi-gold/arm-linux-androideabi-ld: 没有那个文件或目录
+grep: ./external/mesa3d/src/gallium/state_trackers/d3d1x/w32api: 没有那个文件或目录
+./out/target/product/sabresd_6dq/.config:1447:CONFIG_PROJECT_FORYOU_NH4R03A=y
+./out/target/product/sabresd_6dq/.config:1448:CONFIG_MX6Q_FORYOU_NH4R03A=y
+./out/target/product/sabresd_6dq/system/build.prop:50:ro.zh.model_id=NH4R03A
+匹配到二进制文件 ./out/target/product/sabresd_6dq/system.img
+./out/target/product/sabresd_6dq/recovery/root/default.prop:57:ro.zh.model_id=NH4R03A
+匹配到二进制文件 ./out/target/product/sabresd_6dq/obj/PACKAGING/systemimage_intermediates/system.img
+./out/target/product/sabresd_6dq/obj/PACKAGING/target_files_intermediates/sabresd_6dq-target_files-20180705.120622/RECOVERY/RAMDISK/default.prop:57:ro.zh.model_id=NH4R03A
+./out/target/product/sabresd_6dq/obj/PACKAGING/target_files_intermediates/sabresd_6dq-target_files-20180705.120622/SYSTEM/build.prop:50:ro.zh.model_id=NH4R03A
+./out/target/product/sabresd_6dq/obj/PACKAGING/target_files_intermediates/sabresd_6dq-target_files-20180705.134106/RECOVERY/RAMDISK/default.prop:57:ro.zh.model_id=NH4R03A
+./out/target/product/sabresd_6dq/obj/PACKAGING/target_files_intermediates/sabresd_6dq-target_files-20180705.134106/SYSTEM/build.prop:50:ro.zh.model_id=NH4R03A
+./out/target/common/obj/APPS/previous_overlays.txt:1:framework-res frameworks/webview/chromium/overlay/frameworks/base/core/res/res device/fsl/sabresd_6dq/prebuild_src/NH4R03A/overlay/frameworks/base/core/res/res
+./out/target/common/obj/APPS/previous_overlays.txt:2:SettingsProvider device/fsl/sabresd_6dq/prebuild_src/NH4R03A/overlay/frameworks/base/packages/SettingsProvider/res
+./out/target/common/obj/APPS/previous_overlays.txt:3:Launcher2 device/fsl/sabresd_6dq/prebuild_src/NH4R03A/overlay/packages/apps/Launcher2/res
+./out/target/common/obj/APPS/previous_overlays.txt:4:Settings device/fsl/sabresd_6dq/prebuild_src/NH4R03A/overlay/packages/apps/Settings/res
+./kernel_imx/.config:1447:CONFIG_PROJECT_FORYOU_NH4R03A=y
+./kernel_imx/.config:1448:CONFIG_MX6Q_FORYOU_NH4R03A=y
+./kernel_imx/drivers/char/zh_dev/bak_fast_init_927.c:73:#elif defined(CONFIG_PROJECT_FORYOU_NH4R03A)
+./kernel_imx/drivers/char/zh_dev/bak_fast_init_927.c:574:#if defined CONFIG_PROJECT_FORYOU_NH4R03A
+./kernel_imx/drivers/char/zh_dev/bak_fast_init_927.c:637:#if defined CONFIG_PROJECT_FORYOU_NH4R03A
+./kernel_imx/drivers/char/zh_dev/bak_fast_init_927.c:759:               #if (defined(CONFIG_PROJECT_FORYOU_S4)||defined CONFIG_PROJECT_FORYOU_NH4R03A )
+./kernel_imx/drivers/char/zh_dev/bak_fast_init_927.c:1047:#elif defined(CONFIG_PROJECT_FORYOU_NH4R03A)
+./kernel_imx/drivers/char/zh_dev/bak_fast_init_927.c:1120://#if defined CONFIG_PROJECT_FORYOU_NH4R03A
+./kernel_imx/drivers/char/zh_dev/Kconfig:83:config PROJECT_FORYOU_NH4R03A
+./kernel_imx/drivers/char/zh_dev/Kconfig:87:config MX6Q_FORYOU_NH4R03A
+./kernel_imx/drivers/char/zh_dev/fast_init_927.c:73:#elif defined(CONFIG_PROJECT_FORYOU_NH4R03A)
+./kernel_imx/drivers/char/zh_dev/fast_init_927.c:574:#if defined CONFIG_PROJECT_FORYOU_NH4R03A
+./kernel_imx/drivers/char/zh_dev/fast_init_927.c:638:#if defined CONFIG_PROJECT_FORYOU_NH4R03A
+./kernel_imx/drivers/char/zh_dev/fast_init_927.c:761:           #if (defined(CONFIG_PROJECT_FORYOU_S4)||defined CONFIG_PROJECT_FORYOU_NH4R03A )
+./kernel_imx/drivers/char/zh_dev/fast_init_927.c:1049:#elif defined(CONFIG_PROJECT_FORYOU_NH4R03A)
+./kernel_imx/drivers/char/zh_dev/fast_init_927.c:1122://#if defined CONFIG_PROJECT_FORYOU_NH4R03A
+./kernel_imx/drivers/video/mxc/mxc_ipuv3_fb.c:2907:#elif defined(CONFIG_PROJECT_FORYOU_NH4R03A)
+./kernel_imx/.config.old:1447:CONFIG_PROJECT_FORYOU_NH4R03A=y
+./kernel_imx/.config.old:1448:CONFIG_MX6Q_FORYOU_NH4R03A=y
+./kernel_imx/arch/arm/plat-mxc/system.c:174:    #if (defined(CONFIG_PROJECT_FORYOU_NH4R03A)||defined(CONFIG_PROJECT_FORYOU_S4))
+./kernel_imx/arch/arm/configs/imx6_android_NH4R03A_defconfig:1465:CONFIG_PROJECT_FORYOU_NH4R03A=y
+./kernel_imx/arch/arm/configs/imx6_android_NH4R03A_defconfig:1466:CONFIG_MX6Q_FORYOU_NH4R03A=y
+./kernel_imx/arch/arm/mach-mx6/mx6q_sabresd_pmic_pfuze100.c:528:        #if (defined(CONFIG_MX6Q_TSP) || defined(CONFIG_MX6Q_FORYOU_S4)|| defined(CONFIG_PROJECT_FORYOU_NH4R03A))
+./kernel_imx/arch/arm/mach-mx6/Makefile:25:else ifeq ($(CONFIG_MX6Q_FORYOU_NH4R03A),y)
+./kernel_imx/kernel_make.sh:4:make imx6_android_NH4R03A_defconfig
+./kernel_imx/include/config/tristate.conf:15:CONFIG_MX6Q_FORYOU_NH4R03A=Y
+./kernel_imx/include/config/tristate.conf:215:CONFIG_PROJECT_FORYOU_NH4R03A=Y
+./kernel_imx/include/config/auto.conf:37:CONFIG_MX6Q_FORYOU_NH4R03A=y
+./kernel_imx/include/config/auto.conf:484:CONFIG_PROJECT_FORYOU_NH4R03A=y
+./kernel_imx/include/generated/autoconf.h:37:#define CONFIG_MX6Q_FORYOU_NH4R03A 1
+./kernel_imx/include/generated/autoconf.h:484:#define CONFIG_PROJECT_FORYOU_NH4R03A 1
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libaudiofile.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-mainloop-glib.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-browse.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-mainloop-glib.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libaudiofile.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-browse.so.0.1: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libaudiofile.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libpulse-mainloop-glib.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libpulse-browse.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libpulse-mainloop-glib.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libaudiofile.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/i686-linux-glibc2.7-4.4.3/sysroot/usr/lib/libpulse-browse.so.0.1: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libaudiofile.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-mainloop-glib.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-browse.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-mainloop-glib.so: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libaudiofile.so.0.0: 没有那个文件或目录
+grep: ./prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.7-4.6/sysroot/usr/lib/libpulse-browse.so.0.1: 没有那个文件或目录
+grep: ./prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1/libexec/gcc/i686-apple-darwin11/4.2.1/ld: 没有那个文件或目录
+grep: ./prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1/libexec/gcc/i686-apple-darwin11/4.2.1/as: 没有那个文件或目录
+grep: ./prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1/libexec/gcc/i686-apple-darwin10/4.2.1/ld: 没有那个文件或目录
+grep: ./prebuilts/gcc/darwin-x86/host/i686-apple-darwin-4.2.1/libexec/gcc/i686-apple-darwin10/4.2.1/as: 没有那个文件或目录
+./build/tools/secureboot-imx/cst/ttt.img:3511:nt02pSOLKXCe4uZjlfK4nMrxC1MNfbcHLhtzLkkx575n6UA4EPAjCwPh4R03M3R2/ErV2Y30LlS0
+./build/tools/secureboot-imx/cst-2.3.2/ttt.img:3511:nt02pSOLKXCe4uZjlfK4nMrxC1MNfbcHLhtzLkkx575n6UA4EPAjCwPh4R03M3R2/ErV2Y30LlS0
+./build/envsetup.sh:1352:echo  "build project NH4R03A configurate input: lunch 17 NH4R03A"
+./bootable/bootloader/uboot-imx/board/freescale/mx6q_sabresd/flash_header.S:579:#elif defined CONFIG_MX6Q_FORYOU_NH4R03A
+./bootable/bootloader/uboot-imx/board/freescale/mx6q_sabresd/flash_header.S:634:#elif defined CONFIG_MX6Q_FORYOU_NH4R03A
+./bootable/bootloader/uboot-imx/board/freescale/mx6q_sabresd/flash_header.S:635:#foryou_NH4R03A ddr 528
+./bootable/bootloader/uboot-imx/include/configs/mx6q_sabresd_foryou_nh4r03a_android.h:48:#define CONFIG_MX6Q_FORYOU_NH4R03A
+./bootable/bootloader/uboot-imx/include/autoconf.mk:62:CONFIG_MX6Q_FORYOU_NH4R03A=y
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51$ 
+
+
+
+
+
+
+
+CONFIG_PROJECT_FORYOU_NH4R03A=y
+CONFIG_MX6Q_FORYOU_NH4R03A=y
+这两个宏的来历？
+
+
+Y:\work\touch_debug\android_kk_imx6dq\imx6_android_kk_c51\device\fsl\sabresd_6dq\prebuild_src\NH4R03A\customer_src.mk
+##########################
+#victor20150312 add gps config,make sure only define one ture below
+USE_ATHR_GPS_HARDWARE := false
+USE_QEMU_GPS_HARDWARE := false
+USE_EXT_GPS_MODULE_HARDWARE := false
+USE_EXT_GPS_MODULE_UBOX_M8_HARDWARE := true
+USE_EXT_GPS_MODULE_HIPPO_HARDWARE := false
+
+PRODUCT_PACKAGES += \
+
+Y:\work\touch_debug\android_kk_imx6dq\imx6_android_kk_c51\device\fsl\sabresd_6dq\prebuild_src\NH4R03A\etc\u-blox.conf
+### Serial interface 
+# Device to be used by the driver
+SERIAL_DEVICE                   /dev/ttyGPS
+#SERIAL_DEVICE                   /dev/s3c2410_serial2
+#SERIAL_DEVICE                   /dev/i2c-4
+#SERIAL_DEVICE                   /dev/ttyACM0
+
+
+
+
+
+
+customer_src.mk中
+
+#define include package
+copy_apk_files := $(shell ls $(SAPP-PRIV_PATH) | grep .apk)
+
+#$(warning "Customer define packages : $(subst .apk,,$(copy_apk_files))")
+
+PRODUCT_PACKAGES += \
+	 Launcher2      \
+         update \
+         mcuserver \
+	$(foreach file, $(copy_apk_files),$(subst .apk,,$(file)))
+	
+#external bluetooth added by zxj 
+EXTERNAL_BLUETOOTH := \
+	           main
+	
+$(foreach file, $(EXTERNAL_BLUETOOTH),  \
+  $(shell mv -f $(EXTERNAL_BLUETOOTH_PATH)/$(file)/Android.mk $(EXTERNAL_BLUETOOTH_PATH)/$(file)/Android.mk_ 1>/dev/null 2>/dev/null))
+   ##mv -f $(EXTERNAL_BLUETOOTH_PATH)/$(file)/jni/Android.mk $(EXTERNAL_BLUETOOTH_PATH)/$(file)/jni/Android.mk_ 1>/dev/null 2>/dev/null))
+
+#external fsl_imx_omx added by zxj 
+EXTERNAL_FSL_OMX:= \
+	           CactusPlayer
+	
+$(foreach file, $(EXTERNAL_FSL_OMX),  \
+  $(shell mv -f $(EXTERNAL_FSL_OMX_PATH)/$(file)/Android.mk $(EXTERNAL_FSL_OMX_PATH)/$(file)/Android.mk_ 1>/dev/null 2>/dev/null))
+   ##mv -f $(EXTERNAL_BLUETOOTH_PATH)/$(file)/jni/Android.mk $(EXTERNAL_BLUETOOTH_PATH)/$(file)/jni/Android.mk_ 1>/dev/null 2>/dev/null))
+
+#exclude packages for PRODUCT_PACKAGES
+EXCLUDE_PACKAGES := \
+            Gallery2        \
+            Gallery         \
+            Email           \
+            Camera      \
+            Camera2      \
+            LegacyCamera    \
+	    Launcher3      \
+	     Exchange		\
+            VideoEditor    \
+            Browser        \
+            Calculator     \
+            Calendar       \
+            DeskClock      \
+            Mms            \
+            Music          \
+            MusicFX	      \
+            Exchange      \
+            Provision    \
+            QuickSearchBox \
+            SoundRecorder \
+            Dialer        \
+            OneTimeInitializer \
+	    Bluetooth	\
+            KeyChain \
+            Contacts  \
+            CertInstaller             
+
+			
+			
+			Launcher2.apk 所在的目录	
+	/out/target/product/sabresd_6dq/system/priv-app$ 
+
+	
+	添加U盘挂在属性文件
+	\imx6_android_kk_c51\device\fsl\sabresd_6dq\prebuild_src\NH4R03A\init.rc
+	
+	
+	
+	
+device/fsl/sabresd_6dq/prebuild_src/370N/init.rc 中更改蓝牙服务
+	
+on property:service.carlifeService.enable=1
+    start	carlife_service
+        
+on property:sys.boot_completed=1
+    setprop service.carlifeService.enable 1	
+
+# ivt 
+#service brlinkd /system/bin/brlinkd
+#	class main
+#	socket blueletd stream 0660 bluetooth bluetooth
+
+	
+	
+	
+	
+	
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx/nfore-wifi$ cd build/
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx/nfore-wifi/build$ make drivers
+Build drivers
+cd /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx/nfore-wifi/build/../drivers && make ARCH=arm CROSS_COMPILE=/home/sunnyxia/work/doc/android-code/wandboard-4.4.2_1-r8.6sp1/wand-4.4.2_1/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin/arm-eabi-
+make: *** /home/sunnyxia/work/doc/android-code/wandboard-4.4.2_1-r8.6sp1/wand-4.4.2_1/kernel_imx: 没有那个文件或目录。 停止。
+make: *** /home/sunnyxia/work/doc/android-code/wandboard-4.4.2_1-r8.6sp1/wand-4.4.2_1/kernel_imx: 没有那个文件或目录。 停止。
+/bin/sh: 1: [: -gt: argument expected
+make[1]: 正在进入目录 `/home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx/nfore-wifi/drivers'
+Makefile:31: /home/sunnyxia/work/doc/android-code/wandboard-4.4.2_1-r8.6sp1/wand-4.4.2_1/kernel_imx/.config: 没有那个文件或目录
+make[1]: *** 没有规则可以创建目标“/home/sunnyxia/work/doc/android-code/wandboard-4.4.2_1-r8.6sp1/wand-4.4.2_1/kernel_imx/.config”。 停止。
+make[1]:正在离开目录 `/home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx/nfore-wifi/drivers'
+make: *** [drivers] 错误 2
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx/nfore-wifi/build$ echo $CROSS_COMPILE
+/home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51//prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin/arm-eabi-
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx/nfore-wifi/build$ cd ../
+yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx/nfore-wifi$ grep -Rn "sunnyxia" ./
+./drivers/backports/modules.order:1:kernel//home/sunnyxia/work/doc/android-code/wandboard-4.4.2_1-r8.6sp1/wand-4.4.2_1/kernel_imx/nfore-wifi/drivers/backports/compat/compat.ko
+./drivers/backports/modules.order:2:kernel//home/sunnyxia/work/doc/android-code/wandboard-4.4.2_1-r8.6sp1/wand-4.4.2_1/kernel_imx/nfore-wifi/drivers/backports/compat/cordic.ko
+./drivers/backports/modules.order:3:kernel//home/sunnyxia/work/doc/android-code/wandboard-4.4.2_1-r8.6sp1/wand-4.4.2_1/kernel_imx/nfore-wifi/drivers/backports/compat/crc8.ko
+./drivers/backports/modules.order:4:kernel//home/sunnyxia/work/doc/android-code/wandboard-4.4.2_1-r8.6sp1/wand-4.4.2_1/kernel_imx/nfore-wifi/drivers/backports/drive
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1/nfore-wifi/build/../drivers/backports modules
+make[2]: 正在进入目录 `/home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports'
+cc -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer   -c -o conf.o conf.c
+cc -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer   -c -o zconf.tab.o zconf.tab.c
+cc   conf.o zconf.tab.o   -o conf
+.config:445:warning: symbol value 'm' invalid for ST_GPS
+*
+* Restart config...
+*
+*
+* Linux Backports from "Linux" "v3.12.8-0-g97f15f1" (with backports "v3.12.8-1-0-geb41fad")
+*
+codel (BACKPORT_USERSEL_NET_SCH_CODEL) [N/m] n
+FQ codel (BACKPORT_USERSEL_NET_SCH_FQ_CODEL) [N/m] n
+Build all compat code (BACKPORT_USERSEL_BUILD_ALL) [Y/n/?] y
+cfg80211 - wireless configuration API (CFG80211) [M/n/?] m
+  nl80211 testmode command (NL80211_TESTMODE) [Y/n/?] y
+  enable developer warnings (CFG80211_DEVELOPER_WARNINGS) [N/y/?] n
+  cfg80211 regulatory debugging (CFG80211_REG_DEBUG) [N/y/?] n
+  cfg80211 certification onus (CFG80211_CERTIFICATION_ONUS) [N/y/?] n
+  enable powersave by default (CFG80211_DEFAULT_PS) [Y/n/?] y
+  cfg80211 DebugFS entries (CFG80211_DEBUGFS) [N/y/?] (NEW) y
+  use statically compiled regulatory rules database (CFG80211_INTERNAL_REGDB) [Y/n/?] y
+  cfg80211 wireless extensions compatibility (CFG80211_WEXT) [Y/n/?] y
+Generic IEEE 802.11 Networking Stack (mac80211) (MAC80211) [N/m/?] n
+*
+* Bluetooth subsystem support
+*
+Bluetooth subsystem support (BT) [N/m/?] (NEW) m
+  RFCOMM protocol support (BT_RFCOMM) [N/m/?] (NEW) m
+  BNEP protocol support (BT_BNEP) [N/m/?] (NEW) m
+    Multicast filter support (BT_BNEP_MC_FILTER) [N/y/?] (NEW) y
+    Protocol filter support (BT_BNEP_PROTO_FILTER) [N/y/?] (NEW) y
+  HIDP protocol support (BT_HIDP) [N/m/?] (NEW) m
+  *
+  * Bluetooth device drivers
+  *
+  HCI USB driver (BT_HCIBTUSB) [N/m/?] (NEW) m
+  HCI SDIO driver (BT_HCIBTSDIO) [N/m/?] (NEW) m
+  HCI BCM203x USB driver (BT_HCIBCM203X) [N/m/?] (NEW) m
+  HCI BPA10x USB driver (BT_HCIBPA10X) [N/m/?] (NEW) m
+  HCI BlueFRITZ! USB driver (BT_HCIBFUSB) [N/m/?] (NEW) m
+  HCI VHCI (Virtual HCI device) driver (BT_HCIVHCI) [N/m/?] (NEW) m
+  Marvell Bluetooth driver support (BT_MRVL) [N/m/?] (NEW) m
+    Marvell BT-over-SDIO driver (BT_MRVL_SDIO) [N/m/?] (NEW) m
+  Atheros firmware download driver (BT_ATH3K) [N/m/?] (NEW) m
+  Texas Instruments WiLink7 driver (BT_WILINK) [N/m/?] (NEW) m
+*
+* Wireless LAN
+*
+Wireless LAN (WLAN) [Y/n/?] y
+  Wireless RNDIS USB support (USB_NET_RNDIS_WLAN) [N/m/?] n
+  *
+  * Atheros Wireless Cards
+  *
+  Atheros Wireless Cards (ATH_CARDS) [N/m/?] n
+  Broadcom IEEE802.11n embedded FullMAC WLAN driver (BRCMFMAC) [N/m/?] n
+  Marvell 8xxx Libertas WLAN driver support (LIBERTAS) [N/m/?] (NEW) m
+    Marvell Libertas 8388 USB 802.11b/g cards (LIBERTAS_USB) [N/m/?] (NEW) m
+    Marvell Libertas 8385/8686/8688 SDIO 802.11b/g cards (LIBERTAS_SDIO) [N/m/?] (NEW) m
+    Marvell Libertas 8686 SPI 802.11b/g cards (LIBERTAS_SPI) [N/m/?] (NEW) m
+    Enable full debugging output in the Libertas module. (LIBERTAS_DEBUG) [N/y/?] (NEW) m
+
+CPTCFG_LIBERTAS_DEBUG:
+
+Debugging support.
+
+Symbol: LIBERTAS_DEBUG [=n]
+Type  : boolean
+Prompt: Enable full debugging output in the Libertas module.
+  Defined at drivers/net/wireless/libertas/Kconfig:42
+  Depends on: WLAN [=y] && LIBERTAS [=m]
+  Location:
+    -> Wireless LAN (WLAN [=y])
+      -> Marvell 8xxx Libertas WLAN driver support (LIBERTAS [=m])
+
+
+
+    Enable full debugging output in the Libertas module. (LIBERTAS_DEBUG) [N/y/?] (NEW) y
+    Enable mesh support (LIBERTAS_MESH) [N/y/?] (NEW) y
+  *
+  * TI Wireless LAN support
+  *
+  TI Wireless LAN support (WL_TI) [N/y/?] n
+  Marvell WiFi-Ex Driver (MWIFIEX) [N/m/?] n
+*
+* Ethernet driver support
+*
+Ethernet driver support (ETHERNET) [Y/n/?] y
+  Broadcom devices (NET_VENDOR_BROADCOM) [Y/n/?] y
+    Broadcom 440x/47xx ethernet support (B44) [N/m/?] n
+*
+* USB Network Adapters
+*
+Multi-purpose USB Networking Framework (USB_USBNET) [N/m/?] n
+*
+* Sonics Silicon Backplane
+*
+Sonics Silicon Backplane support (SSB) [N/m/?] n
+*
+* Broadcom specific AMBA
+*
+BCMA support (BCMA) [N/m/?] n
+IEEE Std 802.15.4 Low-Rate Wireless Personal Area Networks support (IEEE802154) [N/m/?] n
+*
+* USB Device Class drivers
+*
+USB Wireless Device Management support (USB_WDM) [N/m/?] n
+*
+* Linux Backports from "Linux" "v3.12.8-0-g97f15f1" (with backports "v3.12.8-1-0-geb41fad")
+*
+codel (BACKPORT_USERSEL_NET_SCH_CODEL) [N/m] n
+FQ codel (BACKPORT_USERSEL_NET_SCH_FQ_CODEL) [N/m] n
+Build all compat code (BACKPORT_USERSEL_BUILD_ALL) [Y/n/?] y
+cfg80211 - wireless configuration API (CFG80211) [M/n/?] m
+  nl80211 testmode command (NL80211_TESTMODE) [Y/n/?] y
+  enable developer warnings (CFG80211_DEVELOPER_WARNINGS) [N/y/?] n
+  cfg80211 regulatory debugging (CFG80211_REG_DEBUG) [N/y/?] n
+  cfg80211 certification onus (CFG80211_CERTIFICATION_ONUS) [N/y/?] n
+  enable powersave by default (CFG80211_DEFAULT_PS) [Y/n/?] y
+  cfg80211 DebugFS entries (CFG80211_DEBUGFS) [Y/n/?] y
+  use statically compiled regulatory rules database (CFG80211_INTERNAL_REGDB) [Y/n/?] y
+  cfg80211 wireless extensions compatibility (CFG80211_WEXT) [Y/n/?] y
+lib80211 debugging messages (LIB80211_DEBUG) [N/y/?] (NEW) y
+Generic IEEE 802.11 Networking Stack (mac80211) (MAC80211) [N/m/?] n
+*
+* Bluetooth subsystem support
+*
+Bluetooth subsystem support (BT) [M/n/?] m
+  RFCOMM protocol support (BT_RFCOMM) [M/n/?] m
+  BNEP protocol support (BT_BNEP) [M/n/?] m
+    Multicast filter support (BT_BNEP_MC_FILTER) [Y/n/?] y
+    Protocol filter support (BT_BNEP_PROTO_FILTER) [Y/n/?] y
+  HIDP protocol support (BT_HIDP) [M/n/?] m
+  *
+  * Bluetooth device drivers
+  *
+  HCI USB driver (BT_HCIBTUSB) [M/n/?] m
+  HCI SDIO driver (BT_HCIBTSDIO) [M/n/?] m
+  HCI BCM203x USB driver (BT_HCIBCM203X) [M/n/?] m
+  HCI BPA10x USB driver (BT_HCIBPA10X) [M/n/?] m
+  HCI BlueFRITZ! USB driver (BT_HCIBFUSB) [M/n/?] m
+  HCI VHCI (Virtual HCI device) driver (BT_HCIVHCI) [M/n/?] m
+  Marvell Bluetooth driver support (BT_MRVL) [M/n/?] m
+    Marvell BT-over-SDIO driver (BT_MRVL_SDIO) [M/n/?] m
+  Atheros firmware download driver (BT_ATH3K) [M/n/?] m
+  Texas Instruments WiLink7 driver (BT_WILINK) [M/n/?] m
+*
+* Wireless LAN
+*
+Wireless LAN (WLAN) [Y/n/?] y
+  Wireless RNDIS USB support (USB_NET_RNDIS_WLAN) [N/m/?] n
+  *
+  * Atheros Wireless Cards
+  *
+  Atheros Wireless Cards (ATH_CARDS) [N/m/?] n
+  Broadcom IEEE802.11n embedded FullMAC WLAN driver (BRCMFMAC) [N/m/?] n
+  Marvell 8xxx Libertas WLAN driver support (LIBERTAS) [M/n/?] m
+    Marvell Libertas 8388 USB 802.11b/g cards (LIBERTAS_USB) [M/n/?] m
+    Marvell Libertas 8385/8686/8688 SDIO 802.11b/g cards (LIBERTAS_SDIO) [M/n/?] m
+    Marvell Libertas 8686 SPI 802.11b/g cards (LIBERTAS_SPI) [M/n/?] m
+    Enable full debugging output in the Libertas module. (LIBERTAS_DEBUG) [Y/n/?] y
+    Enable mesh support (LIBERTAS_MESH) [Y/n/?] y
+  *
+  * TI Wireless LAN support
+  *
+  TI Wireless LAN support (WL_TI) [N/y/?] n
+  Marvell WiFi-Ex Driver (MWIFIEX) [N/m/?] n
+*
+* Ethernet driver support
+*
+Ethernet driver support (ETHERNET) [Y/n/?] y
+  Broadcom devices (NET_VENDOR_BROADCOM) [Y/n/?] y
+    Broadcom 440x/47xx ethernet support (B44) [N/m/?] n
+*
+* USB Network Adapters
+*
+Multi-purpose USB Networking Framework (USB_USBNET) [N/m/?] n
+*
+* Sonics Silicon Backplane
+*
+Sonics Silicon Backplane support (SSB) [N/m/?] n
+*
+* Broadcom specific AMBA
+*
+BCMA support (BCMA) [N/m/?] n
+IEEE Std 802.15.4 Low-Rate Wireless Personal Area Networks support (IEEE802154) [N/m/?] n
+*
+* USB Device Class drivers
+*
+USB Wireless Device Management support (USB_WDM) [N/m/?] n
+#
+# configuration written to .config
+#
+Building backport-include/backport/autoconf.h ... done.
+  LD      /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/built-in.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/main.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/compat-3.1.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/compat-3.3.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/compat-3.4.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/compat-3.5.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/user_namespace.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/compat-3.6.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/compat-3.7.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/compat-3.8.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/compat-3.9.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/backport-3.10.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/backport-3.12.o
+  CC [M]  /home/yuzp/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/nfore-wifi/drivers/backports/compat/compat_atomic.o
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  yuzp@zh-build-01:~/work/touch_debug/android_kk_imx6dq/imx6_android_kk_c51/hardware/qcom/bt/libbt-vendor/include$ vim hci_uart.h 
+  
+  //#define BT_HS_UART_DEVICE "/dev/ttyHS0"
+//#define BT_HS_UART_DEVICE "/dev/ser2"
+#define BT_HS_UART_DEVICE "/dev/ttymxc2"
+
+/**** baud rates ****/
+#define USERIAL_BAUD_300        0
+
+
+
+
+wifi_src/hardware/libhardware_legacy/wifi/Android.mk中
+ifdef WIFI_DRIVER_MODULE_PATH
+LOCAL_CFLAGS += -DWIFI_DRIVER_MODULE_PATH=\"$(WIFI_DRIVER_MODULE_PATH)\"
+endif
+这么写的功能是什么？
+
+4.1. wpa_supplicant_8
+Replace the whole folder: wifi_src/external/wpa_supplicant_8 to your Android BSP.
+wpa_supplicant_8这个文件夹的功能是什么，怎么用？
+
+
+device\fsl\sabresd_6dq\prebuild_src\NH4R03A\customer_src.mk中
+#EXTERNAL_BLUETOOTH_PATH := external/bluetooth/bluedroid
+这句话在哪里被调用，为什么要被屏蔽，才能编译成出Bluetooth.apk
+
+
+CONFIG_PROJECT_FORYOU_NH4R03A=y
+CONFIG_MX6Q_FORYOU_NH4R03A=y
+
+
+
+
+
+
+
+==========================================================================
+yuzp@zh-build-01:~/work/imx6_s4/android_kk_imx6dq/imx6_android_kk_c51$ cd kernel_imx/
+yuzp@zh-build-01:~/work/imx6_s4/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx$ grep -Rn "NF_3108" ./
+./.config:1449:# CONFIG_NF_3108 is not set
+./drivers/mmc/host/sdhci.c:46:#if defined(CONFIG_NF_3108)
+./drivers/char/zh_dev/Kconfig:102:config NF_3108
+./.config.old:1449:# CONFIG_NF_3108 is not set
+./arch/arm/plat-mxc/include/mach/imx_rfkill.h:20:#if defined(CONFIG_NF_3108)
+./arch/arm/mach-mx6/board-mx6q_sabresd_foryou_s4.c:92:#if defined(CONFIG_NF_3108)
+./arch/arm/mach-mx6/board-mx6q_sabresd_foryou_nh4r03a.c:94:#if defined(CONFIG_NF_3108)
+yuzp@zh-build-01:~/work/imx6_s4/android_kk_imx6dq/imx6_android_kk_c51/kernel_imx$ 
+
+
+
+
+
+
+
+
+awi2c.c(drivers/input/awi2c)中
+
+static int awi_i2c_write_device(u8 slave_addr,u8 *reg,
+				   u8 reg_size,u8 *src, u32 bytes)				   
+{
+	struct i2c_msg msgs[1];
+	int res;
+	u8 buf[bytes + 2];
+	int i =0;
+	if (!src ) {
+		printk("%s:line=%d,error\n",__func__,__LINE__);
+		return -EINVAL;
+	}
+
+	if(reg_size == 2)
+	{
+		buf[0] = reg[0];
+		buf[1] = reg[1];
+		memcpy(&buf[2], src, bytes);
+	}
+	else
+	{
+		buf[0] = reg[0];
+		memcpy(&buf[1], src, bytes);
+	}
+
+	//int i = 0;
+	awDebug("awi_i2c_write_device reg0=0x%x,reg1=0x%x,len=%d \n", reg[0],reg[1], bytes);
+	for(i=0; i<bytes; i++)
+		awDebug("i=%d,0x%x,",i,buf[i]);
+	awDebug("\n");
+
+
+	if (!src ) {
+		printk("%s:line=%d,error\n",__func__,__LINE__);
+		return -EINVAL;
+	}
+
+	msgs[0].addr = (slave_addr>>1);//slave_addr;
+	msgs[0].flags = 0;	/* write */
+	msgs[0].buf = buf;
+	if(reg_size  == 2)	//底层怎么知道，你的寄存器地址是16位的，16位的寄存器地址怎么读写？	
+	msgs[0].len = bytes+2;
+	else	
+	msgs[0].len = bytes+1;	
+	//msgs[0].scl_rate = AWI_I2C_RATE;
+  	//msgs[0].udelay = 5;
+  
+  
+	i=0;
+	for(i=0;i<reg_size+bytes;i++)
+	{
+		awDebug("awi_i2c_write_device i=%d,buf=0x%x\n",i,buf[i]);
+	}
+	res = i2c_transfer(i2c_adap, msgs, 1);
+	
+	awDebug("awi_i2c_write_device res=%d\n",res);
+	if (res == 1)
+		return 1;//0;
+	else if(res == 0)
+		return -EBUSY;
+	else
+		return res;
+			
+}
+根据i2c协议，
+	写的时序：start + slaver addr + register addr + write data + stop
+	读的时序：start + slaver addr + register addr + start + slaver addr + read data + stop
+猜测：
+	i2c_transfer(i2c_adap, msgs, 1); 会产生一次start信号和stop信号
+	i2c_transfer(i2c_adap, msgs, 2); 会产生一次start信号，msgs[0]传输完成之后，会再产生一次start信号，开始msgs[1]的传输，msgs[1]传输完成之后，会产生一次stop信号
+	
+通常都是8位寄存器，8位数据的读写，	
+以上是对于多位寄存器，多位数据读写操作的分析
+
+
+static int test_process(void)
+{
+	int i,ret=0;
+	int cnt;
+	u8 buf[32] = {0};
+	u8 cmd[8] = {0};	
+	cmd[0]=0x00;
+	cmd[1]=0x1;	
+	printk("\n I2C_ID=%d =====hkh=====\n",I2C_ID);
+	if(awi_iic_init(I2C_ID)==0)
+	{
+		cnt = awi_i2c_read_device(i2cReadAdd,cmd,1,buf,sizeof(buf));
+		 if(cnt <= 0)
+		{
+		printk("----awi_i2c_read_device----error!!!\n");
+		return -1;
+		}
+		printk("===hkh====read deviceid reg data : \n");
+		for(i=0;i<4;i++)
+		{
+			printk("0x%x, ", buf[i]);
+		}
+		printk("\n end =====hkh=====\n");
+	}
+	return ret;
+}	
+
+awi_i2c_read_device(i2cReadAdd,cmd,1,buf,sizeof(buf));读了很多个字节，不会有问题吗？
+
+
+
+
+
+	#if defined(CONFIG_USB_IF)
+	printk("usb if can't set dcp mode\r\n");
+	return 0;	//add by yuzp for 认证
+	#endif
+	
+	
+	
+	
+	
+	
+out\target\product\sabresd_6dq\root中
+的文件，修改了，可以直接编译boot
+
+ueventd.rc		//是改变 /dev/目录下的设备权限的
+
+ueventd.freescale.rc	//同上，也是改变设备权限的
+
+init.rc	//启动脚本，是公共的部分，一般不改动
+
+init.freescale.rc		//是设备相关的部分，增加或删除服务，加载驱动，改文件权限等、在这里改
+
+fstab.freescale		//自动挂载设备用的，比如硬盘，USB、
+
+
+
+system/build.prop
+是系统的属性，所以修改系统相关的东西，需要重编系统，不过为了调试方便，一般直接在板子上修改。
+板子上根目录下boot相关的文件，比如所有的*.rc ,在板子上修改了值是无法保存的，因为再次重启板子，重新读取，加载内核，修改的值会被覆盖。
+
+
+
+
+device/fsl/imx6/etc/目录下
+init.rc  init.usb.rc  ota.conf  ppp  u-blox.conf  ueventd.freescale.rc
+这里init.rc是我们公用的。也就是系统起来时最先创建的进程
+
+./fsl/imx6/sabresd_6dq.mk:25:	device/fsl/sabresd_6dq/prebuild_src/$(TARGET_CUSTOMER_MODEL)/init.rc:root/init.freescale.rc \
+可知，板子上root/init.freescale.rc 就是device/fsl/sabresd_6dq/prebuild_src/$(TARGET_CUSTOMER_MODEL)/init.rc，名字变了
+
+/system/core/init/目录下
+init.c文件，是解析init.rc脚本的程序。详细说明了 不同on trigger 加载的时间顺序
+
+
+
+
+device/fsl/sabresd_6dq/prebuild_src/$(TARGET_CUSTOMER_MODEL)/etc/init.rc 是不是没有用到？
+
+好好百度一下各个*.rc文件的功能作用
+
+
+
+
+
+
+
+
+./device/fsl/sabresd_6dq/BoardConfig.mk
+ifeq ($(TARGET_CUSTOMER_MODEL),FORYOU_S4)
+TARGET_BOOTLOADER_CONFIG := 6q:mx6q_sabresd_foryou_s4_android_config 6dl:mx6dl_sabresd_android_config
+else
+...
+endif
+
+
+mx6q_sabresd_foryou_s4_android_config 所在的目录：bootable/bootloader/uboot-imx/include/configs
+mx6q_sabresd_foryou_s4_android.h
+
+
+
+
+
+背光是在哪里设置的？
+
+ EXPORT_SYMBOL(pwm_request);
+ export();
+ 的区别？
+ 
+ 
+ 编译内核 : make imx6_android_NH4R03A_defconfig
+
+ 编译uboot ：make mx6q_sabresd_foryou_s4_android_config
+ 怎么指定编uboot文件？
+ 敏安项目的uboot好像还没有指定编译命令
+ 
+ 怎么在makefile中添加宏定义，决定编译kernel的板级文件，uboot的板级文件，system的板级文件（device下的板级文件）
+ 
+ 
+ 
+ 串口的CTS与RTS功能？
+ 
+ 
+ 
+ 
+ 8388的问题点：
+ 
+ ecos  是什么？
+ 
+ make kernel -j128;make rom;make part
+
+ mk8388.sh kernel
+ 
+ 
+ 有uboot0 uboot1 uboot2 ，有什么区别？
+ 
+ 触摸屏相关的配置
+ \\192.168.2.119\yuzp\work\zh_20170525\application\tools\tcon_bin_generator\SPHE8388
+ 
+ 
+ 
+ //---- LVDS bit
+#define PANEL_LVDS_OUTPUT_FORMAT	LVDS_VESA_8_BIT //LVDS_JEIDA_8_BIT
+这两个参数的区别？
+
+
+
+\\192.168.2.119\yuzp\work\zh_20170525\linux\sdk\zhonghong_sybd\sdk_go_noui.sh
+
+
+
+makefile 中include Makefile的作用
+
+
+
+一：当执行make [1 2 3 4 5 6] makefile执行的动作:
+1. outclean:	删除$(TOP)/out目录下的isp.sh、part.sh、part.cfg、version_info.txt 4个文件
+2.clean：outclean
+		1> cd $(TOP)/boot/uboot/目录下执行make clean
+		2> cd $(TOP)/linux/kernel/目录下执行make clean
+		3> cd $(TOP)/application/目录下执行make clean
+		4> cd $(TOP)/ecos/目录下执行make clean   		//不会执行这条语句，因有条件判断 if test ! -f $(TOP)/.rls;
+		
+3.unconfig:
+		1> cd $(TOP)/build/platform_cfg/目录下执行make unconfig
+				a> rm -rf $(TOP)/boot/uboot/.uboot_cfg
+				b> rm -rf $(TOP)/ecos/.ecos_cfg			//不会执行这条语句，因有条件判断 if test ! -f $(TOP)/.rls;
+				c> rm -rf $(TOP)/linux/kernel/.kernel_cfg
+				d> rm -rf $(TOP)/linux/sdk/.sdk_cfg		//不会执行这条语句，因有条件判断 if test ! -f $(TOP)/.rls;
+				e> rm -rf $(TOP)/application/.app_cfg
+				f> rm -rf $(TOP)/out/isp.sh
+				g> rm -rf $(TOP)/out/version_info.txt
+				h> rm -rf $(TOP)/out/part.sh
+				i> rm -rf $(TOP)/out/part.cfg
+				
+				j> rm -rf $(TOP)/boot/uboot/.config
+				k> rm -rf $(TOP)/ecos/.config		//这个是有.rls条件判断的
+				l> rm -rf $(TOP)/linux/kernel/.config
+				m> rm -rf $(TOP)/linux/sdk/.config
+				n> rm -rf $(TOP)/application/.config
+				
+				
+		
+3.distclean: clean unconfig
+		1> rm -rf $(TOP)/out
+
+
+4. %_cfg: distclean 
+		1> mkdir $(TOP)/out
+		2> cd $(TOP)/build/platform_cfg/8388_zhonghong_xxx_cfg/ 执行make
+				a> cp uboot.cfg 	$(TOP)/boot/uboot/.uboot_cfg
+				b> cp ecos.cfg  	$(TOP)/ecos/.ecos_cfg
+				c> cp kernel.cfg 	$(TOP)/linux/kernel/.kernel_cfg
+				d> cp sdk.cfg 		$(TOP)/linux/sdk/.sdk_cfg
+				e> cp app.cfg 		$(TOP)/application/.app_cfg
+				f> cp isp.sh 		$(TOP)/out/isp.sh
+				g> cp version_info.txt $(TOP)/out/version_info.txt
+				h> cp part.sh 		$(TOP)/out/part.sh
+				i> cp part.cfg 		$(TOP)/out/part.cfg
+				
+			//	j> cp $(TOP)/boot/uboot/.config
+			//	k> cp $(TOP)/ecos/.config		//这个是有.rls条件判断的
+			//	l> cp $(TOP)/linux/kernel/.config
+			//	m> cp $(TOP)/linux/sdk/.config
+			//	n> cp $(TOP)/application/.config
+		3> cd $(TOP)/boot/uboot/ 		执行make (带的参数，是根据$(TOP)/build/platform_cfg/8388_zhonghong_xxx_cfg/的脚本来的）
+		4> cd $(TOP)/ecos/ 				执行make (带参数，。。。）
+		5> cd $(TOP)/linux/kernel 		执行make (带参数，。。。）
+		6> cd $(TOP)/linux/sdk/ 		执行make (带参数，。。。）//不会执行这条语句，因有条件判断 if test ! -f $(TOP)/.rls;
+		7> cd $(TOP)/application 		执行make (带参数，。。。）
+				a> rm -rf .config
+				b> cp -rf config/sunplus/zhonghong_lihua_x3/app_config   .config
+				
+				c> rm -rf runtime.cfg
+				d> ln -s config/sunplus/zhonghong_lihua_x3/runtime.cfg .
+				
+				e> rm -rf logo.bin
+				f> ln -s config/sunplus/zhonghong_lihua_x3/logo.bin .
+				
+				g> rm -rf pq.bin
+				h> ln -s config/sunplus/zhonghong_lihua_x3/pq.bin .
+				
+				i> rm -rf isp_logo.bin
+				j> ln -s config/sunplus/zhonghong_lihua_x3/isp_logo.bin .
+				
+				k> rm -rf pat_logo.bin
+				l> ln -s config/sunplus/zhonghong_lihua_x3/pat_logo.bin .
+				
+				m> rm -rf animation_logo.bin
+				n> ln -s config/sunplus/zhonghong_lihua_x3/animation_logo.bin .
+				
+		8> 执行脚本 $(TOP)/build/core/libcxx_cfg.sh 指定编译的库	//具体干什么的还不清楚
+		9> 执行命令 make rootfs
+
+		注：
+		每次执行make [1 2 3 4 5 6]，会有一个报错，
+		make[2]: Entering directory `/home/yuzp/work/zh2.1_20180706/ecos'
+		make: Entering an unknown directory
+		make: *** modules: No such file or directory.  Stop.
+		make: Leaving an unknown directory
+		make[2]: *** [mclean] Error 2
+		make[2]: Leaving directory `/home/yuzp/work/zh2.1_20180706/ecos'
+		make[2]: Entering directory `/home/yuzp/work/zh2.1_20180706/linux/kernel'
+
+		这是执行$(TOP)/build/Makefile 中%_cfg: distclean的
+		$(MAKE) -j$(NUM_CPU) -C $(ECOS_ROOT) `cat $(ECOS_ROOT).ecos_cfg | grep 'CONFIG_MODEL_ECOS_CFG=' | sed 's/CONFIG_MODEL_ECOS_CFG=//g'`; \
+		即：make -j4 -C ecos sunplus/demo_v1.0	,参数不对导致的(目前没必要修改）。
+		
+		
+二：当执行mk8388.sh all ， Makefile所执行的动作：
+	1> 执行./build/tools/consistent_check/consistent_check.sh 校验文件数
+	2> cd $(TOP)/boot/uboot/ 执行make（不带参数）
+	3> cd $(TOP)/ecos		 执行make（不带参数）
+	4> cd $(TOP)/linux/kernel执行make uImage
+	5> cd $(TOP)/linux/sdk/	 执行make packimg
+			a> make zhonghong
+					①  ifeq ($(ZHONGHONG_APP),1)
+							cp -rf ./zhonghong_sybd/sdk_go.sh 		./out/system/sdk_go.sh
+						else
+							cp -rf ./zhonghong_sybd/sdk_go_noui.sh 	./out/system/sdk_go.sh
+						endif	
+					②	cp -rf ./zhonghong_sybd/bin/* 			./out/system/bin/
+						cp -rf ./zhonghong_sybd/iap2_car_life_config.xml ./out/system/etc/accessory/iap2_car_life_config.xml
+			b> rm -rf  ./out/system/os_ver.txt
+			c> $(ECHO) `date +%Y-%m-%d-%H:%M` > $(PROJECT_DIR)/system/os_ver.txt
+			d> rm -f ./out/spsdk.sqfs
+			e> $(MKSQUASHFS) ./out/system ./out/spsdk.sqfs -all-root -noappend -comp lzo -Xcompression-level 9 -e ./out/system/include -e ./out/system/qt/include
+				打包生成./out/spsdk.sqfs
+		
+	6> cd $(TOP)/application/执行make（不带参数）
+	7> 执行make rom
+			a> cp $(TOP)/rootfs/sprtlib.sqfs $(TOP)/out/
+			b> cp $(TOP)/rootfs/rootfs.sqfs  $(TOP)/out/rootfs.sqfs
+			c> 执行 make isp		//最后的打包工作，生成ISPBOOOT.BIN
+		
+
+		
+		
+		
+		
+plfs_id=$(shell find $(PLATFORM_CONFIG_ROOT) -maxdepth 1 -mindepth 1 -type d  -name "*_cfg" | sort -i | sed "s,./*,,g" | nl -b an -w 1 | sed ':a;N;$!ba;s/\n/ /g' | sed "s,\t, ,g" | sed "s,  , ,g")
+其中 sed ':a;N;$!ba;s/\n/ /g'  的功能没看懂？
+
+
+outclean:
+	@if [ -d $(GEMINI_OUT_ROOT) ]; then \
+	  $(FIND) $(GEMINI_OUT_ROOT) -type f -regex ".*" \
+                                           ! -regex ".*isp.sh" \
+                                           ! -regex ".*part.sh" \
+                                           ! -regex ".*part.cfg" \
+                                           ! -regex ".*version_info.txt" \
+                                           | xargs rm -rf; \
+	fi
+	
+没看懂？
+
+$(TOP)/Makefile中
+	  if test -d $(APP_ROOT); then \
+	    $(MAKE) -j$(NUM_CPU) -C $(APP_ROOT) `cat $(APP_ROOT).app_cfg | grep 'CONFIG_MODEL_APP_CFG=' | sed 's/CONFIG_MODEL_APP_CFG=//g'`; \
+	  fi; \
+结果是　make -C $(TOP)/application/ sunplus/zhonghong_lihua 
+这条命令sunplus/zhonghong_lihua 不对啊，怎么没报错呢?
+答：这条命令sunplus/zhonghong_lihua 是对的，在$(TOP)/application/Makefile 中有下面这句话
+	# config targets
+	boards=$(subst config/,,$(shell find config/ -maxdepth 2 -mindepth 2 -type d))
+	test:
+		echo $(boards)
+	$(boards):
+		$(RM) -rf .config
+		。。。
+		
+	$(boards)就等于 sunplus/zhonghong_lihua 这条命令
+
+
+logo.bin/isp_logo.bin/pat_logo.bin/animation_logo.bin 区别是什么？
+
+
+$(TOP)/build/Makefile中
+consistent_check这个伪目标没有定义，居然可以直接用？
+
+
+	  $(MAKE) -j${CPU_NUM} -C $(UBOOT_ROOT); \
+	  if [ -f $(UBOOT_OUT_ROOT)$(UBOOT_BIN_NAME) ]; then \
+	    $(CP) -rf $(UBOOT_OUT_ROOT)$(UBOOT_BIN_NAME) $(GEMINI_OUT_ROOT); \
+	    $(ECHO) "\n" $(COLOR_GREEN) " [Build] U-BOOT Finish !!! " $(COLOR_ORIGIN) "\n"; \
+	  else \
+	    $(ECHO) "\n" $(COLOR_RED) " [Build] U-BOOT Fail !!! " $(COLOR_ORIGIN) "\n"; \
+	    exit 1; \
+      fi; 
+	  这就说明，每条makefile语句，都是在执行返回之后才会运行下一条语句的。
+	  
+	  
+	  
+	  
+	  
+$(TOP)/application/Makefile 中	  
+include $(TOPDIR)build/core/config.mak
+ifeq ($(APPCONFIG), $(wildcard $(APPCONFIG)))
+	include $(APP_DES)$(COMMON_CFG_NAME)
+endif
+APPCONFIG、APP_DES 这个变量哪来的？
+
+
+
+
+$(TOP)/application/Makefile 中	 
++$(COMMAND) 
+
+$(COMMAND) 变量来自$(TOP)/build/core/config.mak文件
+COMMAND =	@set fnord $$MAKEFLAGS; amf=$$2; \
+	target=`echo $@ | sed s/-recursive//`; \
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  if test -f $$subdir/Makefile; \
+	  then \
+		  echo "Making $$target in $$subdir"; \
+		  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$target) \
+		   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
+	  fi; \
+	done;
+	
+	
+	
+nvm 0x6E00000 \						->		nvm 0x9100000 \	
+spapp 0x1400000 \--					->		spapp 0x500000 \--
+pat_logo 0x1400000 \--				-> 		pat_logo 0x200000 \--	
+
+
+$(TOP)/build\platform_cfg\8388_zhonghong_yuante_cfg中
+isp.sh/isp_noapp.sh/isp_app.sh 区别是什么？
+
+
+
+ make ecos ;make rom;make part
+直接打包ecos的升级文件
+
+rm ecos/application/obj/ap_mon.o
+
+
+
+svn rm application/config/sunplus/zhonghong_yuante/pat_logo.bin
+
+
+\\192.168.2.119\yuzp\work\zh2.1_20180706\application\tools\tcon_bin_generator\SPHE8388
+修改panel_SPHE8388_LVDS_HSD070IDW1_G_YUANTE.h
+生成 tcon.bin
+是编译屏参的生成文件
+
+
+
+tool/mksquashfs 这个工具是自己编译的吧？
+
+
+
+
+\\192.168.2.119\yuzp\work\zh2.1_20180706\application\tools\tcon_bin_generator\SPHE8388\panel_SPHE8388_LVDS_HSD070IDW1_G_YUANTE.h
+#define PANEL_SYS_SYNC_MODE 1	//可以解决屏幕抖动的问题
+
+
+
+yuzp@zh-build-03:~/work/zh_20170525/build/tools$ cd binary_gen/
+yuzp@zh-build-03:~/work/zh_20170525/build/tools/binary_gen$ ls
+GenerateBin_Final.c  isp_bin_gen  isp_bin_gen.c  isp_bin_gen_palette  logo.bmp  Makefile
+yuzp@zh-build-03:~/work/zh_20170525/build/tools/binary_gen$ ./isp_bin_gen logo.bmp 
+Input bmp: logo.bmp, Output bin: logo.bin
+Image info: size 800x480, bpp 24, compression 0, offset 54, filesize 1152054
+x=0, y=0, w=800, h=480, flag=0x3
+File name logo.bin
+isp binary generate done!
+yuzp@zh-build-03:~/work/zh_20170525/build/tools/binary_gen$ 
+生成的isp_part.bin 才是我们真正需要的，
+将isp_part.bin重命名为logo.bin，拷贝到$(TOP)/application\config\sunplus\zhonghong_yuante\目录下
+
+
+
+
+disp_sys_mode=1	//异显
+disp_sys_mode=0	//同显
+
+
+
+#Uart config
+gps_uart_port=4
+bt_uart_port=4
+ecos_uart_port=5
+#USB Swing Level
+usb_port0_level=0
+usb_port1_level=11
+usb_port2_level=0
+usb_device_port=1
+#USB VBUS GPIO POWER
+
+
+
+
+
+
+
+tcon.bin 是怎么产生的？
+是调屏生成的吗？
+
+
+搞清楚，修改哪部分对应的升级哪个部分，不用每次都全升那么麻烦
+	uboot1 0x100000 \
+	uboot2 0x100000 \
+	env 0x80000 \
+	env_redund 0x80000 \
+	ecos 0x800000 \
+	kernel 0x600000 \
+        rootfs 0x5A0000 \
+	spsdk 0x34E0000 \
+	spapp 0x300000 \
+	nvm 0x9100000 \
+	pq 0x20000 \
+	
+	
+	
+	
+//lihua_x3 & t3s	
+		cmd = 0x1A;//SMPS
+		buf[0] = 0x0d;buf[1] = 0x8f | NRP_DATA;
+		//(>4.0A) 0x8f(nrp off)  0xff(nrp 400)  bit13=1(5.25v)  bit6~4(nrp) bit3~1(overcurrent)
+		usb_i2c_write_device(i2cWriteAddr,&cmd,buf,2);			
+		
+		
+		
+		
+//b511
+		cmd = 0x1A;//SMPS
+		buf[0] = 0x0F;buf[1] = 0x8f | NRP_DATA;
+		//(>4.0A) 0x8f(nrp off)  0xff(nrp 400)  bit13=1(5.25v)  bit6~4(nrp) bit3~1(overcurrent)
+		usb_i2c_write_device(i2cWriteAddr,&cmd,buf,2);		
+
+
+
+cd /proc ; cat spclk			//显示各个模块的时钟频率
+DRAM
+DISPLAY
+SDIO
+SDCARD
+
+
+
+
+
+\\192.168.2.119\yuzp\work\zh2.1_20180706\linux\kernel\arch\arm\configs\gemini_FIQSupport_yuante_defconfig文件中
+CONFIG_CMDLINE="console=ttyS0,115200 root=/dev/blockrom8 rootfstype=squashfs init=/init loglevel=7 printk.time=1 lpj=8396800"
+
+
+
+首先进入默认USB模式cdp
+
+usb1_change_mode_cdp
+{
+	写寄存器切USB模式时，使能引脚必须先切为低电平才能，否则报错
+}
+
+
+
+根据读取的I_VBUS/V_VBUS值切换模式
+check_vbus_iv
+{
+	读寄存器值时，使能引脚为高电平或低电平都可以。
+}
+
+
+
+
+\\192.168.2.119\yuzp\work\zh_20170525\boot\uboot\arch\arm\lib\board.c
+8388的uboot 中修改gpio
+
+uboot中与mcu通信的代码位置
+
+
+
+8368的B511项目的usb眼图 测试 宏
+1.
+	#CONFIG_USB_LOGO_TEST is not set
+	看看这个宏在程序中做了哪些事
+
+2.
+	在linux/sdk/out/system/sdk_go.sh中
+	#usb eye
+	echo 1 >  /sys/module/usbcore/parameters/usb_logo_test_start
+	echo 1 >  /sys/module/usbcore/parameters/id_enable
+	
+	1.0版本系统，打开宏后，要记得把 linux\sdk\out\system\drivers\下的ehci-hcd.ko、ohci-hcd.ko、spsdv2.ko 替换为最新编译生成的文件。
+	2.1版本系统，会自动替换这几个*.ko文件。
+	
+
+
+	1.0系统上
+	#if !defined(CONFIG_sybd_1024)
+	#define CONFIG_AOA_SUPPORT //ricky 打开AOA功能
+	#endif
+
+
+android auto，就是安卓版的，相当于苹果版的carplay。百度版的carlife
+	./drivers/usb/core/generic.c:235:#define CONFIG_AOA_SUPPORT
+	
+	
+AOA
+	是Android的一个usb协议
+	
+	
+	
+	
+	
+	
+	
+	
+static ssize_t touch_dev_write(struct file *filp, const char __user *buffer, size_t count, loff_t *ppos)
+{
+	ssize_t ret=0;
+	tsc2007_t *ptp = filp->private_data;
+	u32 cfg_unit = sizeof(ptp->cfg_data[0]);
+	u32 cfg_index = *ppos/cfg_unit;
+	u32 cfg_offset = cfg_index*cfg_unit;
+	printk("touch_dev_write--------3\r\n");
+	if(cfg_offset<=sizeof(ptp->cfg_data))
+	{
+		if(cfg_offset+count>sizeof(ptp->cfg_data))
+			count = sizeof(ptp->cfg_data)-(cfg_offset);
+		if(copy_from_user(ptp->cfg_data+(cfg_index),buffer,count))
+			ret = -EFAULT;
+		else
+		{
+			ret = count;
+			*ppos = cfg_offset+count;
+			ptp->cal_updated = true;
+		}
+	}
+	else
+		ret = -ENOSPC;
+	return ret;
+}
+中的loff_t *ppos怎么理解？
+
+
+
+
+
+linux\kernel\drivers\usb\core\hub.c中
+usb不识别的设备，上报uevent事件，通知应用层弹框处理
+
+usb 不识别的设备，要有弹框处理，参考宏USB_IF添加相应内容，执行netlink工具，抓取uevent上报事件
+
+yuzp@zh-build-03:~/work/zh3.0_20180712/linux/kernel$ grep USB_IF include/ -rnw
+include/linux/usb/hcd.h:26:#ifndef USB_IF
+include/linux/usb/hcd.h:27:#define USB_IF
+yuzp@zh-build-03:~/work/zh3.0_20180712/linux/kernel$ grep USB_IF drivers/usb/ -rnw
+drivers/usb/core/hub.c:103:#ifdef USB_IF
+drivers/usb/core/hub.c:1453:#ifdef USB_IF
+drivers/usb/core/hub.c:1744:#ifdef USB_IF
+drivers/usb/core/hub.c:2538:#ifdef USB_IF
+drivers/usb/core/hub.c:2805:#ifdef USB_IF
+drivers/usb/core/hub.c:4449:#ifdef USB_IF
+drivers/usb/core/hub.c:4735:                    #ifdef USB_IF
+drivers/usb/core/generic.c:95:#ifdef USB_IF
+drivers/usb/core/generic.c:215:#ifdef USB_IF
+drivers/usb/core/message.c:24:#ifdef USB_IF
+drivers/usb/core/message.c:1926://    	#ifdef USB_IF
+
+
+
+
+
+i2c_new_device(adapter, clients);
+i2c_add_driver(&goodix_ts_driver);
+
+这两个函数是为了建立i2c驱动备模型，
+实际上，i2c 只需要获得adapter，就可以对设备读写数据。
+只是这样没有i2c驱动模型，没有probe函数
+
+1.i2c_adapter_id		（适配器）
+2.slaver_addr			(从设备地址)
+3.reg_addr				(寄存器地址）
+4.读写数据
+
+例子：
+s32 ti927_int_reg(void)
+{
+		u8 buf[2]={0};
+		s32 ret=-1;
+		i2c_adap_927 = i2c_get_adapter(0);
+		if(i2c_adap_927 == NULL)
+		{
+			printk("927_i2c_init i2c_adap = null \n");
+			return ret;
+		}	
+			buf[0] = 0xc7;//addr
+			ti927_i2c_read(i2c_send_slave_addr,buf, 1);	
+			//printk("ti927_read:cmd=0x%x,data=0x%x \n",buf[0],buf[1]); 	
+			if(buf[1]==0x21)
+			  ret=0;
+			return ret;	
+}
+
+
+
+
+
+
+s32 gtp_i2c_read(struct i2c_client *client, u8 *buf, s32 len)
+{
+	#if 0
+		struct i2c_msg msgs[2];
+		s32 ret=-1;
+		s32 retries = 0;
+			u8	cmd = 0;
+		msgs[0].flags = !I2C_M_RD;
+		msgs[0].addr  = client->addr;
+		msgs[0].len   = 1;
+		msgs[0].buf   = &cmd;
+	
+		msgs[1].flags = I2C_M_RD;
+		msgs[1].addr  = client->addr;
+		msgs[1].len   = len;
+		msgs[1].buf   = buf;
+	
+		while(retries < 3)
+		{
+			ret = i2c_transfer(client->adapter, msgs, 2);
+			if(ret == 2)break;
+			retries++;
+		}
+		if((retries >= 3))
+		{
+			printk("I2C Read: 0x%04X, %d bytes failed, errcode: %d! Process reset.", (((u16)(buf[0] << 8)) | buf[1]), len-2, ret);
+			{
+	//			  gtp_reset_guitar(client, 10);
+			}
+		}
+	#else
+		s32 ret=-1;
+		s32 retries = 0;
+		while(retries < 3)
+		{
+			ret = i2c_master_recv(client,buf,len);
+			if(ret == len)break;
+			retries++;
+		}
+		if((retries >= 3))
+		{
+			printk("I2C Read: 0x%04X, %d bytes failed, errcode: %d! Process reset.", (((u16)(buf[0] << 8)) | buf[1]), len-2, ret);
+		}
+	#endif
+		return ret;
+
+}
+
+
+i2c_master_recv 就是单纯的读一次数据，没有写寄存器地址的操作
+
+
+int i2c_master_recv(const struct i2c_client *client, char *buf, int count)
+{
+	struct i2c_adapter *adap = client->adapter;
+	struct i2c_msg msg;
+	int ret;
+
+	msg.addr = client->addr;
+	msg.flags = client->flags & I2C_M_TEN;
+	msg.flags |= I2C_M_RD;
+	msg.len = count;
+	msg.buf = buf;
+
+	ret = i2c_transfer(adap, &msg, 1);
+
+	/*
+	 * If everything went ok (i.e. 1 msg received), return #bytes received,
+	 * else error code.
+	 */
+	return (ret == 1) ? count : ret;
+}
+
+
+
+
+
+linux USB 热插拔事件 uevet netlink
+
+驱动层uevent API 与应用层接收uevent消息的API。应用层是怎么接收uevent消息的？
+
+linux USB HUB 驱动代码分析   drivers/usb/core/hub.c
+
+
+
+makefile中的@ $ :
+MKCONFIG	:= $(SRCTREE)/mkconfig
+ 
+smdk2410_config	:	unconfig
+	@$(MKCONFIG) $(@:_config=) arm arm920t smdk2410 NULL s3c24x0
+	
+	
+@$(MKCONFIG)   @表示在执行命令时不输出命令本身，只输出结果
+                                $(MKCONFIG)表示(MKCONFIG) 这个变量的值mkconfig
+$(@:_config=)      这里用到了makefile的变量替换规则，$(VAR:A=B)表示替换变量$VAR中的A为B，
+                                即把$@中的_config替换为空变成smdk2410，$@ 目标文件，$^ 所有的依赖文件，$< 第一个依赖文件。
+								
+								
+kernel中							
+	sp_uart.c	代码分析
+	
+
+	// Create proc file system
+    gt91xx_config_proc = proc_create(GT91XX_CONFIG_PROC_FILE, 0666, NULL, &config_proc_ops);
+	
+	
+	
+	
+arch/arm/configs/gemini_FIQSupport_yuante_defconfig	
+-CONFIG_CMDLINE="console=ttyS0,115200 root=/dev/blockrom8 rootfstype=squashfs init=/init loglevel=0 printk.time=1 lpj=8396800"
++CONFIG_CMDLINE="console=ttyS0,115200 root=/dev/blockrom8 rootfstype=squashfs init=/init loglevel=7 printk.time=1 lpj=8396800"
+	
+	
+	
+svn commit 提交之后，一定要svn up 之后才能更新到最新的svn log	
+
+
+android.c (drivers\usb\gadget)中
+adb_cleanup();	adb_setup(); 都是static函数，怎么在别的文件中有被调用了。
+
+
+
+xml文件中aoa-carlife%d 的设备节点怎么创建出来的，文件中并没有指明主次设备号
+./out/system/etc/aoa_feature/aoa_carlife.xml:11:		<Name value="aoa-carlife%d"/>
+
+
+
+# USB configuration, with iap,eap
+on property:sys.usb.config=iap,eap
+	stop adbd
+    write /sys/class/android_usb/android0/enable 0
+	#write /sys/class/android_usb/android0/iManufacturer "BAIC MOTOR CORPORATION LTD"
+	#write /sys/class/android_usb/android0/iProduct "C32B-M02"
+	write /sys/class/android_usb/android0/iSerial $ro.serialno				#添加这条语句后，iSerial 节点就可以读到uuid号了。是怎么做到的？
+	
+
+	
+eap_function_init 开机的时候被调用到。
+	
+	
+
+插入iPhone手机，并没有点击车机的carlife软件图标
+1.	create /dev/iap ok
+2.	create /dev/mfi_eap_carlife ok
+
+
+
+
+	
+	
+static struct android_usb_function eap_function = {
+	.name = EAP_FUNC_NAME,
+	.init = eap_function_init,						//开机的时候被调用到。
+	.cleanup = eap_function_cleanup,				//
+	.bind_config = eap_function_bind_config,		//开机的时候被调用到。
+	.unbind_config = eap_function_unbind_config,	//
+};
+	
+eap_function_bind_config	
+	ean_bind_config
+	
+	
+	
+	
+	
+	
+linux的module_param()函数功能？
+
+
+uboot 升级，怎么判断升级开始与结束的？
+
+
+
+
+
+
+
+AOA相关的代码：
+	adk-common.c
+	adk-init.c
+	aoa-skeleton.c
+	generic.c
+	
+	
+eap相关的代码：
+	
+	
+
+	
+	
+			send_uevent_broadcast(&udev->dev.kobj,"usb_if_state=power_exceeded");
+		send_uevent_broadcast(&hdev->dev.kobj,"usb_if_state=devices_exceeded");
+			send_uevent_broadcast(&hdev->dev.kobj,"usb_if_state=unsupported_hub");
+		send_uevent_broadcast(&udev->dev.kobj,"usb_if_state=unsupported_device");
+			send_uevent_broadcast(&udev->dev.kobj,"usb_if_state=device_no_response");
+						send_uevent_broadcast(&hdev->dev.kobj,"usb_if_state=power_exceeded");
+				send_uevent_broadcast(&dev->dev.kobj,"usb_if_state=unsupported_device");
+	
+	
+	
+	#USB Swing Level
+usb_port0_level=0
+usb_port1_level=11
+usb_port2_level=0
+
+//GDB调试用的，内核中原先是关闭的。
+CONFIG_BUG=y
+# CONFIG_ELF_CORE is not set
+CONFIG_BASE_FULL=y
+
+
+
+
+sunplus公板上音频数据线接法：
+最左边上下4组音频线。总共有8根线，每一组的两根线都是左右声道。
+FL- 、BL+
+F 表示前喇叭， R表示后喇叭
+
+
+
+
+	hub_irq
+		kick_khubd				//由这个唤醒
+			hub_thread			//会休眠
+				hub_events
+					hub_port_connect_change
+						hub_port_init
+							if (udev->speed != USB_SPEED_SUPER)
+								dev_info(&udev->dev,
+										"%s %s USB device number %d using %s\n",
+										(udev->config) ? "reset" : "new", speed,
+										devnum, udev->bus->controller->driver->name);
+										
+
+
+
+
+
+profile文件中不同分区的mount地址
+X:\work\zh2.1_20180706\rootfs\rootfs_mtd\etc
+
+
+vi /home/yuzp/.ssh/config
+
+
+telechips 内核代码git路径：
+git clone git@githost:telechips-tcc8971.git
+git clone git@githost:telechips-tcc8971-kernel.git
+git clone git@githost:telechips-tcc8971-uboot.git
+
+
+SRC_URI、SRCREV、 AUTOREV 分别表示什么意思？在哪里被调用的？
+
+
+https://192.168.2.124:8443/svn/sunplus_DA/zh2.1_20180706
+
+lrwxrwxrwx  1 yuzp yuzp   106  1月  9 16:05 git -> /work/yuzp/work/telechips/als_v2.5.2/build/tcc8971-lcn-2.0a/tmp/work-shared/tcc8971-lcn-2.0a/kernel-source/
+
+
+E52241读寄存器读操作，直接读就可以，无须考虑V_BUS的EN使能引脚电平
+E52241读寄存器写操作，需要先把V_BUS的EN使能引脚发出一个脉冲，设为低电平后才能写数据。
+
+#if defined(CONFIG_PROJECT_C32)||defined(CONFIG_PROJECT_C51)||defined(CONFIG_PROJECT_CS75)||defined(CONFIG_PROJECT_C217)
+#define I2C_ID	0	//charge by wh
+#elif defined(CONFIG_PROJECT_C40) || defined(CONFIG_PROJECT_370N) 
+#define I2C_ID	3
+#elif defined(CONFIG_PROJECT_FORYOU_NH4R03A) || defined(CONFIG_PROJECT_FORYOU_S4) || defined(CONFIG_PROJECT_FORYOU_S7)
+#define I2C_ID	2   //i2c3
+#else
+#define I2C_ID	0	//charge by wh
+#endif
+
+
+
+
+sdk tmp 目录：
+kernel sdk： X:\work\telechips\telechips-tcc8974\als_v2.5.2\build\tcc8971-lcn-2.0a\tmp\work\tcc8971_lcn_2.0a-telechips-linux-gnueabi\linux-telechips\3.18.24-r0\git
+uboot  sdk:	 X:\work\telechips\telechips-tcc8974\als_v2.5.2\build\tcc8971-lcn-2.0a\tmp\work\cortexa7-neon-telechips-linux-gnueabi\lk-dt\1.0.0-r0\git
+
+
+
+Linux新建用户
+	sudo userdel yuzp -r
+	sudo useradd -d /home/yuzp -m -s /bin/bash yuzp
+为用户设置密码
+	sudo passwd yuzp
+
+为用户新增Samba服务
+	sudo vim /etc/samba/smb.conf
+	
+	sudo smbpasswd  -a username (记得一定要加-a)
+	sudo service smbd restart
+
+新建Samba文件夹
+	cd /work/
+	sudo mkdir wangys
+	sudo chown wangys.wangys wangys -R
+	
+	
+	
+	
+	
+关闭快速启动：
+lk中	
+	lk\target\tcc897x-lcn-dnga\rules.mk中屏蔽掉以下语句
+		#TCC_QUICKBOOT_USE := 1	
+		
+poky中
+	als_v2.5.2\poky\meta-telechips\meta-core\conf\layer.conf中屏蔽以下语句
+		#INVITE_PLATFORM_append = " snapshot"
+		#CORE_IMAGE_EXTRA_INSTALL += "e2fsprogs-e2fsck"
+	
+	als_v2.5.2\poky\meta-telechips\meta-bsp\conf\machine\tcc8971-lcn-2.0a-dnga.conf中屏蔽以下语句
+		#QUICKBOOT ??= "quickboot"
+		
+		
+	als_v2.5.2\poky\meta-telechips\meta-core\recipes-applications\images	
+		修改文件名 automotive-linux-platform-image.zhbbappend
+		
+	als_v2.5.2\poky\meta-telechips\meta-core\
+		修改文件夹名为zh_recipes-snapshot
+		
+	als_v2.5.2\poky\meta-telechips\meta-core\recipes-applications\telechips-automotive-linux的tc-launcher_1.0.0.bbappend中屏蔽以下语句
+	#FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+struct pinctrl {
+	struct list_head node;
+	struct device *dev;
+	struct list_head states;
+	struct pinctrl_state *state;
+	struct list_head dt_maps;
+	struct kref users;
+};
+
+struct pinctrl_state {
+	struct list_head node;
+	const char *name;
+	struct list_head settings;
+};
+
+
+
+
+devm_pinctrl_get
+	pinctrl_get
+		find_pinctrl
+			list_for_each_entry(p, &pinctrl_list, node)		//在pinctrl_list链表中通过匹配pinctrl中的device 来找到对应的pinctrl。由此可以猜测，内核启动解析设备树的时候会将所有的pinctrl用pinctrl_list链表串起来。
+			if (p->dev == dev) {
+				mutex_unlock(&pinctrl_list_mutex);
+				return p;
+			}
+
+			
+927/928的i2c速率设置			
+{0x18,0x2e,0},//i2c  high 0x3c---160Khz 0x1c---310Khz 2d-208k			
+
+
+
+fdt_next_node(const void *fdt, int offset, int *depth)
+	fdt_next_tag(const void *fdt, int startoffset, int *nextoffset)
+			fdt_offset_ptr(const void *fdt, int offset, unsigned int len)
+				_fdt_offset_ptr(const void *fdt, int offset)
+					return (const char *)fdt + fdt_off_dt_struct(fdt) + offset;
+
+					
+
+*nextoffset = FDT_TAGALIGN(offset);	// 把offset按照4字节对齐，
+offset=1，那么nextoffset=4
+offset=2，那么nextoffset=4
+offset=3，那么nextoffset=4
+offset=4，那么nextoffset=4
+offset=5，那么nextoffset=8
+offset=6，那么nextoffset=8
+
+
+
+
+sunplus ddr 由512M换成256M
+1. 需要更换xboot.img
+2. uboot 中设置ddr大小
+//#define CONFIG_SP_TOTAL_DRAM_SIZE        (256*1024*1024)          // Dram total size 256MB
+#define CONFIG_SP_TOTAL_DRAM_SIZE        (512*1024*1024)          // Dram total size 512MB ricky 
+
+
+
+usb网卡 配置，需要设置configuration=4
+int usb_set_configuration(struct usb_device *dev, int configuration)
+{
+	int i, ret;
+	struct usb_host_config *cp = NULL;
+	struct usb_interface **new_interfaces = NULL;
+	struct usb_hcd *hcd = bus_to_hcd(dev->bus);
+	int n, nintf;
+
+	//ricky 2016-10-29 15:53:53
+	printk("%s,%d \n",__func__,__LINE__);
+	printk("dev->manufacturer:%s \n",dev->manufacturer);
+	printk("dev->descriptor.bNumConfigurations:%d \n",dev->descriptor.bNumConfigurations);
+	if((dev->manufacturer)&&(strcmp(dev->manufacturer, "Apple Inc.") == 0)&&(dev->descriptor.bNumConfigurations==4))
+	{
+		configuration = 4;
+		printk("set for CarLife\n");
+	} 
+	if (dev->authorized == 0 || configuration == -1)
+		configuration = 0;
+	else {
