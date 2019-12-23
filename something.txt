@@ -1475,3 +1475,21 @@ kernel参数配置：
 		TARGET_KERNEL_DEFCONF := imx6_android_$(TARGET_CUSTOMER_MODEL)_defconfig
 		
 		TARGET_KERNEL_DEFCONF是在 build/core/Makefile：831行中被调用的。
+		
+source build/envsetup.sh		
+lunch sabresd_6dq-user FORYOU_S4
+ 把第二个参数 FORYOU_S4 赋给 TARGET_CUSTOMER_MODEL 变量，根据该变量来决定项目编号的。
+
+function lunch()
+{
+    local answer
+if [ "$2" ] ; then
+echo ""
+echo ""
+echo "current project is $2"
+echo ""
+export TARGET_CUSTOMER_MODEL=$2
+...
+}
+
+
