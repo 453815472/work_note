@@ -1,10 +1,10 @@
-¶îÍâ²¹³ä,shell(not Makefile)£º
-1¡¢$@
-$@ Îª´«µİµÄ²ÎÊı
-2¡¢$#
-$# Îª´«µİ²ÎÊıµÄÊıÁ¿
+é¢å¤–è¡¥å……,shell(not Makefile)ï¼š
+1ã€$@
+$@ ä¸ºä¼ é€’çš„å‚æ•°
+2ã€$#
+$# ä¸ºä¼ é€’å‚æ•°çš„æ•°é‡
 
-¾ÍÏñ½Å±¾Ö´ĞĞºóµÄ½á¹û£º
+å°±åƒè„šæœ¬æ‰§è¡Œåçš„ç»“æœï¼š
  
 Testing $@ and $#
 -------------
@@ -12,65 +12,65 @@ Output $@
 1.txt 2.txt
 Output $#
 2
-3¡¢$? 
-    ÊÇshell±äÁ¿,±íÊ¾"×îºóÒ»´ÎÖ´ĞĞÃüÁî"µÄÍË³ö×´Ì¬£¬Ò»°ã0±íÊ¾³É¹¦£¬·Ç0ÊıÖµ±íÊ¾Ã»ÓĞ³É¹¦¡£
+3ã€$? 
+    æ˜¯shellå˜é‡,è¡¨ç¤º"æœ€åä¸€æ¬¡æ‰§è¡Œå‘½ä»¤"çš„é€€å‡ºçŠ¶æ€ï¼Œä¸€èˆ¬0è¡¨ç¤ºæˆåŠŸï¼Œé0æ•°å€¼è¡¨ç¤ºæ²¡æœ‰æˆåŠŸã€‚
  
-ÇĞ¼Ç:
-$?ÓÀÔ¶±íÊ¾shellÃüÁî×îºóÒ»´ÎÖ´ĞĞºóµÄÍË³ö×´Ì¬,µ±º¯ÊıÖ´ĞĞÍê±Ïºó,Èç¹ûÓÖÖ´ĞĞÁËÆäËüÃüÁî,Ôò$?²»ÔÙ±íÊ¾º¯ÊıÖ´ĞĞºóµÄ×´Ì¬,¶ø±íÊ¾ÆäËüÃüÁîµÄÍË³ö×´Ì¬. 
-4¡¢$!
-    ´ú±ípid,½ø³Ìid
+åˆ‡è®°:
+$?æ°¸è¿œè¡¨ç¤ºshellå‘½ä»¤æœ€åä¸€æ¬¡æ‰§è¡Œåçš„é€€å‡ºçŠ¶æ€,å½“å‡½æ•°æ‰§è¡Œå®Œæ¯•å,å¦‚æœåˆæ‰§è¡Œäº†å…¶å®ƒå‘½ä»¤,åˆ™$?ä¸å†è¡¨ç¤ºå‡½æ•°æ‰§è¡Œåçš„çŠ¶æ€,è€Œè¡¨ç¤ºå…¶å®ƒå‘½ä»¤çš„é€€å‡ºçŠ¶æ€. 
+4ã€$!
+    ä»£è¡¨pid,è¿›ç¨‹id
  
-5¡¢$$
-    ´ú±íppid,¸¸½ø³Ìid
+5ã€$$
+    ä»£è¡¨ppid,çˆ¶è¿›ç¨‹id
 	
 	
 	
 	
 	
 	
-1.Ê¹ÓÃIE gÓ[Æ÷İ”ÈëÏÂÁĞ¾WÖ·
+1.ä½¿ç”¨IE ç€è¦½å™¨è¼¸å…¥ä¸‹åˆ—ç¶²å€
    https://firm.sunplus.com/
 2.
-ÕËºÅzouhh   ÃÜÂëLi#98xy!
+è´¦å·zouhh   å¯†ç Li#98xy!
 
 
-Â·½£ºhttp://carwiki.sunplus.com/index.php/SPHE_8388 	
+è·¯å¾‘ï¼šhttp://carwiki.sunplus.com/index.php/SPHE_8388 	
 
 
 
-µ¥µã´¥Ãş(Single-touch)Éè±¸Ö§³ÖÒÔÏÂLinuxÊäÈëÊÂ¼ş: 
-ABS_X: (±ØĞë) £º±¨¸æ¹¤¾ßµÄx×ø±ê 
-ABS_Y: (±ØĞë) £º±¨¸æ¹¤¾ßµÄy×ø±ê 
-BTN_TOUCH: (±ØĞë) £ºÖ¸Ê¾¹¤¾ßÊÇ·ñ½Ó´¥´¥ÃşÉè±¸. 
+å•ç‚¹è§¦æ‘¸(Single-touch)è®¾å¤‡æ”¯æŒä»¥ä¸‹Linuxè¾“å…¥äº‹ä»¶: 
+ABS_X: (å¿…é¡») ï¼šæŠ¥å‘Šå·¥å…·çš„xåæ ‡ 
+ABS_Y: (å¿…é¡») ï¼šæŠ¥å‘Šå·¥å…·çš„yåæ ‡ 
+BTN_TOUCH: (å¿…é¡») ï¼šæŒ‡ç¤ºå·¥å…·æ˜¯å¦æ¥è§¦è§¦æ‘¸è®¾å¤‡. 
 
-¶àµã´¥Ãş(Multi-touch)Éè±¸Ö§³ÖÒÔÏÂLinuxÊäÈëÊÂ¼ş: 
-ABS_MT_POSITION_X: (±ØĞë)£º ±¨¸æ¹¤¾ßµÄX×ø±ê 
-ABS_MT_POSITION_Y: (±ØĞë)£º ±¨¸æ¹¤¾ßµÄX×ø±ê 
-BTN_TOUCH: (±ØĞë) £º Ö¸Ê¾¹¤¾ßÊÇ·ñ½Ó´¥´¥ÃşÉè±¸
+å¤šç‚¹è§¦æ‘¸(Multi-touch)è®¾å¤‡æ”¯æŒä»¥ä¸‹Linuxè¾“å…¥äº‹ä»¶: 
+ABS_MT_POSITION_X: (å¿…é¡»)ï¼š æŠ¥å‘Šå·¥å…·çš„Xåæ ‡ 
+ABS_MT_POSITION_Y: (å¿…é¡»)ï¼š æŠ¥å‘Šå·¥å…·çš„Xåæ ‡ 
+BTN_TOUCH: (å¿…é¡») ï¼š æŒ‡ç¤ºå·¥å…·æ˜¯å¦æ¥è§¦è§¦æ‘¸è®¾å¤‡
 
-/---------------927/926¼Ä´æÆ÷ÉèÖÃ-------------------------
+/---------------927/926å¯„å­˜å™¨è®¾ç½®-------------------------
 
-927ÖĞgpioÉèÖÃ£º
+927ä¸­gpioè®¾ç½®ï¼š
 GPIO Function Enable
-1: Enable GPIO operation		//gpio¹¦ÄÜ
-0: Enable normal operation		//³£¹æ¹¦ÄÜ£¬¼´¸´ÓÃµÄ¹¦ÄÜ
+1: Enable GPIO operation		//gpioåŠŸèƒ½
+0: Enable normal operation		//å¸¸è§„åŠŸèƒ½ï¼Œå³å¤ç”¨çš„åŠŸèƒ½
 
 
 Note: 
 if the DS90UB927Q-Q1 is paired with a DS90UB926Q-Q1 deserializer, the devices must be configured into 18-bit mode to allow usage of
 GPIO pins on the DS90UB927 serializer. To enable 18-bit mode, set serializer register reg_0x12[2] = 1. 18-bit
 mode will be auto-loaded into the deserializer from the serializer. 
-ÒâË¼ÊÇ£¬Èç¹û927Óë926Åä¶ÔÊ¹ÓÃ£¬±ØĞë°Ñ0x12¼Ä´æÆ÷µÄµÚ[2]Î»ÉèÖÃÎª1£¬ÅäÖÃ³É 18-bit Ä£Ê½£¬²ÅÄÜÔÚ927ÉÏÔÊĞíÊ¹ÓÃGPIOÒı½Å¹¦ÄÜ¡£
+æ„æ€æ˜¯ï¼Œå¦‚æœ927ä¸926é…å¯¹ä½¿ç”¨ï¼Œå¿…é¡»æŠŠ0x12å¯„å­˜å™¨çš„ç¬¬[2]ä½è®¾ç½®ä¸º1ï¼Œé…ç½®æˆ 18-bit æ¨¡å¼ï¼Œæ‰èƒ½åœ¨927ä¸Šå…è®¸ä½¿ç”¨GPIOå¼•è„šåŠŸèƒ½ã€‚
 
-GPIO[0:3] Õâ4¸ögpioÊÇ¿ÉÒÔÓÃ×÷Í¸´«µÄ£¬ÆäËûgpio²»¿ÉÒÔÍ¸´«,GPIO_REG[5:8]¾Í²»ÄÜÍ¸´«¡£
-Í¸´«µÄgpio£¬ĞèÒªÍ¬Ê±ÉèÖÃ927ºÍ926µÄgpio¼Ä´æÆ÷£¬²ÅÄÜÊµÏÖÍ¸´«¹¦ÄÜ¡£
-
-
+GPIO[0:3] è¿™4ä¸ªgpioæ˜¯å¯ä»¥ç”¨ä½œé€ä¼ çš„ï¼Œå…¶ä»–gpioä¸å¯ä»¥é€ä¼ ,GPIO_REG[5:8]å°±ä¸èƒ½é€ä¼ ã€‚
+é€ä¼ çš„gpioï¼Œéœ€è¦åŒæ—¶è®¾ç½®927å’Œ926çš„gpioå¯„å­˜å™¨ï¼Œæ‰èƒ½å®ç°é€ä¼ åŠŸèƒ½ã€‚
 
 
-Table 1. GPIO Enable and Configuration£¨Í¸´«ÉèÖÃ£©£º
 
-Òı½Å			Éè±¸					ÓÉ927-->926ÕıÏòÍ¸´«			ÓÉ926--->927·´ÏòÍ¸´«
+
+Table 1. GPIO Enable and Configurationï¼ˆé€ä¼ è®¾ç½®ï¼‰ï¼š
+
+å¼•è„š			è®¾å¤‡					ç”±927-->926æ­£å‘é€ä¼ 			ç”±926--->927åå‘é€ä¼ 
 DESCRIPTION		DEVICE					FORWARD CHANNEL				BACK CHANNEL
 GPIO3 			DS90UB927Q-Q1 			0x0F = 0x03 				0x0F = 0x05
 GPIO3			DS90UB926/8Q-Q1 		0x1F = 0x05 				0x1F = 0x03
@@ -91,7 +91,7 @@ GPIO0			DS90UB926/8Q-Q1 		0x1D = 0x05 				0x1D = 0x03
 
 
 
-Table 2. GPIO_REG and GPIO Local Enable and Configuration(±¾µØgpioÉèÖÃ)
+Table 2. GPIO_REG and GPIO Local Enable and Configuration(æœ¬åœ°gpioè®¾ç½®)
 
 DESCRIPTION 			REGISTER CONFIGURATION 				FUNCTION
 GPIO_REG8				0x11 = 0x01 						Output, L
@@ -101,11 +101,11 @@ GPIO_REG8				0x11 = 0x01 						Output, L
 GPIO_REG7				0x10 = 0x01 						Output, L
 						0x10 = 0x09							Output, H
 						0x10 = 0x03 						Input, Read: 0x1C[7]
-¡£¡£¡£
+ã€‚ã€‚ã€‚
 
 
 
-IDx Òı½ÅµÄ¹¦ÄÜÊÇ ÅäÖÃdevice I2C Address Select
+IDx å¼•è„šçš„åŠŸèƒ½æ˜¯ é…ç½®device I2C Address Select
 
 
 PDB = H, device is enabled (normal operation)
@@ -114,7 +114,7 @@ PDB = L, device is powered down.
 INTB	Interrupt
 		INTB = H, normal
 		INTB = L, Interrupt request
-		Recommended pullup: 4.7 k¦¸ to VDDIO. 
+		Recommended pullup: 4.7 kÎ© to VDDIO. 
 		
 		
 		
@@ -131,28 +131,28 @@ serializer also pulls low, indicating an interrupt condition.
 source. Reading this register also clears and resets the interrupt.	
 		
 		
-¶ÁÈ¡927¼Ä´æÆ÷0x0c£¬¿É²é¿´927/926Á¬½Ó×´Ì¬¡£		
+è¯»å–927å¯„å­˜å™¨0x0cï¼Œå¯æŸ¥çœ‹927/926è¿æ¥çŠ¶æ€ã€‚		
 the Link Detect Status is 0 (cable is not detected) on bit 0 of address 0x0C 	
 		
 		
 		
 		
 serializer
-927		----µ¥LVDSÊäÈë£¬µ¥FPD-LinkÊä³ö£¬ Ã»ÓĞ REM_INTBÒı½Å
-929		----µ¥HDMIÊäÈë£¬µ¥FPD-LinkÊä³ö£¬ ÓĞ   REM_INTBÒı½Å
-949		----µ¥HDMIÊäÈë£¬Ë«FPD-LinkÊä³ö£¬ ÓĞ   REM_INTBÒı½Å
+927		----å•LVDSè¾“å…¥ï¼Œå•FPD-Linkè¾“å‡ºï¼Œ æ²¡æœ‰ REM_INTBå¼•è„š
+929		----å•HDMIè¾“å…¥ï¼Œå•FPD-Linkè¾“å‡ºï¼Œ æœ‰   REM_INTBå¼•è„š
+949		----å•HDMIè¾“å…¥ï¼ŒåŒFPD-Linkè¾“å‡ºï¼Œ æœ‰   REM_INTBå¼•è„š
 
 
 
 
 deserializer		
-926		----µ¥FPD-LinkÊäÈë£¬µ¥RGBÊä³ö
-928		----µ¥FPD-LinkÊäÈë£¬µ¥LVDSÊä³ö
-948		----Ë«FPD-LinkÊäÈë£¬µ¥LVDSÊä³ö
+926		----å•FPD-Linkè¾“å…¥ï¼Œå•RGBè¾“å‡º
+928		----å•FPD-Linkè¾“å…¥ï¼Œå•LVDSè¾“å‡º
+948		----åŒFPD-Linkè¾“å…¥ï¼Œå•LVDSè¾“å‡º
 		
 		
 
-²åÈëiPhoneÊÖ»ú£¬²¢Ã»ÓĞµã»÷³µ»úµÄcarlifeÈí¼şÍ¼±ê£¬
+æ’å…¥iPhoneæ‰‹æœºï¼Œå¹¶æ²¡æœ‰ç‚¹å‡»è½¦æœºçš„carlifeè½¯ä»¶å›¾æ ‡ï¼Œ
 1.	create /dev/iap ok
 2.	create /dev/mfi_eap_carlife ok
 
@@ -160,21 +160,21 @@ deserializer
 root@Gemini:/sys/bus/usb/drivers# ls
 adk_skeleton   snd-usb-audio  usb-storage    usbhid
 hub            usb            usbfs          uvcvideo
-»ù±¾ÉÏ,drivers/Ä¿Â¼ÏÂÃæµÚÒ»²ãµÄÃ¿¸öÄ¿Â¼¶¼ËãÒ»¸ö×ÓÏµÍ³,ÒòÎªËüÃÇ´ú±íÁËÒ»ÀàÉè±¸
+åŸºæœ¬ä¸Š,drivers/ç›®å½•ä¸‹é¢ç¬¬ä¸€å±‚çš„æ¯ä¸ªç›®å½•éƒ½ç®—ä¸€ä¸ªå­ç³»ç»Ÿ,å› ä¸ºå®ƒä»¬ä»£è¡¨äº†ä¸€ç±»è®¾å¤‡
 
 
-.hub±¾Éí¾ÍÊÇÁ½ÖÖ,Ò»ÖÖÊÇÆÕÍ¨µÄhub,Ò»ÖÖÊÇroot hub.
-¶ÔÓÚÆÕÍ¨hub,ËüÍêÈ«¿ÉÄÜÒ²ÊÇºÍUÅÌÒ»Ñù,ÔÚÄ³¸öÊ±¿Ì±»Äã²åÈë,È»ºóÕâÖÖÇé¿öÏÂhub_probe±»µ÷ÓÃ,
-µ«ÊÇ¶ÔÓÚroot hub¾Í²»ĞèÒªÕâÃ´¶à·Ï»°ÁË,root hub¿Ï¶¨ÊÇÓĞµÄ,Ö»ÒªÄãÓĞhost controller,¾ÍÒ»¶¨»áÓĞroot hub,
-ËùÒÔhub_probe()»ù±¾ÉÏÊÇºÜ×ÔÈ»µÄ¾Í±»µ÷ÓÃÁË,²»ÓÃËµ·ÇµÃµÈ´ıÄ³¸ö²åÈëÊÂ¼şµÄ·¢Éú,Ã»Õâ¸ö±ØÒª.
+.hubæœ¬èº«å°±æ˜¯ä¸¤ç§,ä¸€ç§æ˜¯æ™®é€šçš„hub,ä¸€ç§æ˜¯root hub.
+å¯¹äºæ™®é€šhub,å®ƒå®Œå…¨å¯èƒ½ä¹Ÿæ˜¯å’ŒUç›˜ä¸€æ ·,åœ¨æŸä¸ªæ—¶åˆ»è¢«ä½ æ’å…¥,ç„¶åè¿™ç§æƒ…å†µä¸‹hub_probeè¢«è°ƒç”¨,
+ä½†æ˜¯å¯¹äºroot hubå°±ä¸éœ€è¦è¿™ä¹ˆå¤šåºŸè¯äº†,root hubè‚¯å®šæ˜¯æœ‰çš„,åªè¦ä½ æœ‰host controller,å°±ä¸€å®šä¼šæœ‰root hub,
+æ‰€ä»¥hub_probe()åŸºæœ¬ä¸Šæ˜¯å¾ˆè‡ªç„¶çš„å°±è¢«è°ƒç”¨äº†,ä¸ç”¨è¯´éå¾—ç­‰å¾…æŸä¸ªæ’å…¥äº‹ä»¶çš„å‘ç”Ÿ,æ²¡è¿™ä¸ªå¿…è¦.
 
-ÎÊÌâ£ºÏµÍ³Æô¶¯µÄÊ±ºò£¬root hub µÄprobe ÊÇÔõÃ´±»µ÷ÓÃµÄ£¿
+é—®é¢˜ï¼šç³»ç»Ÿå¯åŠ¨çš„æ—¶å€™ï¼Œroot hub çš„probe æ˜¯æ€ä¹ˆè¢«è°ƒç”¨çš„ï¼Ÿ
 --------------------- 
-Ö»ÒªÄãÓĞusb host controller,ÄÇÃ´ÔÚusb host controllerµÄÇı¶¯³ÌĞò³õÊ¼»¯µÄ¹ı³ÌÖĞ,Ëü¾Í»áµ÷ÓÃhub_probe()À´Ì½²âroot hub,
-²»¹ÜÄãµÄhost controllerÊÇohci,uhci,»¹ÊÇehciµÄ½Ó¿Ú.
+åªè¦ä½ æœ‰usb host controller,é‚£ä¹ˆåœ¨usb host controllerçš„é©±åŠ¨ç¨‹åºåˆå§‹åŒ–çš„è¿‡ç¨‹ä¸­,å®ƒå°±ä¼šè°ƒç”¨hub_probe()æ¥æ¢æµ‹root hub,
+ä¸ç®¡ä½ çš„host controlleræ˜¯ohci,uhci,è¿˜æ˜¯ehciçš„æ¥å£.
 
 
- kernel/drivers/mtd/mtdcore.c µÄ mtd_erase/mtd_write_oob/mtd_write API£¬
+ kernel/drivers/mtd/mtdcore.c çš„ mtd_erase/mtd_write_oob/mtd_write APIï¼Œ
  
  
  
@@ -187,13 +187,13 @@ hub            usb            usbfs          uvcvideo
  
  
  
-ÏÂÔØrepo
+ä¸‹è½½repo
 curl https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -o repo
 chmod +x repo
 
 export REPO_URL='https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/'
  
- ÖØĞÂÔËĞĞµÄÃüÁî 
+ é‡æ–°è¿è¡Œçš„å‘½ä»¤ 
 ? For TCC897X/TCC802X
 $ mkdir Linux_platform
 $ cd Linux_platform
@@ -206,32 +206,32 @@ $ poky/download.sh
     git config --global user.email "yuzp@zhonghongcarav.com.cn"
     git config --global user.name "yuzp"
  
-Èç¹ûÒÔÇ°ÏÂÔØ¹ıALS£¬¿ÉÒÔÖ´ĞĞÒ»´Îrepo sync£¬ÔÚ.repo/manifests/ÖĞ¾Í¿É¿´µ½als_v2.6.0.xml£¬ÔÙÖ´ĞĞrepo init -m als_v2.6.0.xml && repo sync¼´¿ÉÏÂÔØv2.6.0°æ±¾ 
+å¦‚æœä»¥å‰ä¸‹è½½è¿‡ALSï¼Œå¯ä»¥æ‰§è¡Œä¸€æ¬¡repo syncï¼Œåœ¨.repo/manifests/ä¸­å°±å¯çœ‹åˆ°als_v2.6.0.xmlï¼Œå†æ‰§è¡Œrepo init -m als_v2.6.0.xml && repo syncå³å¯ä¸‹è½½v2.6.0ç‰ˆæœ¬ 
  
  
- »ÆÈñÊ¤:
-¾ÍÊÇ¿ª»ú¶¯»­µÄsize£¬ÄãÓÊ¼şÓĞÊÕµ½ÎÒ×òÌì·¢µÄB511ÎŞUI±¨¸æÂğ£¿
+ é»„é”èƒœ:
+å°±æ˜¯å¼€æœºåŠ¨ç”»çš„sizeï¼Œä½ é‚®ä»¶æœ‰æ”¶åˆ°æˆ‘æ˜¨å¤©å‘çš„B511æ— UIæŠ¥å‘Šå—ï¼Ÿ
 
 BOSS-YU-BEYOND:
-ÄãÃÇ¸Ä¶¯ÁËÄÄĞ©ÄÚÈİ£¬ÎÒĞèÒªÁË½âÒ»ÏÂ
+ä½ ä»¬æ”¹åŠ¨äº†å“ªäº›å†…å®¹ï¼Œæˆ‘éœ€è¦äº†è§£ä¸€ä¸‹
 
 BOSS-YU-BEYOND:
-ÓĞµÄ£¬ÄÇ¸öpdf
+æœ‰çš„ï¼Œé‚£ä¸ªpdf
 
-»ÆÈñÊ¤:
-¶ÔµÄ£¬
+é»„é”èƒœ:
+å¯¹çš„ï¼Œ
 
-»ÆÈñÊ¤:
-¿ª»ú¶¯»­µÄsizeÊÇ¹Ì¶¨µÄ£¬xboot½«animation_logo.bin·Åµ½DRAM
+é»„é”èƒœ:
+å¼€æœºåŠ¨ç”»çš„sizeæ˜¯å›ºå®šçš„ï¼Œxbootå°†animation_logo.binæ”¾åˆ°DRAM
 
-»ÆÈñÊ¤:
-²¥·ÅµÄÊ±ºò»á´«addressºÍsize½øÈ¥
+é»„é”èƒœ:
+æ’­æ”¾çš„æ—¶å€™ä¼šä¼ addresså’Œsizeè¿›å»
 
-»ÆÈñÊ¤:
-Õâ¸öÊ±ºòÎÒ½«size¸Ä±ä
+é»„é”èƒœ:
+è¿™ä¸ªæ—¶å€™æˆ‘å°†sizeæ”¹å˜
 
-»ÆÈñÊ¤:
-°´ÕÕÔ­ÀíÀ´Ã»ÓĞĞŞÕıµÄcode£¬»á³öÏÖIPC timeoutµÄÎÊÌâ
+é»„é”èƒœ:
+æŒ‰ç…§åŸç†æ¥æ²¡æœ‰ä¿®æ­£çš„codeï¼Œä¼šå‡ºç°IPC timeoutçš„é—®é¢˜
 
  
  
@@ -270,30 +270,30 @@ Choose ALS version
 3. als_v2.5.2
 select number(1-3) => 3
 
-TCC8971 DEMO BOARD Ä¿Ç°µÄALS version£º als_v2.5.2£¬¼¸¸öÒÉÎÊµã£¬ÒÔÏÂ¹¦ÄÜÔõÃ´Ìí¼Ó£º
-1.	Ä¿Ç°±àÒë³öÀ´×ÀÃæÖ»ÓĞÒ»¸öAV PlayÓ¦ÓÃ£¬¿ÉÒÔÔÚ±àÒëµÄÊ±ºòÑ¡Ôñ¸ü¶àÓ¦ÓÃÂğ
-2.´¥ÃşÆÁ¹¦ÄÜÔõÃ´¿ªÆô
-3.µ¹³µ£¬ÒôÀÖÉùÒôÊä³ö
+TCC8971 DEMO BOARD ç›®å‰çš„ALS versionï¼š als_v2.5.2ï¼Œå‡ ä¸ªç–‘é—®ç‚¹ï¼Œä»¥ä¸‹åŠŸèƒ½æ€ä¹ˆæ·»åŠ ï¼š
+1.	ç›®å‰ç¼–è¯‘å‡ºæ¥æ¡Œé¢åªæœ‰ä¸€ä¸ªAV Playåº”ç”¨ï¼Œå¯ä»¥åœ¨ç¼–è¯‘çš„æ—¶å€™é€‰æ‹©æ›´å¤šåº”ç”¨å—
+2.è§¦æ‘¸å±åŠŸèƒ½æ€ä¹ˆå¼€å¯
+3.å€’è½¦ï¼ŒéŸ³ä¹å£°éŸ³è¾“å‡º
 4.aux in
-5.À¶ÑÀ¡¢WiFi
-6¡£usb¡¢sd¿¨
-7.Â¼Òô¹¦ÄÜ
+5.è“ç‰™ã€WiFi
+6ã€‚usbã€sdå¡
+7.å½•éŸ³åŠŸèƒ½
 
 
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
 
 
-ÄÚºËsource code Â·¾¶£º
+å†…æ ¸source code è·¯å¾„ï¼š
 yuzp@zhos-sw:~/work/Linux_platform/build/tcc8971-lcn-2.0a/tmp/work-shared/tcc8971-lcn-2.0a/kernel-source$ ls
 Z:\Linux_platform\build\tcc8971-lcn-2.0a\tmp\work\tcc8971_lcn_2.0a-telechips-linux-gnueabi\linux-telechips\3.18.24-r0\git
 
-little kernel Ô´ÂëÂ·¾¶£º
+little kernel æºç è·¯å¾„ï¼š
 Z:\Linux_platform\build\tcc8971-lcn-2.0a\tmp\work\cortexa7-neon-telechips-linux-gnueabi\lk-dt\1.0.0-r0\git
 
 
 
-Ã¿´Î¿ªÆô·şÎñÆ÷£¬ÖØĞÂ½¨Á¢»·¾³ĞèÒªÖ´ĞĞµÄ¶¯×÷£º
+æ¯æ¬¡å¼€å¯æœåŠ¡å™¨ï¼Œé‡æ–°å»ºç«‹ç¯å¢ƒéœ€è¦æ‰§è¡Œçš„åŠ¨ä½œï¼š
 
  source buildtools/environment-setup-x86_64-pokysdk-linux
  
@@ -308,43 +308,43 @@ Z:\Linux_platform\build\tcc8971-lcn-2.0a\tmp\work\cortexa7-neon-telechips-linux-
   
   
   
-  ÉèÖÃ½»²æ±àÒëÆ÷»·¾³£º
+  è®¾ç½®äº¤å‰ç¼–è¯‘å™¨ç¯å¢ƒï¼š
   source ../adt/environment-setup-cortexa7-neon-telechips-linux-gnueabi
   
-  ÖÕ¶ËÊäÈëarm-telechips-linux-gnueabi °´tab¼ü ¾Í»áÓĞ²¹³ä
+  ç»ˆç«¯è¾“å…¥arm-telechips-linux-gnueabi æŒ‰tabé”® å°±ä¼šæœ‰è¡¥å……
   
   
   
-  adt°²×°Ä¬ÈÏÂ·¾¶£º
+  adtå®‰è£…é»˜è®¤è·¯å¾„ï¼š
   Enter target directory for SDK (default: /opt/poky-telechips-systemd/nodistro.0):
   
   
-ÄÇÃ´Õâ¸öÖØ¸´´òÓ¡µÄÔ­ÒòÊÇ·şÎñ±»ÖØ¸´¿ªÆôÁË£¿	ÊÇµÄ
-ÄÇÃ´Õâ¸öÖØ¸´´òÓ¡µÄÔ­ÒòÊÇ·şÎñ±»ÖØ¸´¿ªÆôÁË£¿  ÊÇµÄ
+é‚£ä¹ˆè¿™ä¸ªé‡å¤æ‰“å°çš„åŸå› æ˜¯æœåŠ¡è¢«é‡å¤å¼€å¯äº†ï¼Ÿ	æ˜¯çš„
+é‚£ä¹ˆè¿™ä¸ªé‡å¤æ‰“å°çš„åŸå› æ˜¯æœåŠ¡è¢«é‡å¤å¼€å¯äº†ï¼Ÿ  æ˜¯çš„
 
-ÅäÖÃÄÚºËµÄÃüÁî£º
+é…ç½®å†…æ ¸çš„å‘½ä»¤ï¼š
 bitbake -c menuconfig linux-telechips
 
-ÕâÁ½ÌõÃüÁîÊÇ¸ÉÊ²Ã´µÄ£¿
+è¿™ä¸¤æ¡å‘½ä»¤æ˜¯å¹²ä»€ä¹ˆçš„ï¼Ÿ
 bitbake -c cleanall linux-telechips
 bitbake linux-telechips
 
-Éú³É¾µÏñËùÔÚÎ»ÖÃ£º
+ç”Ÿæˆé•œåƒæ‰€åœ¨ä½ç½®ï¼š
 ls -1 tmp/deploy/images/tcc8971-lcn-2.0a/
 
 
 
-Telechips Issue Management System£º
+Telechips Issue Management Systemï¼š
 https://tims.telechips.com:8443/secure/Dashboard.jspa
 
-timsÕËºÅÃÜÂë£º
+timsè´¦å·å¯†ç ï¼š
 Username:
     yuzp@zhonghongcarav.com.cn 
-password£º
+passwordï¼š
 	zhonghong2018
 	
-×¢Òâ
-²»ÒªÇóÍ¼²ãÃû³ÆÒÔÇ°×º¿ªÍ·meta-£¬µ«ËüÊÇYoctoÏîÄ¿ÉçÇøÖĞÆÕ±é½ÓÊÜµÄ±ê×¼¡£	
+æ³¨æ„
+ä¸è¦æ±‚å›¾å±‚åç§°ä»¥å‰ç¼€å¼€å¤´meta-ï¼Œä½†å®ƒæ˜¯Yoctoé¡¹ç›®ç¤¾åŒºä¸­æ™®éæ¥å—çš„æ ‡å‡†ã€‚	
 	
 	
 BitBake User Manual
@@ -360,54 +360,54 @@ ALS_VERSIONS="als_v2.5.0 als_v2.5.1 als_v2.5.2"
 ncftp -u customer -p telecustomer12! rf.telechips.com
 
 
-»ÆÈñÊ¤:
-Ö§³ÖISPĞèÒªÂú×ãÕâ3¸öÌõ¼ş
+é»„é”èƒœ:
+æ”¯æŒISPéœ€è¦æ»¡è¶³è¿™3ä¸ªæ¡ä»¶
 
-Ò»¸öpartition£¬FAT32£¬ÉÈÇø´óĞ¡512
+ä¸€ä¸ªpartitionï¼ŒFAT32ï¼Œæ‰‡åŒºå¤§å°512
 
 
 
 list_for_each_entry(d, &core_list, node)
-/*¼ÇÒä·½·¨£ºcore_list ÊÇÁ´±íÍ·£¬nodeÊÇÁ´±íÉÏµÄ½Úµã£¬d ÊÇ°üº¬node³ÉÔ±µÄ½á¹¹Ìå¡£ÒâË¼¾ÍÊÇ ´Ócore_listÁ´±íÍ·¿ªÊ¼±éÀúÃ¿Ò»¸ö½Úµã£¬¾Í¿ÉÒÔÕÒµ½Ã¿Ò»¸öd ½á¹¹ÌåÁË*/
+/*è®°å¿†æ–¹æ³•ï¼šcore_list æ˜¯é“¾è¡¨å¤´ï¼Œnodeæ˜¯é“¾è¡¨ä¸Šçš„èŠ‚ç‚¹ï¼Œd æ˜¯åŒ…å«nodeæˆå‘˜çš„ç»“æ„ä½“ã€‚æ„æ€å°±æ˜¯ ä»core_listé“¾è¡¨å¤´å¼€å§‹éå†æ¯ä¸€ä¸ªèŠ‚ç‚¹ï¼Œå°±å¯ä»¥æ‰¾åˆ°æ¯ä¸€ä¸ªd ç»“æ„ä½“äº†*/
 
 
 
-µ¥¶À±àÒëÄÚºË£º
+å•ç‹¬ç¼–è¯‘å†…æ ¸ï¼š
 	bitbake linux-telechips
 
-µ¥¶À±àÒëÉè±¸Ê÷£º	
+å•ç‹¬ç¼–è¯‘è®¾å¤‡æ ‘ï¼š	
 	
 	
-µ¥¶À±àÒëuboot£º
+å•ç‹¬ç¼–è¯‘ubootï¼š
 	bitbake lk-dt
 	
 		
-µ¥¶À±àÒërootfs:
+å•ç‹¬ç¼–è¯‘rootfs:
 	
 		
 		
 		
 initramfs-telechips-image-tcc8971-lcn-2.0a.cpio.gz
 modules-tcc8971-lcn-2.0a.tgz
- ÕâÁ½¸öÊÇÊ²Ã´ÎÄ¼ş£¿	
+ è¿™ä¸¤ä¸ªæ˜¯ä»€ä¹ˆæ–‡ä»¶ï¼Ÿ	
  
-  yocto-layer create layer_name´´½¨Ò»¸öĞÂ²ã
+  yocto-layer create layer_nameåˆ›å»ºä¸€ä¸ªæ–°å±‚
   
   
-   3. ±àÒëÄÚºË
+   3. ç¼–è¯‘å†…æ ¸
 
-         ÅäÖÃmenuconfigÖ¸Áî£º
+         é…ç½®menuconfigæŒ‡ä»¤ï¼š
         bitbake -c menuconfig -v linux-imx 
   
-        µ¥¶À±àÒëkernel¡¢Ä£¿é¡¢Éè±¸Ê÷
+        å•ç‹¬ç¼–è¯‘kernelã€æ¨¡å—ã€è®¾å¤‡æ ‘
         bitbake -c compile -f -v linux-imx 
         bitbake linux-imx -c compile_kernelmodules -f -v    
         bitbake -c deploy -f -v linux-imx  
 
-ÈôÒª±àÒëÎÄ¼şÏµÍ³ÔòÓÃÏÂÃæ×ÜÖ¸Áî
+è‹¥è¦ç¼–è¯‘æ–‡ä»¶ç³»ç»Ÿåˆ™ç”¨ä¸‹é¢æ€»æŒ‡ä»¤
         bitbake core-image-minimal
 
-         µ¥¶À±àÒëu-boot
+         å•ç‹¬ç¼–è¯‘u-boot
         bitbake -c compile -f -v u-boot-imx
         bitbake -c deploy -f -v u-boot-imx
 		
@@ -415,24 +415,24 @@ modules-tcc8971-lcn-2.0a.tgz
 yocto project development manual		
 https://www.yoctoproject.org/docs/2.2/dev-manual/dev-manual.html#new-recipe-writing-a-new-recipe		
 
-Yocto Project Linux Kernel Development Manual ¹Ø¼ü×Ö£ºpatch
+Yocto Project Linux Kernel Development Manual å…³é”®å­—ï¼špatch
 https://www.yoctoproject.org/docs/2.0.1/kernel-dev/kernel-dev.html#applying-patches
 		
-bitbake Ê¹ÓÃÖ¸ÄÏ		
+bitbake ä½¿ç”¨æŒ‡å—		
 https://blog.csdn.net/lu_embedded/article/details/80634368
 
 
-Yocto BitbakeµÄcleanÓëcleanallÒÔ¼°cleansstateµÄÇø±ğ
+Yocto Bitbakeçš„cleanä¸cleanallä»¥åŠcleansstateçš„åŒºåˆ«
 https://www.kancloud.cn/digest/yocto/138630
 
-bitbakeÏê½â
+bitbakeè¯¦è§£
 https://blog.csdn.net/archer1991/article/details/62423014
 
-bitbakeÓï·¨
+bitbakeè¯­æ³•
 https://www.yoctoproject.org/docs/2.2/bitbake-user-manual/bitbake-user-manual.html#bitbake-user-manual-metadata
 
 
-yoctoµÄ³õÊ¼»¯½Å±¾½âÊÍ
+yoctoçš„åˆå§‹åŒ–è„šæœ¬è§£é‡Š
 https://blog.csdn.net/groundhappy/article/details/51307225
 
 
@@ -450,9 +450,9 @@ https://www.yoctoproject.org/docs/2.2/ref-manual/ref-manual.html#usingpoky-debug
 3.1.5. Immediate variable expansion (:=)
 3.1.6. Appending (+=) and prepending (=+) With Spaces					,immediate effect during parsing
 3.1.7. Appending (.=) and Prepending (=.) Without Spaces				,immediate effect during parsing
-3.1.8. Appending and Prepending (Override Style Syntax)£¬Without Spaces	,effects are deferred until after parsing completes rather than being immediately applied.
-		B_append ¡¢C_prepend, ÕâĞ©ÔËËã·ûÓë":=", ".=", "=.", "+=", and "=+"ÔËËã·ûµÄ²»Í¬Ö®´¦ÔÚÓÚ£¬ËüÃÇµÄĞ§¹û»áÑÓ³Ùµ½½âÎöÍê³Éºó¶ø²»ÊÇÁ¢¼´Ó¦ÓÃ¡£
-3.1.9. Removal (Override Style Syntax)£¬ Without Spaces
+3.1.8. Appending and Prepending (Override Style Syntax)ï¼ŒWithout Spaces	,effects are deferred until after parsing completes rather than being immediately applied.
+		B_append ã€C_prepend, è¿™äº›è¿ç®—ç¬¦ä¸":=", ".=", "=.", "+=", and "=+"è¿ç®—ç¬¦çš„ä¸åŒä¹‹å¤„åœ¨äºï¼Œå®ƒä»¬çš„æ•ˆæœä¼šå»¶è¿Ÿåˆ°è§£æå®Œæˆåè€Œä¸æ˜¯ç«‹å³åº”ç”¨ã€‚
+3.1.9. Removal (Override Style Syntax)ï¼Œ Without Spaces
 		FOO = "123 456 789 123456 123 456 123 456"
 		FOO_remove = "123"
 		FOO_remove = "456"
@@ -460,88 +460,88 @@ https://www.yoctoproject.org/docs/2.2/ref-manual/ref-manual.html#usingpoky-debug
 		FOO2_remove = "abc def"
 		The variable FOO becomes "789 123456" and FOO2 becomes "ghi abcdef". 
 3.1.10. Override Style Operation Advantages
-		Óë "+=" and "=+" ÔËËã·ûÏà±È£¬¸²¸ÇÑùÊ½²Ù×÷¡°_append¡±£¬¡°_ prepend¡±ºÍ¡°_remove¡±µÄÒ»¸öÓÅµãÊÇ¸²¸ÇÑùÊ½ÔËËã·ûÌá¹©ÁË¸üÓĞ±£Ö¤µÄ²Ù×÷¡£
+		ä¸ "+=" and "=+" è¿ç®—ç¬¦ç›¸æ¯”ï¼Œè¦†ç›–æ ·å¼æ“ä½œâ€œ_appendâ€ï¼Œâ€œ_ prependâ€å’Œâ€œ_removeâ€çš„ä¸€ä¸ªä¼˜ç‚¹æ˜¯è¦†ç›–æ ·å¼è¿ç®—ç¬¦æä¾›äº†æ›´æœ‰ä¿è¯çš„æ“ä½œã€‚
 
 
 
 
-ÀıÌâ£º
+ä¾‹é¢˜ï¼š
      A = "1"
      A_append = "2"
      A_append = "3"
      A += "4"
      A .= "5"
-´ğ°¸£ºA becoming "1 4523".
+ç­”æ¡ˆï¼šA becoming "1 4523".
 
 
 
 		
-Åä·½£¨recipes£©ÎÄ¼ş£¨ºó×ºÎª .bb£©	
-Åä·½£¨recipes£©µÄÀàÎÄ¼ş£¨ºó×ºÎª .bbclass£©
-ËùÓĞµÄÅä·½ÎÄ¼ş¶¼×Ô¶¯¼Ì³ĞÁË base.bbclass¡£base.bbclass Ìá¹©ÁË´ó²¿·Ö bitbake ÈÎÎñµÄÄ¬ÈÏÊµÏÖ¡£
-Ò»¸öÅä·½ÎÄ¼ş¿ÉÒÔ¼Ì³Ğ¶à¸öÀàÎÄ¼ş¡£
-conf Ä¿Â¼°üº¬±àÒëÏµÍ³µÄÅäÖÃÎÄ¼ş£¨ºó×ºÎª .conf£©
-BitBakeÔÊĞíÍ¨¹ıincludeÎÄ¼ş£¨.inc£©ºÍÀàÎÄ¼ş£¨.bbclass£©¹²ÏíÔªÊı¾İ¡£
+é…æ–¹ï¼ˆrecipesï¼‰æ–‡ä»¶ï¼ˆåç¼€ä¸º .bbï¼‰	
+é…æ–¹ï¼ˆrecipesï¼‰çš„ç±»æ–‡ä»¶ï¼ˆåç¼€ä¸º .bbclassï¼‰
+æ‰€æœ‰çš„é…æ–¹æ–‡ä»¶éƒ½è‡ªåŠ¨ç»§æ‰¿äº† base.bbclassã€‚base.bbclass æä¾›äº†å¤§éƒ¨åˆ† bitbake ä»»åŠ¡çš„é»˜è®¤å®ç°ã€‚
+ä¸€ä¸ªé…æ–¹æ–‡ä»¶å¯ä»¥ç»§æ‰¿å¤šä¸ªç±»æ–‡ä»¶ã€‚
+conf ç›®å½•åŒ…å«ç¼–è¯‘ç³»ç»Ÿçš„é…ç½®æ–‡ä»¶ï¼ˆåç¼€ä¸º .confï¼‰
+BitBakeå…è®¸é€šè¿‡includeæ–‡ä»¶ï¼ˆ.incï¼‰å’Œç±»æ–‡ä»¶ï¼ˆ.bbclassï¼‰å…±äº«å…ƒæ•°æ®ã€‚
 
-BitBakeÔÊĞíÍ¨¹ıincludeÎÄ¼ş£¨.inc£©ºÍÀàÎÄ¼ş£¨.bbclass£©¹²ÏíÔªÊı¾İ¡£ÀıÈç£¬¼ÙÉèÄúÓĞÒ»¸ö³£ÓÃ¹¦ÄÜ£¬±ÈÈçÒªÔÚ¶à¸örecipeÖ®¼ä¹²ÏíµÄÈÎÎñ¡£ÔÚÕâÖÖÇé¿öÏÂ£¬´´½¨°üº¬¹«¹²¹¦ÄÜµÄ.bbclassÎÄ¼ş£¬È»ºóÔÚÅä·½ÖĞÊ¹ÓÃinheritÖ¸Áî¼Ì³ĞÀàÊÇ¹²ÏíÈÎÎñµÄ³£ÓÃ·½·¨¡£
-BitBakeÌá¹©µÄÏàÓ¦µÄ»úÖÆ£¬ÔÊĞíÄúÔÚÅä·½Ö®¼ä¹²Ïí¹¦ÄÜ¡£ ¾ßÌåÀ´Ëµ£¬»úÖÆ°üÀ¨include£¬inherit£¬INHERITºÍrequireÖ¸Áî¡£
+BitBakeå…è®¸é€šè¿‡includeæ–‡ä»¶ï¼ˆ.incï¼‰å’Œç±»æ–‡ä»¶ï¼ˆ.bbclassï¼‰å…±äº«å…ƒæ•°æ®ã€‚ä¾‹å¦‚ï¼Œå‡è®¾æ‚¨æœ‰ä¸€ä¸ªå¸¸ç”¨åŠŸèƒ½ï¼Œæ¯”å¦‚è¦åœ¨å¤šä¸ªrecipeä¹‹é—´å…±äº«çš„ä»»åŠ¡ã€‚åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œåˆ›å»ºåŒ…å«å…¬å…±åŠŸèƒ½çš„.bbclassæ–‡ä»¶ï¼Œç„¶ååœ¨é…æ–¹ä¸­ä½¿ç”¨inheritæŒ‡ä»¤ç»§æ‰¿ç±»æ˜¯å…±äº«ä»»åŠ¡çš„å¸¸ç”¨æ–¹æ³•ã€‚
+BitBakeæä¾›çš„ç›¸åº”çš„æœºåˆ¶ï¼Œå…è®¸æ‚¨åœ¨é…æ–¹ä¹‹é—´å…±äº«åŠŸèƒ½ã€‚ å…·ä½“æ¥è¯´ï¼Œæœºåˆ¶åŒ…æ‹¬includeï¼Œinheritï¼ŒINHERITå’ŒrequireæŒ‡ä»¤ã€‚
 
-×¢Òâ
-inheritÖ¸Áî ¼Ì³ĞÀà£¨.bbclass£©µÄ¹¦ÄÜ,¸ÃÖ¸Áî²Ù×÷µÄ¶ÔÏóÊÇ.bbclassÎÄ¼ş¡£
+æ³¨æ„
+inheritæŒ‡ä»¤ ç»§æ‰¿ç±»ï¼ˆ.bbclassï¼‰çš„åŠŸèƒ½,è¯¥æŒ‡ä»¤æ“ä½œçš„å¯¹è±¡æ˜¯.bbclassæ–‡ä»¶ã€‚
 
-includeÎŞ·¨ÕÒµ½ÎÄ¼şÊ±£¬ ¸ÃÖ¸Áî²»»á²úÉú´íÎó¡£Òò´Ë£¬½¨ÒéÈç¹ûÄúÒª°üº¬µÄÎÄ¼ş´æÔÚ£¬ÔòÓ¦Ê¹ÓÃ require ¶ø²»ÊÇinclude¡£ÕâÑù×ö¿ÉÈ·±£ÔÚÕÒ²»µ½ÎÄ¼şÊ±²úÉú´íÎó¡£²Ù×÷¶ÔÏóÊÇ.inc¡¢.bb
+includeæ— æ³•æ‰¾åˆ°æ–‡ä»¶æ—¶ï¼Œ è¯¥æŒ‡ä»¤ä¸ä¼šäº§ç”Ÿé”™è¯¯ã€‚å› æ­¤ï¼Œå»ºè®®å¦‚æœæ‚¨è¦åŒ…å«çš„æ–‡ä»¶å­˜åœ¨ï¼Œåˆ™åº”ä½¿ç”¨ require è€Œä¸æ˜¯includeã€‚è¿™æ ·åšå¯ç¡®ä¿åœ¨æ‰¾ä¸åˆ°æ–‡ä»¶æ—¶äº§ç”Ÿé”™è¯¯ã€‚æ“ä½œå¯¹è±¡æ˜¯.incã€.bb
 
-require Ö¸Áî¡£¸ÃÖ¸ÁîµÄĞĞÎªÓëincludeÖ¸ÁîÀàËÆ£¬ µ«Èç¹ûÎŞ·¨ÕÒµ½Òª°üº¬µÄÎÄ¼ş£¬ÔòBitBake»áÒı·¢½âÎö´íÎó¡£²Ù×÷¶ÔÏóÊÇ.inc¡¢.bb
+require æŒ‡ä»¤ã€‚è¯¥æŒ‡ä»¤çš„è¡Œä¸ºä¸includeæŒ‡ä»¤ç±»ä¼¼ï¼Œ ä½†å¦‚æœæ— æ³•æ‰¾åˆ°è¦åŒ…å«çš„æ–‡ä»¶ï¼Œåˆ™BitBakeä¼šå¼•å‘è§£æé”™è¯¯ã€‚æ“ä½œå¯¹è±¡æ˜¯.incã€.bb
 
-INHERIT ÅäÖÃÖ¸Áî¡£½öÔÚÅäÖÃÎÄ¼ş£¨.conf£©ÖĞÊ¹ÓÃ£¬ÓëinheritÖ¸ÁîÒ»Ñù²Ù×÷µÄ¶ÔÏóÊÇ.bbclassÎÄ¼ş¡£
-¼ÙÉèÄúĞèÒª¼Ì³Ğabc.bbclass´ÓÅäÖÃÎÄ¼şµ÷ÓÃµÄÀàÎÄ¼ş£¬ÈçÏÂËùÊ¾£º
+INHERIT é…ç½®æŒ‡ä»¤ã€‚ä»…åœ¨é…ç½®æ–‡ä»¶ï¼ˆ.confï¼‰ä¸­ä½¿ç”¨ï¼Œä¸inheritæŒ‡ä»¤ä¸€æ ·æ“ä½œçš„å¯¹è±¡æ˜¯.bbclassæ–‡ä»¶ã€‚
+å‡è®¾æ‚¨éœ€è¦ç»§æ‰¿abc.bbclassä»é…ç½®æ–‡ä»¶è°ƒç”¨çš„ç±»æ–‡ä»¶ï¼Œå¦‚ä¸‹æ‰€ç¤ºï¼š
 
-     INHERIT + =¡°abc¡±
+     INHERIT + =â€œabcâ€
 	 
-×¢Òâ
-ÒòÎª.confÔÚBitBakeÖ´ĞĞÆÚ¼äÊ×ÏÈ½âÎöÎÄ¼ş£¬ËùÒÔÊ¹ÓÃ INHERIT¼Ì³ĞÀàÓĞĞ§µØ¼Ì³ĞÈ«¾ÖÀà£¨¼´ËùÓĞÅä·½£©	 
+æ³¨æ„
+å› ä¸º.confåœ¨BitBakeæ‰§è¡ŒæœŸé—´é¦–å…ˆè§£ææ–‡ä»¶ï¼Œæ‰€ä»¥ä½¿ç”¨ INHERITç»§æ‰¿ç±»æœ‰æ•ˆåœ°ç»§æ‰¿å…¨å±€ç±»ï¼ˆå³æ‰€æœ‰é…æ–¹ï¼‰	 
 
 
 require recipes-kernel/linux/linux-dtb.inc
 require conf/machine/include/tune-cortexa7.inc
 
-note£º
-require ÎÄ¼şµÄÂ·¾¶£¬Ïàµ±ÓÚCÓïÑÔÖĞµÄinclude£¬Ò²ÊÇÓĞÄ¬ÈÏÄ¿Â¼ºÍµ±Ç°Ä¿Â¼ 2ÖÖËÑË÷Â·¾¶µÄ¡£
-1.ÒÔ poky\meta\ Îª¶¥²ãÄ¿Â¼£¬¼´Ä¬ÈÏËÑË÷Ä¿Â¼¡£
-2.ÒÔµ±Ç°Ä¿Â¼ÏÂËÑË÷
+noteï¼š
+require æ–‡ä»¶çš„è·¯å¾„ï¼Œç›¸å½“äºCè¯­è¨€ä¸­çš„includeï¼Œä¹Ÿæ˜¯æœ‰é»˜è®¤ç›®å½•å’Œå½“å‰ç›®å½• 2ç§æœç´¢è·¯å¾„çš„ã€‚
+1.ä»¥ poky\meta\ ä¸ºé¡¶å±‚ç›®å½•ï¼Œå³é»˜è®¤æœç´¢ç›®å½•ã€‚
+2.ä»¥å½“å‰ç›®å½•ä¸‹æœç´¢
 
-Ã¿Ò»¸öconfÄ¿Â¼ÏÂµÄlayer.confÎÄ¼şÖĞµÄ±äÁ¿¶¼ÊÇÈ«¾Ö±äÁ¿
+æ¯ä¸€ä¸ªconfç›®å½•ä¸‹çš„layer.confæ–‡ä»¶ä¸­çš„å˜é‡éƒ½æ˜¯å…¨å±€å˜é‡
 
 inherit kernel
-note£º
-inherit ÎÄ¼şµÄÂ·¾¶£¬¶¼ÊÇpoky\meta\classes\Ä¿Â¼ÏÂ¡£
+noteï¼š
+inherit æ–‡ä»¶çš„è·¯å¾„ï¼Œéƒ½æ˜¯poky\meta\classes\ç›®å½•ä¸‹ã€‚
 
 --------------------- 
 
-Overrides and override-style ¿ÉÒÔÓ¦ÓÃÓÚÈÎºÎshellº¯Êı£¬¶ø²»½ö½öÊÇ ÈÎÎñ
+Overrides and override-style å¯ä»¥åº”ç”¨äºä»»ä½•shellå‡½æ•°ï¼Œè€Œä¸ä»…ä»…æ˜¯ ä»»åŠ¡
 
-Èí¼ş°ü B ÔÚ¹¹½¨Ê±¿ÉÄÜÒÀÀµÈí¼ş°ü A Ìá¹©µÄÍ·ÎÄ¼ş¡¢¿âÎÄ¼ş£¬Ò²¿ÉÄÜÒªÊ¹ÓÃÈí¼ş°ü C Éú³ÉµÄ¹¤¾ß¡£ÎÒÃÇ±ØĞëÔÚÅä·½ÎÄ¼şÖĞÓÃ¡°DEPENDS¡±±äÁ¿ÉùÃ÷¹¹½¨Ê±µÄÒÀÀµ¹ØÏµ¡£
-recipe(.bb)¡¢append(.bbappend)¡¢configuration(.conf)¡¢include(.inc) ºÍ class(.bbclass) ÎÄ¼ş	
+è½¯ä»¶åŒ… B åœ¨æ„å»ºæ—¶å¯èƒ½ä¾èµ–è½¯ä»¶åŒ… A æä¾›çš„å¤´æ–‡ä»¶ã€åº“æ–‡ä»¶ï¼Œä¹Ÿå¯èƒ½è¦ä½¿ç”¨è½¯ä»¶åŒ… C ç”Ÿæˆçš„å·¥å…·ã€‚æˆ‘ä»¬å¿…é¡»åœ¨é…æ–¹æ–‡ä»¶ä¸­ç”¨â€œDEPENDSâ€å˜é‡å£°æ˜æ„å»ºæ—¶çš„ä¾èµ–å…³ç³»ã€‚
+recipe(.bb)ã€append(.bbappend)ã€configuration(.conf)ã€include(.inc) å’Œ class(.bbclass) æ–‡ä»¶	
 
 
-¸½¼ÓÎÄ¼ş(Append Files)
+é™„åŠ æ–‡ä»¶(Append Files)
 
-¸½¼ÓÎÄ¼şÊÇ¾ßÓĞ.bbappendÎÄ¼şÀ©Õ¹ÃûµÄÎÄ¼ş£¬ÓÃÓÚÀ©Õ¹»ò¸²¸ÇÏÖÓĞÅä·½ÎÄ¼şÖĞµÄĞÅÏ¢¡£
-BitBakeÆÚÍûÃ¿¸ö¸½¼ÓÎÄ¼ş¾ßÓĞÏàÓ¦µÄÅä·½ÎÄ¼ş¡£´ËÍâ£¬¸½¼ÓÎÄ¼şºÍÏàÓ¦µÄÅä·½ÎÄ¼ş±ØĞëÊ¹ÓÃÏàÍ¬µÄ¸ùÎÄ¼şÃû£¬Ö»ÄÜÔÚÊ¹ÓÃµÄÎÄ¼şÀàĞÍºó×º·½ÃæÓĞËù²»Í¬£¨ÀıÈçformfactor_0.0.bbºÍformfactor_0.0.bbappend£©¡£
-¸½¼ÓÎÄ¼şÖĞµÄĞÅÏ¢½«»áÀ©Õ¹»ò¸²¸ÇÆ¥ÅäµÄµÄÅä·½ÎÄ¼şÖĞµÄĞÅÏ¢¡£
-ÔÚÃüÃû¸½¼ÓÎÄ¼şÊ±£¬¿ÉÒÔÊ¹ÓÃÍ¨Åä·û£¨£¥£©À´Æ¥ÅäÅä·½ÎÄ¼şÃû³Æ¡£ÀıÈç£¬¼ÙÉèÄúÓĞÒ»¸öÈçÏÂµÄ×·¼ÓÎÄ¼ş£º
-¡¡¡¡busybox_1.21.£¥.bbappend
-¸Ã¸½¼ÓÎÄ¼ş½«Æ¥ÅäÈÎºÎbusybox_1.21.x.bb°æ±¾µÄÅä·½ÎÄ¼ş¡£Òò´Ë£¬¸½¼ÓÎÄ¼ş½«Æ¥ÅäÒÔÏÂÅä·½Ãû³Æ£º
-¡¡¡¡busybox_1.21.1.bb
-¡¡¡¡busybox_1.21.2.bb
-¡¡¡¡busybox_1.21.3.bb
-Èç¹ûbusyboxµÄÅä·½¸üĞÂÎªbusybox_1.3.0.bb£¬Ôò¸½¼ÓÎÄ¼şÃû³Æ½«²»Æ¥Åä¡£µ«ÊÇ£¬Èç¹ûÄãÃüÃûÁË¸½¼ÓÎÄ¼şÎªbusybox_1.£¥.bbappend£¬ÄÇÃ´Äã½«»áÒÀÈ»Æ¥Åäbusybox_1.3.0.bbÎÄ¼ş¡£
-ÔÚÍ¨³£Çé¿öÏÂ£¬Äú¿ÉÒÔ½«¸½¼ÓÎÄ¼şÃüÃûÎªbusybox _£¥.bbappend¡£ÕâÑù¼òµ¥£¬ÍêÈ«¶ÀÁ¢ÓÚ°æ±¾¡£
+é™„åŠ æ–‡ä»¶æ˜¯å…·æœ‰.bbappendæ–‡ä»¶æ‰©å±•åçš„æ–‡ä»¶ï¼Œç”¨äºæ‰©å±•æˆ–è¦†ç›–ç°æœ‰é…æ–¹æ–‡ä»¶ä¸­çš„ä¿¡æ¯ã€‚
+BitBakeæœŸæœ›æ¯ä¸ªé™„åŠ æ–‡ä»¶å…·æœ‰ç›¸åº”çš„é…æ–¹æ–‡ä»¶ã€‚æ­¤å¤–ï¼Œé™„åŠ æ–‡ä»¶å’Œç›¸åº”çš„é…æ–¹æ–‡ä»¶å¿…é¡»ä½¿ç”¨ç›¸åŒçš„æ ¹æ–‡ä»¶åï¼Œåªèƒ½åœ¨ä½¿ç”¨çš„æ–‡ä»¶ç±»å‹åç¼€æ–¹é¢æœ‰æ‰€ä¸åŒï¼ˆä¾‹å¦‚formfactor_0.0.bbå’Œformfactor_0.0.bbappendï¼‰ã€‚
+é™„åŠ æ–‡ä»¶ä¸­çš„ä¿¡æ¯å°†ä¼šæ‰©å±•æˆ–è¦†ç›–åŒ¹é…çš„çš„é…æ–¹æ–‡ä»¶ä¸­çš„ä¿¡æ¯ã€‚
+åœ¨å‘½åé™„åŠ æ–‡ä»¶æ—¶ï¼Œå¯ä»¥ä½¿ç”¨é€šé…ç¬¦ï¼ˆï¼…ï¼‰æ¥åŒ¹é…é…æ–¹æ–‡ä»¶åç§°ã€‚ä¾‹å¦‚ï¼Œå‡è®¾æ‚¨æœ‰ä¸€ä¸ªå¦‚ä¸‹çš„è¿½åŠ æ–‡ä»¶ï¼š
+ã€€ã€€busybox_1.21.ï¼….bbappend
+è¯¥é™„åŠ æ–‡ä»¶å°†åŒ¹é…ä»»ä½•busybox_1.21.x.bbç‰ˆæœ¬çš„é…æ–¹æ–‡ä»¶ã€‚å› æ­¤ï¼Œé™„åŠ æ–‡ä»¶å°†åŒ¹é…ä»¥ä¸‹é…æ–¹åç§°ï¼š
+ã€€ã€€busybox_1.21.1.bb
+ã€€ã€€busybox_1.21.2.bb
+ã€€ã€€busybox_1.21.3.bb
+å¦‚æœbusyboxçš„é…æ–¹æ›´æ–°ä¸ºbusybox_1.3.0.bbï¼Œåˆ™é™„åŠ æ–‡ä»¶åç§°å°†ä¸åŒ¹é…ã€‚ä½†æ˜¯ï¼Œå¦‚æœä½ å‘½åäº†é™„åŠ æ–‡ä»¶ä¸ºbusybox_1.ï¼….bbappendï¼Œé‚£ä¹ˆä½ å°†ä¼šä¾ç„¶åŒ¹é…busybox_1.3.0.bbæ–‡ä»¶ã€‚
+åœ¨é€šå¸¸æƒ…å†µä¸‹ï¼Œæ‚¨å¯ä»¥å°†é™„åŠ æ–‡ä»¶å‘½åä¸ºbusybox _ï¼….bbappendã€‚è¿™æ ·ç®€å•ï¼Œå®Œå…¨ç‹¬ç«‹äºç‰ˆæœ¬ã€‚
 --------------------- 
-×÷Õß£ºÓÂ¸ÒµÄĞÄ2013 
-À´Ô´£ºCSDN 
-Ô­ÎÄ£ºhttps://blog.csdn.net/archer1991/article/details/62423014 
-°æÈ¨ÉùÃ÷£º±¾ÎÄÎª²©Ö÷Ô­´´ÎÄÕÂ£¬×ªÔØÇë¸½ÉÏ²©ÎÄÁ´½Ó£¡
+ä½œè€…ï¼šå‹‡æ•¢çš„å¿ƒ2013 
+æ¥æºï¼šCSDN 
+åŸæ–‡ï¼šhttps://blog.csdn.net/archer1991/article/details/62423014 
+ç‰ˆæƒå£°æ˜ï¼šæœ¬æ–‡ä¸ºåšä¸»åŸåˆ›æ–‡ç« ï¼Œè½¬è½½è¯·é™„ä¸Šåšæ–‡é“¾æ¥ï¼
 
 
 linux-telechips                                   :3.18.24-r0                          
@@ -559,9 +559,9 @@ u-boot-mkimage-native                            1:2017.11-r0
  foo / 1.3.0-r0
  
  
-¡¡¡¡PN£ºÅä·½Ãû³Æ	foo
-¡¡¡¡PV£ºÅä·½°æ±¾	1.3.0
-¡¡¡¡PR£ºÅä·½ĞŞ¶©°æ 	r0
+ã€€ã€€PNï¼šé…æ–¹åç§°	foo
+ã€€ã€€PVï¼šé…æ–¹ç‰ˆæœ¬	1.3.0
+ã€€ã€€PRï¼šé…æ–¹ä¿®è®¢ç‰ˆ 	r0
 	recipe name (PN) and version (PV)
 
 
@@ -574,40 +574,40 @@ install -d ${D}${bindir}
 {includedir}:/usr/include
 
 
-ÔÚrecipesÖĞ¼ÓÈë´òÓ¡ĞÅÏ¢£¬ÓĞÁ½ÖÖ·½Ê½
-    Ò»ÖÖÊÇPythonĞÎÊ½£¬¸ÃĞÎÊ½¿ÉÔÚconsoleÉÏ´òÓ¡³öÀ´: bb.plain, bb.note, bb.warn, bb.error, bb.fatal, bb.debug
-    ÁíÒ»ÖÖÊÇbashĞÎÊ½£¬¸ÃĞÎÊ½»áÔÚtempÄ¿Â¼ÏÂµÄlogÖĞ°üº¬£¬ĞèÒªinherit logging(base.bbclass»á°üº¬£¬Í¨³£²»ĞèÒªÌØÒâÌí¼Ó): bbplain, bbnote, bbwarn, bberror, bbfatal, bbdebug
-		 bbnote "1111111111111111"			//²»»áÊä³öµ½console
-		bbplain "222222222222222222"		//°×É«×ÖÌå Êä³öµ½console
-		 bbwarn "D:${D}"					//»ÆÉ«µÄ¾¯¸æ×ÖÌå Êä³öµ½console
-		 bberror "binder:${bindir}"			//±¨´í£¬²»»á¼ÌĞøÍùÏÂ±àÒë
-	°üÒÀÀµÖĞ´øÓĞ-nativeµÄ±íÊ¾ÕâĞ©°ü±»hostÊ¹ÓÃ¡£
-    ±ÈÈçbbÎÄ¼şÖĞ°üº¬ÈçÏÂÓï¾ä£º DEPENDS += "lzop-native bc-native" ±íÊ¾lzopºÍbc½«»á±»hostÊ¹ÓÃ¡£
+åœ¨recipesä¸­åŠ å…¥æ‰“å°ä¿¡æ¯ï¼Œæœ‰ä¸¤ç§æ–¹å¼
+    ä¸€ç§æ˜¯Pythonå½¢å¼ï¼Œè¯¥å½¢å¼å¯åœ¨consoleä¸Šæ‰“å°å‡ºæ¥: bb.plain, bb.note, bb.warn, bb.error, bb.fatal, bb.debug
+    å¦ä¸€ç§æ˜¯bashå½¢å¼ï¼Œè¯¥å½¢å¼ä¼šåœ¨tempç›®å½•ä¸‹çš„logä¸­åŒ…å«ï¼Œéœ€è¦inherit logging(base.bbclassä¼šåŒ…å«ï¼Œé€šå¸¸ä¸éœ€è¦ç‰¹æ„æ·»åŠ ): bbplain, bbnote, bbwarn, bberror, bbfatal, bbdebug
+		 bbnote "1111111111111111"			//ä¸ä¼šè¾“å‡ºåˆ°console
+		bbplain "222222222222222222"		//ç™½è‰²å­—ä½“ è¾“å‡ºåˆ°console
+		 bbwarn "D:${D}"					//é»„è‰²çš„è­¦å‘Šå­—ä½“ è¾“å‡ºåˆ°console
+		 bberror "binder:${bindir}"			//æŠ¥é”™ï¼Œä¸ä¼šç»§ç»­å¾€ä¸‹ç¼–è¯‘
+	åŒ…ä¾èµ–ä¸­å¸¦æœ‰-nativeçš„è¡¨ç¤ºè¿™äº›åŒ…è¢«hostä½¿ç”¨ã€‚
+    æ¯”å¦‚bbæ–‡ä»¶ä¸­åŒ…å«å¦‚ä¸‹è¯­å¥ï¼š DEPENDS += "lzop-native bc-native" è¡¨ç¤ºlzopå’Œbcå°†ä¼šè¢«hostä½¿ç”¨ã€‚
 	
 	
 
 
-Yocto tips (5): YoctoÈçºÎ¸ü¸Äsource codeµÄÏÂÔØÓëgit cloneµØÖ·
+Yocto tips (5): Yoctoå¦‚ä½•æ›´æ”¹source codeçš„ä¸‹è½½ä¸git cloneåœ°å€
 https://blog.csdn.net/sy373466062/article/details/50363537
 
 
 yocto  .bb file SRC_URI
 https://community.nxp.com/thread/392020
 
-Yocto¸ü¸ÄÔ´ÂëµÄ»ñÈ¡Î»ÖÃÓëgit clone µØÖ·
+Yoctoæ›´æ”¹æºç çš„è·å–ä½ç½®ä¸git clone åœ°å€
 https://blog.csdn.net/yangteng0210/article/details/82022938?utm_source=blogxgwz3
 
 
-xargs ÃüÁî
+xargs å‘½ä»¤
 
 
-git commit ÓĞµ¯¿ò½øÈëvim£¬ÌîĞ´ĞÅÏ¢ È»ºóctrl+o,»Ø³µ±£´æ£¬ÔÙctrl+xÍË³ö
+git commit æœ‰å¼¹æ¡†è¿›å…¥vimï¼Œå¡«å†™ä¿¡æ¯ ç„¶åctrl+o,å›è½¦ä¿å­˜ï¼Œå†ctrl+xé€€å‡º
 
-git²é¿´Ô¶³Ì²Ö¿âµØÖ·ÃüÁî
+gitæŸ¥çœ‹è¿œç¨‹ä»“åº“åœ°å€å‘½ä»¤
 git remote -v
 
-file£º//-´Ó±¾µØ»ñÈ¡ÎÄ¼ş£¬ÕâĞ©ÎÄ¼şÍ¨³£ÊÇÔªÊı¾İ¸½´øµÄÎÄ¼ş¡£ÆäÂ·¾¶Ïà¶ÔÓÚFILESPATH±äÁ¿¡£
-Òò´Ë£¬¹¹½¨ÏµÍ³°´Ë³Ğò´ÓÅä·½ÎÄ¼ş£¨.bb£©»ò¸½¼ÓÎÄ¼ş£¨.bbappend£©ËùÔÚµÄÄ¿Â¼µÄ×ÓÄ¿Â¼ÖĞËÑË÷£º
+fileï¼š//-ä»æœ¬åœ°è·å–æ–‡ä»¶ï¼Œè¿™äº›æ–‡ä»¶é€šå¸¸æ˜¯å…ƒæ•°æ®é™„å¸¦çš„æ–‡ä»¶ã€‚å…¶è·¯å¾„ç›¸å¯¹äºFILESPATHå˜é‡ã€‚
+å› æ­¤ï¼Œæ„å»ºç³»ç»ŸæŒ‰é¡ºåºä»é…æ–¹æ–‡ä»¶ï¼ˆ.bbï¼‰æˆ–é™„åŠ æ–‡ä»¶ï¼ˆ.bbappendï¼‰æ‰€åœ¨çš„ç›®å½•çš„å­ç›®å½•ä¸­æœç´¢ï¼š
 
 
 ./meta-telechips/meta-bsp/conf/machine/tcc897x.inc:39:KBUILD_DEFCONFIG ??= "tcc897x_linux_avn_lcn_defconfig"
@@ -617,28 +617,28 @@ file£º//-´Ó±¾µØ»ñÈ¡ÎÄ¼ş£¬ÕâĞ©ÎÄ¼şÍ¨³£ÊÇÔªÊı¾İ¸½´øµÄÎÄ¼ş¡£ÆäÂ·¾¶Ïà¶ÔÓÚFILESPATH±ä
 
 
 			bitbake -C compile <target>
-            ×¢Òâ£ºÕâÀïÊ¹ÓÃÁË-C£¬±íÊ¾±àÒë¸Ãtaskºó£¬ÔÙ±àÒëËùÓĞµÄtask¡£µÈĞ§ÓÚ
+            æ³¨æ„ï¼šè¿™é‡Œä½¿ç”¨äº†-Cï¼Œè¡¨ç¤ºç¼–è¯‘è¯¥taskåï¼Œå†ç¼–è¯‘æ‰€æœ‰çš„taskã€‚ç­‰æ•ˆäº
                 bitbake -c compile <target>
                 bitbake <target>
 				
 				
 				
 
-PROVIDES ÓÃÓÚÌá¹©Åä·½µÄ±ğÃû¡£
+PROVIDES ç”¨äºæä¾›é…æ–¹çš„åˆ«åã€‚
 
-ÒÔÅä·½ÎÄ¼şlibav_0.8.11.bbÎªÀı£¬libav_0.8.11.bbÖĞµÄPROVIDESÓï¾äÈçÏÂ£º
+ä»¥é…æ–¹æ–‡ä»¶libav_0.8.11.bbä¸ºä¾‹ï¼Œlibav_0.8.11.bbä¸­çš„PROVIDESè¯­å¥å¦‚ä¸‹ï¼š
 
-PROVIDES + =¡°libpostproc¡±
+PROVIDES + =â€œlibpostprocâ€
 
-¸ÃPROVIDESÓï¾äÊ¹µÃ¡°libav¡±Åä·½Ò²±»³ÆÎª¡°libpostproc¡±¡£
-
-
-
-DEPENDS		ÁĞ³öÅä·½µÄ¹¹½¨Ê±µÄÒÀÀµÏî£¨¼´ÆäËûÅä·½ÎÄ¼ş£©¡£
-RDEPENDS	ÁĞ³ö°üµÄÔËĞĞÊ±ÒÀÀµ¹ØÏµ£¨¼´ÆäËû³ÌĞò°ü£©
+è¯¥PROVIDESè¯­å¥ä½¿å¾—â€œlibavâ€é…æ–¹ä¹Ÿè¢«ç§°ä¸ºâ€œlibpostprocâ€ã€‚
 
 
-tmp/work/tcc8971_lcn_2.0a-telechips-linux-gnueabi/linux-telechips/3.18.24-r0/temp/log.task_order	Õâ¸öÎÄ¼şÏÔÊ¾ÁË±àÒë linux-yocto Ö´ĞĞµÄtask ÒÔ¼° task µÄÖ´ĞĞË³Ğò¡£
+
+DEPENDS		åˆ—å‡ºé…æ–¹çš„æ„å»ºæ—¶çš„ä¾èµ–é¡¹ï¼ˆå³å…¶ä»–é…æ–¹æ–‡ä»¶ï¼‰ã€‚
+RDEPENDS	åˆ—å‡ºåŒ…çš„è¿è¡Œæ—¶ä¾èµ–å…³ç³»ï¼ˆå³å…¶ä»–ç¨‹åºåŒ…ï¼‰
+
+
+tmp/work/tcc8971_lcn_2.0a-telechips-linux-gnueabi/linux-telechips/3.18.24-r0/temp/log.task_order	è¿™ä¸ªæ–‡ä»¶æ˜¾ç¤ºäº†ç¼–è¯‘ linux-yocto æ‰§è¡Œçš„task ä»¥åŠ task çš„æ‰§è¡Œé¡ºåºã€‚
 
 
 bitbake automotive-linux-platform-image -c cleansstate
@@ -661,19 +661,19 @@ root@telechips-tcc8031:~# tc-write-misc
 write 'boot-recovery' to /dev/disk/by-partlabel/misc finished
 root@telechips-tcc8031:~#
 
-/dev/disk/by-partlabel		Õâ¸öµØÖ·¿ÉÒÔ²é¿´·ÖÇø
+/dev/disk/by-partlabel		è¿™ä¸ªåœ°å€å¯ä»¥æŸ¥çœ‹åˆ†åŒº
 
- local.confÖĞ¶¨ÒåµÄ±äÁ¿¶¼ÊÇÈ«¾Ö±äÁ¿
-BitBake ÊÇÒ»¸öÖ´ĞĞ python ºÍ shell ½Å±¾µÄÒıÇæ£»
-BitBake Ê¹ÓÃµÄ 5 ÖÖÎÄ¼şÀàĞÍ£¨.bb£¬.bbclass£¬.bbappend£¬.conf ºÍ include ÎÄ¼ş£©£»
+ local.confä¸­å®šä¹‰çš„å˜é‡éƒ½æ˜¯å…¨å±€å˜é‡
+BitBake æ˜¯ä¸€ä¸ªæ‰§è¡Œ python å’Œ shell è„šæœ¬çš„å¼•æ“ï¼›
+BitBake ä½¿ç”¨çš„ 5 ç§æ–‡ä»¶ç±»å‹ï¼ˆ.bbï¼Œ.bbclassï¼Œ.bbappendï¼Œ.conf å’Œ include æ–‡ä»¶ï¼‰ï¼›
 
 
-¹¹½¨Ê±ÒÀÀµ ºÍ ÔËĞĞÊ±ÒÀÀµ
+æ„å»ºæ—¶ä¾èµ– å’Œ è¿è¡Œæ—¶ä¾èµ–
  build-time dependencies, which are required when the software is built; 
  runtime dependencies, which are required to be installed on the target in order for the software to run. 
 
 
-FILESPATHÔÚ²éÕÒfile://Åä·½ÖĞÃ¿¸öURI Ö¸¶¨µÄÎÄ¼şºÍ²¹¶¡Ê±£¬°´Ö¸¶¨µÄË³Ğò ËÑË÷Ã¿¸öÄ¿Â¼ ¡£
+FILESPATHåœ¨æŸ¥æ‰¾file://é…æ–¹ä¸­æ¯ä¸ªURI æŒ‡å®šçš„æ–‡ä»¶å’Œè¡¥ä¸æ—¶ï¼ŒæŒ‰æŒ‡å®šçš„é¡ºåº æœç´¢æ¯ä¸ªç›®å½• ã€‚
  The default value for the FILESPATH variable is defined in the base.bbclass class found in meta/classes in the Source Directory:
 
      FILESPATH = "${@base_set_filespath(["${FILE_DIRNAME}/${BP}", \
@@ -682,7 +682,7 @@ FILESPATHÔÚ²éÕÒfile://Åä·½ÖĞÃ¿¸öURI Ö¸¶¨µÄÎÄ¼şºÍ²¹¶¡Ê±£¬°´Ö¸¶¨µÄË³Ğò ËÑË÷Ã¿¸öÄ¿Â
 
 
 
-If the first recipe is named a_1.1.bb, then the PN variable will be set to ¡°a¡±, and the PV variable will be set to 1.1.
+If the first recipe is named a_1.1.bb, then the PN variable will be set to â€œaâ€, and the PV variable will be set to 1.1.
 a recipe called "something_1.2.3.bb" would set PN to "something" and PV to "1.2.3".
 
 
@@ -690,8 +690,8 @@ a recipe called "something_1.2.3.bb" would set PN to "something" and PV to "1.2.
 
 BBPATH is used to search for configuration and class files under the conf and classes directories.
 BBFILES is used to locate both recipe and recipe append files (.bb and .bbappend). 
-BBPATHÓÃÓÚ·Ö±ğËÑË÷confºÍclasses Ä¿Â¼ÏÂµÄÅäÖÃºÍÀàÎÄ¼ş ¡£ 
-BBFILESÓÃÓÚ¶¨Î»Åä·½ºÍÅä·½¸½¼ÓÎÄ¼ş£¨.bbºÍ.bbappend£©¡£
+BBPATHç”¨äºåˆ†åˆ«æœç´¢confå’Œclasses ç›®å½•ä¸‹çš„é…ç½®å’Œç±»æ–‡ä»¶ ã€‚ 
+BBFILESç”¨äºå®šä½é…æ–¹å’Œé…æ–¹é™„åŠ æ–‡ä»¶ï¼ˆ.bbå’Œ.bbappendï¼‰ã€‚
 
 
 The PACKAGES variable lists the packages generated by a recipe.
@@ -701,10 +701,10 @@ The DEPENDS is a list of recipe names.
 
      FILES_${PN} += "${bindir}/mydir1 ${bindir}/mydir2/myfile"
 	 
-FILES :Ö¸¶¨ĞèÒª·ÅÈë°üÖĞµÄÄ¿Â¼»òÎÄ¼şµÄÁĞ±í¡£
-Ê¹ÓÃFILES±äÁ¿Ê±£¬±ØĞëÓëÉú³É°üµÄ°üÃû½áºÏÊ¹ÓÃ¡£È»ºóÌá¹©Ò»¸ö¿Õ¸ñ·Ö¸ôµÄÎÄ¼ş»òÂ·¾¶ÁĞ±í£¬ÓÃÓÚ±êÊ¶Òª°üº¬ÔÚÉú³É°üÖĞµÄÎÄ¼ş¡£ÀıÈç£º
+FILES :æŒ‡å®šéœ€è¦æ”¾å…¥åŒ…ä¸­çš„ç›®å½•æˆ–æ–‡ä»¶çš„åˆ—è¡¨ã€‚
+ä½¿ç”¨FILESå˜é‡æ—¶ï¼Œå¿…é¡»ä¸ç”ŸæˆåŒ…çš„åŒ…åç»“åˆä½¿ç”¨ã€‚ç„¶åæä¾›ä¸€ä¸ªç©ºæ ¼åˆ†éš”çš„æ–‡ä»¶æˆ–è·¯å¾„åˆ—è¡¨ï¼Œç”¨äºæ ‡è¯†è¦åŒ…å«åœ¨ç”ŸæˆåŒ…ä¸­çš„æ–‡ä»¶ã€‚ä¾‹å¦‚ï¼š
 
-FILES _ $ {PN} + =¡°$ {bindir} / mydir1 / $ {bindir} / mydir2 / myfile¡±
+FILES _ $ {PN} + =â€œ$ {bindir} / mydir1 / $ {bindir} / mydir2 / myfileâ€
 
 
 The standard BitBake behavior in most cases is: do_fetch, do_unpack, do_patch, do_configure, do_compile, do_install, do_package, do_package_write_*, and do_build.
@@ -718,17 +718,17 @@ do_install() {
 	bbplain "[-yuzp-]{libdir}:${libdir}"
 	bbplain "[-yuzp-]{includedir}:${includedir}"
 }
-//Õâ¸öº¯Êı£¬ÊÇ´´½¨${D}${libdir} ${D}${includedir}Ä¿Â¼£¬²¢ÏòÄ¿Â¼ÖĞ·Ö±ğ¿½±´ÎÄ¼ş¡£
+//è¿™ä¸ªå‡½æ•°ï¼Œæ˜¯åˆ›å»º${D}${libdir} ${D}${includedir}ç›®å½•ï¼Œå¹¶å‘ç›®å½•ä¸­åˆ†åˆ«æ‹·è´æ–‡ä»¶ã€‚
 
 
-PACKAGES = "${PN}"	//Õâ¾ä»°µÄ×÷ÓÃÊÇÖ¸¶¨°ü£¨packages)µÄÃû³Æ¡£
+PACKAGES = "${PN}"	//è¿™å¥è¯çš„ä½œç”¨æ˜¯æŒ‡å®šåŒ…ï¼ˆpackages)çš„åç§°ã€‚
 
 FILES_${PN} += " \
     ${libdir}/*.so \
     ${includedir}/*.h \
 "
-//Õâ¾ä»°ÊÇ Ö¸¶¨ĞèÒª·ÅÈë°üÖĞµÄÎÄ¼şµÄÁĞ±í¡£
-//FILES Ïà¶ÔÂ·¾¶ÊÇ${D}Ä¿Â¼£¬¼´$ {WORKDIR} / image ÏÂµÄÄ¿Â¼¼°ÎÄ¼ş
+//è¿™å¥è¯æ˜¯ æŒ‡å®šéœ€è¦æ”¾å…¥åŒ…ä¸­çš„æ–‡ä»¶çš„åˆ—è¡¨ã€‚
+//FILES ç›¸å¯¹è·¯å¾„æ˜¯${D}ç›®å½•ï¼Œå³$ {WORKDIR} / image ä¸‹çš„ç›®å½•åŠæ–‡ä»¶
 
 ${WORKDIR}:	$ {TMPDIR} / work / $ {MULTIMACH_TARGET_SYS} / $ {PN} / $ {EXTENDPE} $ {PV} - $ {PR}
 tmp\work\cortexa7-neon-telechips-linux-gnueabi\mytest\1.0.0-r0
@@ -741,53 +741,53 @@ The list of packages to be created from the recipe. The default value is the fol
  
  
 oe-pkgdata-util list-pkgs [pattern]: Lists all packages that have been built, optionally limiting the match to packages that match pattern.
-Äã¿ÉÒÔÊ¹ÓÃ±ê×¼*ºÍ£¿Í¨Åä·ûÍ¨Åä·û×÷Îª°üÃû³ÆºÍÂ·¾¶µÄÒ»²¿·Ö¡£
-oe-pkgdata-util list-pkgs 				//²é¿´ËùÓĞpackage
-oe-pkgdata-util list-pkgs helloworld	//²é¿´ÊÇ·ñÓĞÕâ¸öpackage
+ä½ å¯ä»¥ä½¿ç”¨æ ‡å‡†*å’Œï¼Ÿé€šé…ç¬¦é€šé…ç¬¦ä½œä¸ºåŒ…åç§°å’Œè·¯å¾„çš„ä¸€éƒ¨åˆ†ã€‚
+oe-pkgdata-util list-pkgs 				//æŸ¥çœ‹æ‰€æœ‰package
+oe-pkgdata-util list-pkgs helloworld	//æŸ¥çœ‹æ˜¯å¦æœ‰è¿™ä¸ªpackage
 
 
 
 
 
 oe-pkgdata-util list-pkg-files package ...: Lists the files and directories contained in the given packages.
-$oe-pkgdata-util list-pkg-files testlib	//²é¿´packageÖĞÎÄ¼şºÍÄ¿Â¼µÄÁĞ±í
+$oe-pkgdata-util list-pkg-files testlib	//æŸ¥çœ‹packageä¸­æ–‡ä»¶å’Œç›®å½•çš„åˆ—è¡¨
 testlib:
 	/usr/include/testlib.h
 	/usr/lib/testlib1.so
 	/usr/lib/testlib2.so
 
 
-²é¿´°üÄÚÈİµÄÁíÒ»ÖÖ·½·¨ÊÇ²é¿´ ÈçÏÂËùÊ¾£º
+æŸ¥çœ‹åŒ…å†…å®¹çš„å¦ä¸€ç§æ–¹æ³•æ˜¯æŸ¥çœ‹ å¦‚ä¸‹æ‰€ç¤ºï¼š
 ${WORKDIR}/packages-split directory of the recipe that generates the package. This directory is created by the do_package task
 If you want to inspect the ${WORKDIR}/packages-split directory, make sure that rm_work is not enabled when you build the recipe.
 
 
 oe-pkgdata-util lookup-recipe package ...: Lists the name of the recipes that produce the given packages.
-$oe-pkgdata-util lookup-recipe testlib	//²é¿´packageÊÇÊôÓÚÄÄ¸örecipe
+$oe-pkgdata-util lookup-recipe testlib	//æŸ¥çœ‹packageæ˜¯å±äºå“ªä¸ªrecipe
 
 
 
 
 
-¹¹½¨¹ı³ÌÖĞµÄÕâÒ»²½°üº¬Èı¸öÈÎÎñ£º
-do_configure£º
+æ„å»ºè¿‡ç¨‹ä¸­çš„è¿™ä¸€æ­¥åŒ…å«ä¸‰ä¸ªä»»åŠ¡ï¼š
+do_configureï¼š
 
-do_compile£º Ò»µ©ÅäÖÃÈÎÎñÂú×ã£¬BitBake¾Í»áÊ¹ÓÃdo_compile ÈÎÎñ±àÒëÔ´´úÂë ¡£±àÒë·¢ÉúÔÚB ±äÁ¿Ö¸ÏòµÄÄ¿Â¼ÖĞ ¡£ÒâÊ¶µ½BÄ¿Â¼£¬Ä¬ÈÏÇé¿öÏÂ£¬ÔÚÏàÍ¬ S Ä¿Â¼ÏÂ¡£
+do_compileï¼š ä¸€æ—¦é…ç½®ä»»åŠ¡æ»¡è¶³ï¼ŒBitBakeå°±ä¼šä½¿ç”¨do_compile ä»»åŠ¡ç¼–è¯‘æºä»£ç  ã€‚ç¼–è¯‘å‘ç”Ÿåœ¨B å˜é‡æŒ‡å‘çš„ç›®å½•ä¸­ ã€‚æ„è¯†åˆ°Bç›®å½•ï¼Œé»˜è®¤æƒ…å†µä¸‹ï¼Œåœ¨ç›¸åŒ S ç›®å½•ä¸‹ã€‚
 
-do_install£º ±àÒëÍê³Éºó£¬BitBakeÖ´ĞĞ do_install ÈÎÎñ¡£´ËÈÎÎñ´ÓB Ä¿Â¼¸´ÖÆÎÄ¼ş²¢½«ËüÃÇ·ÅÔÚD ±äÁ¿Ö¸ÏòµÄ±£ÁôÇøÓòÖĞ ¡£
+do_installï¼š ç¼–è¯‘å®Œæˆåï¼ŒBitBakeæ‰§è¡Œ do_install ä»»åŠ¡ã€‚æ­¤ä»»åŠ¡ä»B ç›®å½•å¤åˆ¶æ–‡ä»¶å¹¶å°†å®ƒä»¬æ”¾åœ¨D å˜é‡æŒ‡å‘çš„ä¿ç•™åŒºåŸŸä¸­ ã€‚
 
 
 The TOPDIR variable points to the Build Directory.
 
 
-"Package Feeds"Ä¿Â¼£º
+"Package Feeds"ç›®å½•ï¼š
 tmp\deploy\rpm\cortexa7_neon\
 
 
 
-STAMP ÉèÖÃÔÚmeta/conf/bitbake.conf£º
+STAMP è®¾ç½®åœ¨meta/conf/bitbake.confï¼š
 
-     STAMP =¡°$ {STAMPS_DIR} / $ {MULTIMACH_TARGET_SYS} / $ {PN} / $ {EXTENDPE} $ {PV}  -  $ {PR}¡±
+     STAMP =â€œ$ {STAMPS_DIR} / $ {MULTIMACH_TARGET_SYS} / $ {PN} / $ {EXTENDPE} $ {PV}  -  $ {PR}â€
 
 
 
@@ -816,7 +816,7 @@ STAMP ÉèÖÃÔÚmeta/conf/bitbake.conf£º
 
 
 /*-------------------------------------------------------------------------------------
-Èç meta-tutorial/classes/mybuild.bbclass£º
+å¦‚ meta-tutorial/classes/mybuild.bbclassï¼š
 addtask build
 mybuild_do_build () {
  
@@ -826,13 +826,13 @@ mybuild_do_build () {
  
 EXPORT_FUNCTIONS do_build
 
-ÔÚ base.class ÖĞ£¬ÎÒÃÇÌí¼ÓÁËÒ»¸ö build task£¬ËüÒ²ÊÇÒ»¸ö¼òµ¥µÄ shell º¯Êı¡£mybuild_do Ç°×ºµÄÒÀ¾İÊÇ class ÖĞ task ¶¨ÒåµÄ¹æ·¶ classname_do_functionname¡£
-EXPORT_FUNCTIONS Ê¹¸Ã build º¯Êı¿É±»Õâ¸ö class µÄÊ¹ÓÃÕßÊ¹ÓÃ£¬Èç¹û²»Ìí¼ÓÕâĞĞ£¬ÔòËü²»»á¸²¸Ç base class ÖĞµÄ build º¯Êı¡£
+åœ¨ base.class ä¸­ï¼Œæˆ‘ä»¬æ·»åŠ äº†ä¸€ä¸ª build taskï¼Œå®ƒä¹Ÿæ˜¯ä¸€ä¸ªç®€å•çš„ shell å‡½æ•°ã€‚mybuild_do å‰ç¼€çš„ä¾æ®æ˜¯ class ä¸­ task å®šä¹‰çš„è§„èŒƒ classname_do_functionnameã€‚
+EXPORT_FUNCTIONS ä½¿è¯¥ build å‡½æ•°å¯è¢«è¿™ä¸ª class çš„ä½¿ç”¨è€…ä½¿ç”¨ï¼Œå¦‚æœä¸æ·»åŠ è¿™è¡Œï¼Œåˆ™å®ƒä¸ä¼šè¦†ç›– base class ä¸­çš„ build å‡½æ•°ã€‚
 --------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 do_set_kernel_defconfig() {
-	# °Ñ arch/arm/configs/tcc897x_linux_avn_lcn2_reduce_defconfig ¿½±´Îª defconfig(ËùÔÚÄ¿Â¼ tmp\work\tcc8971_lcn_2.0a-telechips-linux-gnueabi\linux-telechips\3.18.24-r0\ )
+	# æŠŠ arch/arm/configs/tcc897x_linux_avn_lcn2_reduce_defconfig æ‹·è´ä¸º defconfig(æ‰€åœ¨ç›®å½• tmp\work\tcc8971_lcn_2.0a-telechips-linux-gnueabi\linux-telechips\3.18.24-r0\ )
 	#	
 	if [ -n "${KBUILD_DEFCONFIG}" ]; then
 		bbplain "[-yuzp-]linux-telechips.inc WORKDIR:${WORKDIR}"
@@ -863,8 +863,8 @@ gst-launch-1.0 playbin uri=file:///run/media/sda1/http_and_raw_h264_800x416_30se
 
 
 
-tcc8974 ´úÂë¹ÜÀíÂ·¾¶£º
-»·¾³£¬	git@githost:telechips-tcc8971.git
+tcc8974 ä»£ç ç®¡ç†è·¯å¾„ï¼š
+ç¯å¢ƒï¼Œ	git@githost:telechips-tcc8971.git
 kernel	git@githost:telechips-tcc8971-kernel.git
 uboot	git@githost:telechips-tcc8971-uboot.git
 
@@ -877,9 +877,9 @@ uboot	git@githost:telechips-tcc8971-uboot.git
 
 
 
-±È½ÏÊµÓÃµÄÓ¦ÓÃ
+æ¯”è¾ƒå®ç”¨çš„åº”ç”¨
 $ ls | xargs -t -i mv {} {}.bak
--i Ñ¡Ïî¸æËß xargs ÓÃÃ¿ÏîµÄÃû³ÆÌæ»» {}¡£
+-i é€‰é¡¹å‘Šè¯‰ xargs ç”¨æ¯é¡¹çš„åç§°æ›¿æ¢ {}ã€‚
 
 find ./ -nama ".git"|xargs rm -rf
 
@@ -891,9 +891,9 @@ echo 1 > /proc/sys/kernel/printk
 
 
 
-$(MAKEFILE_LIST) »á·µ»Ø×î½üÊ¹ÓÃµÄMakefileÎÄ¼ş£¨Èç¹ûÊ¹ÓÃÁËinclude °üº¬ÁËÒ»¸öMakefileÎÄ¼şÄÇÃ´·µ»Ø¾ÍÊÇÕâ¸ö±»include °üº¬µÄMakefileÎÄ¼şµÄÂ·¾¶£¬Èç¹ûÃ»ÓĞÊ¹ÓÃinclude ÄÇÃ´·µ»ØµÄÊÇÕıÔÚÊ¹ÓÃµÄMakefileÎÄ¼şËùÔÚµÄ¾ø¶ÔÂ·¾¶£©
+$(MAKEFILE_LIST) ä¼šè¿”å›æœ€è¿‘ä½¿ç”¨çš„Makefileæ–‡ä»¶ï¼ˆå¦‚æœä½¿ç”¨äº†include åŒ…å«äº†ä¸€ä¸ªMakefileæ–‡ä»¶é‚£ä¹ˆè¿”å›å°±æ˜¯è¿™ä¸ªè¢«include åŒ…å«çš„Makefileæ–‡ä»¶çš„è·¯å¾„ï¼Œå¦‚æœæ²¡æœ‰ä½¿ç”¨include é‚£ä¹ˆè¿”å›çš„æ˜¯æ­£åœ¨ä½¿ç”¨çš„Makefileæ–‡ä»¶æ‰€åœ¨çš„ç»å¯¹è·¯å¾„ï¼‰
 
-lastwordÕâ¸öº¯Êı±íÊ¾ÌáÈ¡×îºóÒ»¸öMAKEFILE_LISTÁĞ±íÀïµÄ×îºóÒ»¸öÔªËØ¡£ÔªËØÓëÔªËØÖ®¼äÊÇÒÔ¿Õ¸ñ·û·Ö¿ª¡£ $(lastword $(MAKEFILE_LIST)) ±íÊ¾ÌáÈ¡×îºóÒ»¸öMakefile
+lastwordè¿™ä¸ªå‡½æ•°è¡¨ç¤ºæå–æœ€åä¸€ä¸ªMAKEFILE_LISTåˆ—è¡¨é‡Œçš„æœ€åä¸€ä¸ªå…ƒç´ ã€‚å…ƒç´ ä¸å…ƒç´ ä¹‹é—´æ˜¯ä»¥ç©ºæ ¼ç¬¦åˆ†å¼€ã€‚ $(lastword $(MAKEFILE_LIST)) è¡¨ç¤ºæå–æœ€åä¸€ä¸ªMakefile
 --------------------- 
 
 
@@ -912,35 +912,35 @@ lastwordÕâ¸öº¯Êı±íÊ¾ÌáÈ¡×îºóÒ»¸öMAKEFILE_LISTÁĞ±íÀïµÄ×îºóÒ»¸öÔªËØ¡£ÔªËØÓëÔªËØÖ®¼
 
 
 
-CarLife ×ö MFI ÈÏÖ¤ĞèÒªÍ¨¹ı IAP2 µÄÈÏÖ¤ 
+CarLife åš MFI è®¤è¯éœ€è¦é€šè¿‡ IAP2 çš„è®¤è¯ 
 
-°Ù¶È CarLife ÊÖ»úºÍ³µ»ú²ÉÓÃµÄÊÇ EAP Á¬½Ó£¬ 
-¶ø CarPlay ÊÇÍ¨¹ı NCM ¶Ë¿ÚÀ´´«ÊäÊı¾İµÄ 
+ç™¾åº¦ CarLife æ‰‹æœºå’Œè½¦æœºé‡‡ç”¨çš„æ˜¯ EAP è¿æ¥ï¼Œ 
+è€Œ CarPlay æ˜¯é€šè¿‡ NCM ç«¯å£æ¥ä¼ è¾“æ•°æ®çš„ 
 
-AOAÊÇÊ²Ã´£¿
-
-
+AOAæ˜¯ä»€ä¹ˆï¼Ÿ
 
 
 
 
-¸ßÇåÆÁÏîÄ¿µ÷ÊÔ´¥ÃşÆÁ³öÏÖµÄÏÖÏó£º
-1.CPUÕ¼ÓÃÂÊ¸ß¡£ µ±´¥ÃşÊ±£¬CPUÕ¼ÓÃÂÊË²¼ä»áÉı¸ßµ½70%×óÓÒ
-2.i2c²»ÎÈ¶¨¡£	¶Áµ½µÄÊı¾İ£¬Ê±³£»á³öÏÖĞ£ÑéºÍ´íÎó
 
 
-I2C scl¸ßµçÆ½ÆÚ¼ä, sda¶ÁÈ¡Êı¾İ
-	sclµÍµçÆ½ÆÚ¼ä£¬sda·¢ËÍÊı¾İ
-ËùÓĞµÄÊ±ÖÓÂö³å°üÀ¨ACKĞÅºÅ¶ÔÓ¦µÄÊ±ÖÓÂö³å¶¼ÊÇÓÉmaster²úÉúµÄ¡£
-        ACKĞÅºÅ£º·¢ËÍÕßÔÚACKÊ±ÖÓÂö³åÆÚ¼äÊÍ·ÅSDAÏß£¬½ÓÊÕÕß¿ÉÒÔ½«SDAÀ­µÍ²¢ÔÚÊ±ÖÓĞÅºÅÎª¸ßÊ±±£³ÖµÍµçÆ½¡£
+é«˜æ¸…å±é¡¹ç›®è°ƒè¯•è§¦æ‘¸å±å‡ºç°çš„ç°è±¡ï¼š
+1.CPUå ç”¨ç‡é«˜ã€‚ å½“è§¦æ‘¸æ—¶ï¼ŒCPUå ç”¨ç‡ç¬é—´ä¼šå‡é«˜åˆ°70%å·¦å³
+2.i2cä¸ç¨³å®šã€‚	è¯»åˆ°çš„æ•°æ®ï¼Œæ—¶å¸¸ä¼šå‡ºç°æ ¡éªŒå’Œé”™è¯¯
 
-        NACKĞÅºÅ£ºµ±ÔÚµÚ9¸öÊ±ÖÓÂö³åµÄÊ±ºòSDAÏß±£³Ö¸ßµçÆ½£¬¾Í±»¶¨ÒåÎªNACKĞÅºÅ¡£MasterÒªÃ´²úÉúSTOPÌõ¼şÀ´·ÅÆúÕâ´Î´«Êä£¬»òÕßÖØ¸´STARTÌõ¼şÀ´·¢ÆğÒ»¸öĞÂµÄ¿ªÊ¼¡£
+
+I2C sclé«˜ç”µå¹³æœŸé—´, sdaè¯»å–æ•°æ®
+	sclä½ç”µå¹³æœŸé—´ï¼Œsdaå‘é€æ•°æ®
+æ‰€æœ‰çš„æ—¶é’Ÿè„‰å†²åŒ…æ‹¬ACKä¿¡å·å¯¹åº”çš„æ—¶é’Ÿè„‰å†²éƒ½æ˜¯ç”±masteräº§ç”Ÿçš„ã€‚
+        ACKä¿¡å·ï¼šå‘é€è€…åœ¨ACKæ—¶é’Ÿè„‰å†²æœŸé—´é‡Šæ”¾SDAçº¿ï¼Œæ¥æ”¶è€…å¯ä»¥å°†SDAæ‹‰ä½å¹¶åœ¨æ—¶é’Ÿä¿¡å·ä¸ºé«˜æ—¶ä¿æŒä½ç”µå¹³ã€‚
+
+        NACKä¿¡å·ï¼šå½“åœ¨ç¬¬9ä¸ªæ—¶é’Ÿè„‰å†²çš„æ—¶å€™SDAçº¿ä¿æŒé«˜ç”µå¹³ï¼Œå°±è¢«å®šä¹‰ä¸ºNACKä¿¡å·ã€‚Masterè¦ä¹ˆäº§ç”ŸSTOPæ¡ä»¶æ¥æ”¾å¼ƒè¿™æ¬¡ä¼ è¾“ï¼Œæˆ–è€…é‡å¤STARTæ¡ä»¶æ¥å‘èµ·ä¸€ä¸ªæ–°çš„å¼€å§‹ã€‚
 --------------------- 
 
-jiffies µÄÊ±¼äµ¥Î»£º
-jiffiesµÄ¼ÆÊıÔö¼Ó£¬ÊÇ¸ù¾İHZµÄÖµÃæ¶ø±ä»¯µÄ¡£
-Èç¹û HZ=100£¬ 1¸öjiffies = 10 ms
-Èç¹û HZ=1000, 1¸öjiffies = 1 ms 
+jiffies çš„æ—¶é—´å•ä½ï¼š
+jiffiesçš„è®¡æ•°å¢åŠ ï¼Œæ˜¯æ ¹æ®HZçš„å€¼é¢è€Œå˜åŒ–çš„ã€‚
+å¦‚æœ HZ=100ï¼Œ 1ä¸ªjiffies = 10 ms
+å¦‚æœ HZ=1000, 1ä¸ªjiffies = 1 ms 
 
 root@telechips-tcc8971-lcn-2:/opt/data# ./mmc cid read /sys/devices/76020000.sdhc/mmc_host/mmc1/mmc1:59b4
 type: 'SD'
@@ -950,53 +950,53 @@ serial: 0x00000000
 manfacturing date: 2017 mar
 root@telechips-tcc8971-lcn-2:/opt/data# 
 
-serial Í¬Ò»¸ö³§¼ÒµÄserialÊÇÒ»ÑùµÄ£¬²»Í¬³§¼ÒµÄserial¿ÉÄÜ»á³öÏÖÒ»Ñù¡£ËùÒÔĞèÒªÓ¦ÓÃÉÏ¼ÓÉÏ ³§ÉÌÃû³Æ¡¢Æ·ÅÆµÈĞÅÏ¢×öÇø·Ö¡£
+serial åŒä¸€ä¸ªå‚å®¶çš„serialæ˜¯ä¸€æ ·çš„ï¼Œä¸åŒå‚å®¶çš„serialå¯èƒ½ä¼šå‡ºç°ä¸€æ ·ã€‚æ‰€ä»¥éœ€è¦åº”ç”¨ä¸ŠåŠ ä¸Š å‚å•†åç§°ã€å“ç‰Œç­‰ä¿¡æ¯åšåŒºåˆ†ã€‚
 
-bInterval:	¶ËµãÊı¾İ´«ÊäµÄ·ÃÎÊÊ±¼ä¼ä¸ô¡£¶ÔÓÚÈ«ËÙ/µÍËÙµÄÖĞ¶Ï¶Ëµã£¬È¡Öµ·¶Î§Îª 1~255£¬¶ÔÓÚ¸ßËÙÖĞ¶Ï¶Ëµã£¬È¡Öµ·¶Î§Îª1~16
-			Õâ¸öÖµÖ»ÓĞÔÚ¶ËµãÀàĞÍÊÇÖĞ¶ÏÀàĞÍÊ±²ÅÆğ×÷ÓÃ£¬ËüÊÇ¶ËµãÖĞ¶ÏÇëÇóµÄ¼ä¸ôÊ±¼ä£¬ÒÔºÁÃëÎªµ¥Î»¡£
+bInterval:	ç«¯ç‚¹æ•°æ®ä¼ è¾“çš„è®¿é—®æ—¶é—´é—´éš”ã€‚å¯¹äºå…¨é€Ÿ/ä½é€Ÿçš„ä¸­æ–­ç«¯ç‚¹ï¼Œå–å€¼èŒƒå›´ä¸º 1~255ï¼Œå¯¹äºé«˜é€Ÿä¸­æ–­ç«¯ç‚¹ï¼Œå–å€¼èŒƒå›´ä¸º1~16
+			è¿™ä¸ªå€¼åªæœ‰åœ¨ç«¯ç‚¹ç±»å‹æ˜¯ä¸­æ–­ç±»å‹æ—¶æ‰èµ·ä½œç”¨ï¼Œå®ƒæ˜¯ç«¯ç‚¹ä¸­æ–­è¯·æ±‚çš„é—´éš”æ—¶é—´ï¼Œä»¥æ¯«ç§’ä¸ºå•ä½ã€‚
 			
 			
-	_ _u8 bInterval;//ÂÖÑ¯Êı¾İ´«ËÍ¶ËµãµÄÊ±¼ä¼ä¸ô
-	                       //¶ÔÓÚÅúÁ¿´«ËÍµÄ¶ËµãÒÔ¼°¿ØÖÆ´«ËÍµÄ¶Ëµã£¬´ËÓòºöÂÔ
-	                    //¶ÔÓÚÍ¬²½´«ËÍµÄ¶Ëµã£¬´ËÓò±ØĞëÎª1			
+	_ _u8 bInterval;//è½®è¯¢æ•°æ®ä¼ é€ç«¯ç‚¹çš„æ—¶é—´é—´éš”
+	                       //å¯¹äºæ‰¹é‡ä¼ é€çš„ç«¯ç‚¹ä»¥åŠæ§åˆ¶ä¼ é€çš„ç«¯ç‚¹ï¼Œæ­¤åŸŸå¿½ç•¥
+	                    //å¯¹äºåŒæ­¥ä¼ é€çš„ç«¯ç‚¹ï¼Œæ­¤åŸŸå¿…é¡»ä¸º1			
 			
 			
 			
 			
-Ò»¡¢USB ÃèÊö·û£º£¨´æÔÚÓÚUSB µÄE2PROMÀïÃæ£©
+ä¸€ã€USB æè¿°ç¬¦ï¼šï¼ˆå­˜åœ¨äºUSB çš„E2PROMé‡Œé¢ï¼‰
 
-1¡¢  Éè±¸ÃèÊö·û£ºstruct usb_device_descriptor
+1ã€  è®¾å¤‡æè¿°ç¬¦ï¼šstruct usb_device_descriptor
 
-2¡¢  ÅäÖÃÃèÊö·û£ºstruct usb_config_descriptor
+2ã€  é…ç½®æè¿°ç¬¦ï¼šstruct usb_config_descriptor
 
-3¡¢  ½Ó¿ÚÃèÊö·û£ºstruct usb_interface_descriptor
+3ã€  æ¥å£æè¿°ç¬¦ï¼šstruct usb_interface_descriptor
 
-4¡¢  ¶ËµãÃèÊö·û£ºstruct usb_endpoint_descriptor			
-
-
+4ã€  ç«¯ç‚¹æè¿°ç¬¦ï¼šstruct usb_endpoint_descriptor			
 
 
-¶ş¡¢USBµÄ´«Êä·½Ê½£º
-USB_ENDPOINT_XFER_CONTROL£¨¿ØÖÆ´«Êä£©£¨control£©
-       ÓÃÓÚÅäÖÃÉè±¸¡¢»ñÈ¡Éè±¸ĞÅÏ¢¡¢·¢ËÍÃüÁî»òÕß»ñÈ¡Éè±¸µÄ×´Ì¬±¨¸æ
+
+
+äºŒã€USBçš„ä¼ è¾“æ–¹å¼ï¼š
+USB_ENDPOINT_XFER_CONTROLï¼ˆæ§åˆ¶ä¼ è¾“ï¼‰ï¼ˆcontrolï¼‰
+       ç”¨äºé…ç½®è®¾å¤‡ã€è·å–è®¾å¤‡ä¿¡æ¯ã€å‘é€å‘½ä»¤æˆ–è€…è·å–è®¾å¤‡çš„çŠ¶æ€æŠ¥å‘Š
 	   
-USB_ENDPOINT_XFER_INT£¨ÖĞ¶Ï´«Êä£©£¨interrupt£©
-       £¨ÕâÀïËµµÄÖĞ¶ÏºÍÓ²¼şÉÏÏÂÎÄµÄÖĞ¶Ï²»Ò»Ñù£¬Ëü²»ÊÇÉè±¸Ö÷¶¯·¢ËÍÒ»¸öÖĞ¶ÏÇëÇó£¬¶øÊÇÖ÷¿ØÖÆÆ÷ÔÚ±£Ö¤²»´óÓÚÄ³¸öÊ±¼ä¼ä¸ôintervalÄÚ°²ÅÅµÄÒ»´ÎÊı¾İ´«Êä£©ÀıÈçUSBÊó±ê¡¢USB¼üÅÌ
+USB_ENDPOINT_XFER_INTï¼ˆä¸­æ–­ä¼ è¾“ï¼‰ï¼ˆinterruptï¼‰
+       ï¼ˆè¿™é‡Œè¯´çš„ä¸­æ–­å’Œç¡¬ä»¶ä¸Šä¸‹æ–‡çš„ä¸­æ–­ä¸ä¸€æ ·ï¼Œå®ƒä¸æ˜¯è®¾å¤‡ä¸»åŠ¨å‘é€ä¸€ä¸ªä¸­æ–­è¯·æ±‚ï¼Œè€Œæ˜¯ä¸»æ§åˆ¶å™¨åœ¨ä¿è¯ä¸å¤§äºæŸä¸ªæ—¶é—´é—´éš”intervalå†…å®‰æ’çš„ä¸€æ¬¡æ•°æ®ä¼ è¾“ï¼‰ä¾‹å¦‚USBé¼ æ ‡ã€USBé”®ç›˜
 	   
-USB_ENDPOINT_XFER_BULK£¨ÅúÁ¿´«Êä£©£¨bulk£©
-       ÓÃÓÚ´óÁ¿Êı¾İµÄ¿É¿¿´«Êä£¬Èç¹û×ÜÏßÉÏµÄ¿Õ¼ä²»×ãÒÔ·¢ËÍÕû¸öÅúÁ¿°ü£¬Ëü»á±»·Ö¸î³É¶à¸ö°ü´«Êä¡£Ã»ÓĞ¹Ì¶¨µÄ´«ÊäËÙÂÊ£¬ÀıÈçusb´òÓ¡»ú¡¢É¨ÃèÒÇ¡¢UÅÌµÈ£¬¶ÔÓ¦µÄ¶Ëµã¾Í½ĞÅúÁ¿¶Ëµã
+USB_ENDPOINT_XFER_BULKï¼ˆæ‰¹é‡ä¼ è¾“ï¼‰ï¼ˆbulkï¼‰
+       ç”¨äºå¤§é‡æ•°æ®çš„å¯é ä¼ è¾“ï¼Œå¦‚æœæ€»çº¿ä¸Šçš„ç©ºé—´ä¸è¶³ä»¥å‘é€æ•´ä¸ªæ‰¹é‡åŒ…ï¼Œå®ƒä¼šè¢«åˆ†å‰²æˆå¤šä¸ªåŒ…ä¼ è¾“ã€‚æ²¡æœ‰å›ºå®šçš„ä¼ è¾“é€Ÿç‡ï¼Œä¾‹å¦‚usbæ‰“å°æœºã€æ‰«æä»ªã€Uç›˜ç­‰ï¼Œå¯¹åº”çš„ç«¯ç‚¹å°±å«æ‰¹é‡ç«¯ç‚¹
 	   
-USB_ENDPOINT_XFER_ISOC£¨µÈÊ±´«Êä£©£¨isochronous£©
-       ´óÁ¿Êı¾İµÄ²»¿É¿¿´«Êä£¬²»±£Ö¤Êı¾İµÄµ½´ï£¬¶ÔÊµÊ±ĞÔÒªÇóºÜ¸ß£¬ ÀıÈçÒôÆµ¡¢ÊÓÆµµÈÉè±¸£¨USBÉãÏñÍ·¡¢USB»°Í²£©£¬¶ÔÓ¦µÄ¶Ëµã¾Í½ĞµÈÊ±¶Ëµã		
-	   
-	   
+USB_ENDPOINT_XFER_ISOCï¼ˆç­‰æ—¶ä¼ è¾“ï¼‰ï¼ˆisochronousï¼‰
+       å¤§é‡æ•°æ®çš„ä¸å¯é ä¼ è¾“ï¼Œä¸ä¿è¯æ•°æ®çš„åˆ°è¾¾ï¼Œå¯¹å®æ—¶æ€§è¦æ±‚å¾ˆé«˜ï¼Œ ä¾‹å¦‚éŸ³é¢‘ã€è§†é¢‘ç­‰è®¾å¤‡ï¼ˆUSBæ‘„åƒå¤´ã€USBè¯ç­’ï¼‰ï¼Œå¯¹åº”çš„ç«¯ç‚¹å°±å«ç­‰æ—¶ç«¯ç‚¹		
 	   
 	   
-git ¹«Ô¿ºÍË½Ô¿ ssh
+	   
+	   
+git å…¬é’¥å’Œç§é’¥ ssh
 https://git-scm.com/book/zh/v2/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5
 
 
-ÏÂÃæÊÇÉè±¸Ê÷ÖĞ½ÚµãÊôĞÔstatusµÄ´¦Àí´úÂë£¬Î»ÓÚÄÚºËµÄdrivers/of/base.cÖĞ
+ä¸‹é¢æ˜¯è®¾å¤‡æ ‘ä¸­èŠ‚ç‚¹å±æ€§statusçš„å¤„ç†ä»£ç ï¼Œä½äºå†…æ ¸çš„drivers/of/base.cä¸­
 
 static bool __of_device_is_available(const struct device_node *device)
 {
@@ -1008,13 +1008,13 @@ static bool __of_device_is_available(const struct device_node *device)
 
     status = __of_get_property(device, "status", &statlen);
     if (status == NULL)
-        return true; //Ä¬ÈÏÎªÊ¹ÄÜ
+        return true; //é»˜è®¤ä¸ºä½¿èƒ½
 
     if (statlen > 0) {
-        if (!strcmp(status, "okay") || !strcmp(status, "ok")) //okºÍokay¶¼¿ÉÒÔ
+        if (!strcmp(status, "okay") || !strcmp(status, "ok")) //okå’Œokayéƒ½å¯ä»¥
             return true;
     }
-    //±íÖĞµÄfailºÍfail-sssÃ»×ö¾ßÌå´¦Àí
+    //è¡¨ä¸­çš„failå’Œfail-sssæ²¡åšå…·ä½“å¤„ç†
     return false;
 }
 --------------------- 
@@ -1031,23 +1031,23 @@ static bool __of_device_is_available(const struct device_node *device)
 
 
 
-²é¿´Ä³¸öÎÄ¼şµÄÌá½»ÀúÊ·
+æŸ¥çœ‹æŸä¸ªæ–‡ä»¶çš„æäº¤å†å²
 git log filename
 
-²é¿´Ä³¸öÎÄ¼ş¼ĞµÄÌá½»ÀúÊ· £¿
+æŸ¥çœ‹æŸä¸ªæ–‡ä»¶å¤¹çš„æäº¤å†å² ï¼Ÿ
 
 
-²é¿´Ä³¸öÀúÊ·°æ±¾ÎÄ¼şµÄĞŞ¸ÄÄÚÈİ
+æŸ¥çœ‹æŸä¸ªå†å²ç‰ˆæœ¬æ–‡ä»¶çš„ä¿®æ”¹å†…å®¹
 git show commit_id filename
 	   
 
 
-ÈçºÎÖÆ×÷Ext4ÎÄ¼şÏµÍ³¾µÏñ
+å¦‚ä½•åˆ¶ä½œExt4æ–‡ä»¶ç³»ç»Ÿé•œåƒ
 https://blog.csdn.net/q123456789098/article/details/51912015
 	   
 mount -t ext4 -o loop test.ext4 mount_test
 
-mkuserimg.shÎÄ¼şÂ·¾¶£ºAndroid sdkÖĞµÄ out/host/linux-x86/bin/mkuserimg.sh
+mkuserimg.shæ–‡ä»¶è·¯å¾„ï¼šAndroid sdkä¸­çš„ out/host/linux-x86/bin/mkuserimg.sh
 
 
 mkuserimg.sh [-s] SRC_DIR OUTPUT_FILE EXT_VARIANT MOUNT_POINT SIZE
@@ -1083,34 +1083,34 @@ ROOTFS ?= "${IMGDEPLOYDIR}/${IMAGE_LINK_NAME}.${VM_ROOTFS_TYPE}"
 
 
 
-poky/meta-telechips/meta-update/recipes-applications/images/automotive-linux-platform-image.bbappend			¾ÍÊÇbootloader¡¢dtb¡¢kernel¡¢rootfs µÄ¿½±´µ½updateÎÄ¼ş¼Ğ ¼°ÖØÃüÃû
+poky/meta-telechips/meta-update/recipes-applications/images/automotive-linux-platform-image.bbappend			å°±æ˜¯bootloaderã€dtbã€kernelã€rootfs çš„æ‹·è´åˆ°updateæ–‡ä»¶å¤¹ åŠé‡å‘½å
 
 
 
 interrupts = <GIC_SPI 66 IRQ_TYPE_LEVEL_HIGH>,
 		 <GIC_SPI 67 IRQ_TYPE_LEVEL_HIGH>;
 		 
-*µÚÒ»¸öcell±íÊ¾ÖĞ¶ÏÀàĞÍ£¬0´ú±íSPI interrupts£¬1´ú±íPPI interrupts
-*µÚ¶ş¸öcell±íÊ¾ÖĞ¶ÏºÅÂë£¬SPI interruptsµÄÖĞ¶ÏºÅ·¶Î§ÊÇ0 ~ 987£¬¶øPPI
-*interruptsµÄÖĞ¶ÏºÅ·¶Î§ÊÇ0 ~ 15
-*µÚÈı¸öcell±íÊ¾´¥·¢·½Ê½£¬ËüÓĞ4¸öÖµ£¬·Ö±ğÎª1£¬2£¬4£¬8
-*1±íÊ¾ÉÏÉıÑØ´¥·¢£¬2±íÊ¾ÏÂ½µÑØ´¥·¢
-*4±íÊ¾¸ßµçÆ½´¥·¢£¬8±íÊ¾µÍµçÆ½´¥·¢. 
+*ç¬¬ä¸€ä¸ªcellè¡¨ç¤ºä¸­æ–­ç±»å‹ï¼Œ0ä»£è¡¨SPI interruptsï¼Œ1ä»£è¡¨PPI interrupts
+*ç¬¬äºŒä¸ªcellè¡¨ç¤ºä¸­æ–­å·ç ï¼ŒSPI interruptsçš„ä¸­æ–­å·èŒƒå›´æ˜¯0 ~ 987ï¼Œè€ŒPPI
+*interruptsçš„ä¸­æ–­å·èŒƒå›´æ˜¯0 ~ 15
+*ç¬¬ä¸‰ä¸ªcellè¡¨ç¤ºè§¦å‘æ–¹å¼ï¼Œå®ƒæœ‰4ä¸ªå€¼ï¼Œåˆ†åˆ«ä¸º1ï¼Œ2ï¼Œ4ï¼Œ8
+*1è¡¨ç¤ºä¸Šå‡æ²¿è§¦å‘ï¼Œ2è¡¨ç¤ºä¸‹é™æ²¿è§¦å‘
+*4è¡¨ç¤ºé«˜ç”µå¹³è§¦å‘ï¼Œ8è¡¨ç¤ºä½ç”µå¹³è§¦å‘. 
 --------------------- 
 
-gpio-controller;//±íÃ÷×Ô¼ºµÄÉí·İÎªgpio¿ØÖÆÆ÷
+gpio-controller;//è¡¨æ˜è‡ªå·±çš„èº«ä»½ä¸ºgpioæ§åˆ¶å™¨
 #gpio-cells = <2>;
-//µÚÒ»¸öcell±íÊ¾gpioºÅ£¬µÚ¶ş¸öcell±íÊ¾gpioÄ¬ÈÏµçÆ½
-interrupt-controller;//±íÃ÷×Ô¼ºµÄÉí·İÎªÖĞ¶Ï¿ØÖÆÆ÷
+//ç¬¬ä¸€ä¸ªcellè¡¨ç¤ºgpioå·ï¼Œç¬¬äºŒä¸ªcellè¡¨ç¤ºgpioé»˜è®¤ç”µå¹³
+interrupt-controller;//è¡¨æ˜è‡ªå·±çš„èº«ä»½ä¸ºä¸­æ–­æ§åˆ¶å™¨
 #interrupt-cells = <2>;
-//µÚÒ»¸öcell±íÊ¾ÖĞ¶ÏºÅ£¬µÚ¶ş¸öcell±íÊ¾ÖĞ¶Ï´¥·¢·½Ê½ 
+//ç¬¬ä¸€ä¸ªcellè¡¨ç¤ºä¸­æ–­å·ï¼Œç¬¬äºŒä¸ªcellè¡¨ç¤ºä¸­æ–­è§¦å‘æ–¹å¼ 
 --------------------- 
 	 
 	 
 	 
 	 
 	 
-Linux 4.x Ö®Gpio·ÖÎö£¨Ò»£©Gpiolib¿â1	 
+Linux 4.x ä¹‹Gpioåˆ†æï¼ˆä¸€ï¼‰Gpiolibåº“1	 
 https://blog.csdn.net/zmnqazqaz/article/details/78228180#3%E4%BB%A3%E7%A0%81
 
 
@@ -1143,60 +1143,60 @@ top -m 3 -d 1
 
 
 
-1. struct resouse Êµ¼ÊÀ´Ô´ÓÚ .dtsÖĞÉè±¸½Úµãreg¡¢interruptÊôĞÔ¡£
+1. struct resouse å®é™…æ¥æºäº .dtsä¸­è®¾å¤‡èŠ‚ç‚¹regã€interruptå±æ€§ã€‚
 
-2. /¸ù½ÚµãÏÂµÄËùÓĞ×Ó½Úµã£¬ÄÚºË½âÎöÎªplatform×ÜÏß¡£
-	platform×ÜÏßÏÂµÄ½Úµã£¬ÄÚºË½âÎöÎªÄ³Ğ©ÕæÊµµÄ×ÜÏßÈçi2c£¬spi£¬usbµÈ¡£
-	platform×ÜÏßµÄ½ÚµãÃû×Ö´øÓĞ¡°simpile-bus"µÈ×Ö£¬ÔòÆä×Ó½ÚµãÒ²±»½âÎöÎªplatform×ÜÏß¡£
+2. /æ ¹èŠ‚ç‚¹ä¸‹çš„æ‰€æœ‰å­èŠ‚ç‚¹ï¼Œå†…æ ¸è§£æä¸ºplatformæ€»çº¿ã€‚
+	platformæ€»çº¿ä¸‹çš„èŠ‚ç‚¹ï¼Œå†…æ ¸è§£æä¸ºæŸäº›çœŸå®çš„æ€»çº¿å¦‚i2cï¼Œspiï¼Œusbç­‰ã€‚
+	platformæ€»çº¿çš„èŠ‚ç‚¹åå­—å¸¦æœ‰â€œsimpile-bus"ç­‰å­—ï¼Œåˆ™å…¶å­èŠ‚ç‚¹ä¹Ÿè¢«è§£æä¸ºplatformæ€»çº¿ã€‚
 	
 3.	
 
-TPÖĞA/BĞ­ÒéµÄÇø±ğ:
- BĞ­ÒéÓÖ³ÆÎªslotĞ­Òé,slotÖ±ÒëÎªÎ»ÖÃ¡¢²Û£¬ÓĞÁ½²ãº¬Òå¡£Ò»²ãÊÇÎ»ÖÃ£¬»¹ÓĞÒ»²ãÊÇÈİÆ÷¡£ÔÚInput×ÓÏµÍ³ÖĞ¡£Ëü°çÑİµÄ¾ÍÊÇÕâÁ½¸ö½ÇÉ«¡£
- Ëü²úÉúÓÚÕâÑùÒ»¸ö±³¾°£º
-      ¼ÙÉè´ÓDevice»ñÈ¡µÄµ±Ç°Êı¾İÓëÉÏÒ»¸öÊı¾İÍ¬Ñù£¬ÎÒÃÇÓĞ±ØÒªÔÙÉÏ±¨µ±Ç°Êı¾İÂğ£¿
-	  ¼ÙÉèÎÒÃÇÎŞÂÛÁ½´ÎÊı¾İÊÇ·ñÒ»ÖÂ¶¼ÉÏ±¨¡£ÄÇ¾ÍÊÇAĞ­Òé£»
-	  ¼ÙÉèÎÒÃÇÑ¡Ôñ²»ÉÏ±¨¡£ÄÇÃ´¼ÈÈ»ĞëÒª±Èİ^¡£×ÜĞëÒª°ÑÉÏÒ»´ÎÊı¾İ´æÆğÀ´°É¡£slot¾ÍÊÇ×öÕâ¸öÊÂÇéµÄ£¬ÏÔÈ»Õâ¾ÍÊÇSlot(B)Ğ­Òé¡£
+TPä¸­A/Båè®®çš„åŒºåˆ«:
+ Båè®®åˆç§°ä¸ºslotåè®®,slotç›´è¯‘ä¸ºä½ç½®ã€æ§½ï¼Œæœ‰ä¸¤å±‚å«ä¹‰ã€‚ä¸€å±‚æ˜¯ä½ç½®ï¼Œè¿˜æœ‰ä¸€å±‚æ˜¯å®¹å™¨ã€‚åœ¨Inputå­ç³»ç»Ÿä¸­ã€‚å®ƒæ‰®æ¼”çš„å°±æ˜¯è¿™ä¸¤ä¸ªè§’è‰²ã€‚
+ å®ƒäº§ç”Ÿäºè¿™æ ·ä¸€ä¸ªèƒŒæ™¯ï¼š
+      å‡è®¾ä»Deviceè·å–çš„å½“å‰æ•°æ®ä¸ä¸Šä¸€ä¸ªæ•°æ®åŒæ ·ï¼Œæˆ‘ä»¬æœ‰å¿…è¦å†ä¸ŠæŠ¥å½“å‰æ•°æ®å—ï¼Ÿ
+	  å‡è®¾æˆ‘ä»¬æ— è®ºä¸¤æ¬¡æ•°æ®æ˜¯å¦ä¸€è‡´éƒ½ä¸ŠæŠ¥ã€‚é‚£å°±æ˜¯Aåè®®ï¼›
+	  å‡è®¾æˆ‘ä»¬é€‰æ‹©ä¸ä¸ŠæŠ¥ã€‚é‚£ä¹ˆæ—¢ç„¶é¡»è¦æ¯”è¼ƒã€‚æ€»é¡»è¦æŠŠä¸Šä¸€æ¬¡æ•°æ®å­˜èµ·æ¥å§ã€‚slotå°±æ˜¯åšè¿™ä¸ªäº‹æƒ…çš„ï¼Œæ˜¾ç„¶è¿™å°±æ˜¯Slot(B)åè®®ã€‚
 	  
 	  
-ESD(Electro-Static discharge),ÎÒÃÇ³£Ëµ·ÀÖ¹ESD¾ÍÊÇÕâ¸öÒâË¼¡£¾ÍÊÇ¾²µç·À»¤	  
+ESD(Electro-Static discharge),æˆ‘ä»¬å¸¸è¯´é˜²æ­¢ESDå°±æ˜¯è¿™ä¸ªæ„æ€ã€‚å°±æ˜¯é™ç”µé˜²æŠ¤	  
 
 
 
-Ò»°ãÓÃ»§Ì¬´«µİ²ÎÊıÊÇÍ¨¹ımainº¯Êı£¬µÚÒ»¸ö²ÎÊı±íÊ¾args¸öÊı£¬¼´argc£¬µÚ¶ş¸ö²ÎÊı±íÊ¾¾ßÌåµÄ²ÎÊı
+ä¸€èˆ¬ç”¨æˆ·æ€ä¼ é€’å‚æ•°æ˜¯é€šè¿‡mainå‡½æ•°ï¼Œç¬¬ä¸€ä¸ªå‚æ•°è¡¨ç¤ºargsä¸ªæ•°ï¼Œå³argcï¼Œç¬¬äºŒä¸ªå‚æ•°è¡¨ç¤ºå…·ä½“çš„å‚æ•°
 
-ÔÚkernelÌ¬£¬ÎŞ·¨Í¨¹ıÕâÑùµÄ·½Ê½´«µİ²ÎÊı£¬Ò»°ãÊ¹ÓÃºêmodule_paramµÄ·½Ê½£¬²½ÖèÈçÏÂ£º
-1.Ê¹ÓÃmodule_paramÖ¸¶¨Ä£¿éµÄ²ÎÊı
-2.¼ÓÔØdriverÊ±¸øÄ£¿é´«µİ²ÎÊı
+åœ¨kernelæ€ï¼Œæ— æ³•é€šè¿‡è¿™æ ·çš„æ–¹å¼ä¼ é€’å‚æ•°ï¼Œä¸€èˆ¬ä½¿ç”¨å®module_paramçš„æ–¹å¼ï¼Œæ­¥éª¤å¦‚ä¸‹ï¼š
+1.ä½¿ç”¨module_paramæŒ‡å®šæ¨¡å—çš„å‚æ•°
+2.åŠ è½½driveræ—¶ç»™æ¨¡å—ä¼ é€’å‚æ•°
 --------------------- 
 
 
 #define module_param(name, type, perm)                \
     module_param_named(name, name, type, perm)
 
-Í¨¹ıÃüÁî"modinfo -p ${modulename}"¿ÉÒÔµÃÖªÒ»¸öÄ£¿éÓĞÄÄĞ©²ÎÊı¿ÉÒÔÊ¹ÓÃ¡£
-Í¬Ê±£¬¶ÔÓÚÒÑ¾­¼ÓÔØµ½ÄÚºËÀïµÄÄ£¿é£¬ËüÃÇµÄÄ£¿é²ÎÊı»áÁĞ¾ÙÔÚ/sys/module/${modulename}/parameters/Ä¿Â¼ÏÂÃæ£¬
-¿ÉÒÔÊ¹ÓÃ"echo -n ${value} > /sys/module/$ {modulename}/parameters/${parm}"ÃüÁîĞŞ¸Ä¡£ 
+é€šè¿‡å‘½ä»¤"modinfo -p ${modulename}"å¯ä»¥å¾—çŸ¥ä¸€ä¸ªæ¨¡å—æœ‰å“ªäº›å‚æ•°å¯ä»¥ä½¿ç”¨ã€‚
+åŒæ—¶ï¼Œå¯¹äºå·²ç»åŠ è½½åˆ°å†…æ ¸é‡Œçš„æ¨¡å—ï¼Œå®ƒä»¬çš„æ¨¡å—å‚æ•°ä¼šåˆ—ä¸¾åœ¨/sys/module/${modulename}/parameters/ç›®å½•ä¸‹é¢ï¼Œ
+å¯ä»¥ä½¿ç”¨"echo -n ${value} > /sys/module/$ {modulename}/parameters/${parm}"å‘½ä»¤ä¿®æ”¹ã€‚ 
 
 
-linux±ê×¼log¹ÜÀí£º
+linuxæ ‡å‡†logç®¡ç†ï¼š
 cat /var/log/messages
 tail -F /var/log/messages
 
 
-systemd service notify  simple	Çø±ğ?
+systemd service notify  simple	åŒºåˆ«?
 
 
-valÊÇphandle»òlinux,phandleÖµµÄÖ¸Õë¡£
-np->phandle = be32_to_cpup(val);	//°ÑvalÖ¸Õë±£´æµ½phandle±äÁ¿ÖĞ
+valæ˜¯phandleæˆ–linux,phandleå€¼çš„æŒ‡é’ˆã€‚
+np->phandle = be32_to_cpup(val);	//æŠŠvalæŒ‡é’ˆä¿å­˜åˆ°phandleå˜é‡ä¸­
 
 
-°Ñruntime.cfgÎÄ¼ş¶Á³öÀ´ĞŞ¸Ä£¬È»ºóÔÙĞ´»ØÈ¥
+æŠŠruntime.cfgæ–‡ä»¶è¯»å‡ºæ¥ä¿®æ”¹ï¼Œç„¶åå†å†™å›å»
 dd if=/dev/mtdblock16 of=/media/flash/nvm/run.cfg
 dd if=/media/flash/nvm/run.cfg of=/dev/mtdblock16
 
 
-Ã¿Ò»¸öirq_domain¶¼¶ÔÓ¦Ò»¸öirq_chip£¬irq_chipÊÇkernel¶ÔÖĞ¶Ï¿ØÖÆÆ÷µÄÈí¼ş³éÏó
+æ¯ä¸€ä¸ªirq_domainéƒ½å¯¹åº”ä¸€ä¸ªirq_chipï¼Œirq_chipæ˜¯kernelå¯¹ä¸­æ–­æ§åˆ¶å™¨çš„è½¯ä»¶æŠ½è±¡
 
 
 
@@ -1210,64 +1210,64 @@ interrupts =  <1  28  0  4>,  <1  28  1  4>;
 
     <1 28 0 4>
 
-    1£ºÊÇ×Ó¿ØÖÆÆ÷
+    1ï¼šæ˜¯å­æ§åˆ¶å™¨
 
-    28£ºÖ÷ÖĞ¶ÏÊÇ28
+    28ï¼šä¸»ä¸­æ–­æ˜¯28
 
-    0£º×ÓÖĞ¶ÏµÄÓ²¼şÖĞ¶ÏºÅÎª0
+    0ï¼šå­ä¸­æ–­çš„ç¡¬ä»¶ä¸­æ–­å·ä¸º0
 
-    4£ºÎª¸ßµçÆ½´¥·¢
+    4ï¼šä¸ºé«˜ç”µå¹³è§¦å‘
 
-    ¶¨Î»µ½INT_RXD0ÖĞ¶ÏÔ´
+    å®šä½åˆ°INT_RXD0ä¸­æ–­æº
 
     <1 28 1 4>
 
-    1£ºÊÇ×Ó¿ØÖÆÆ÷
+    1ï¼šæ˜¯å­æ§åˆ¶å™¨
 
-    28£ºÖ÷ÖĞ¶ÏÊÇ28
+    28ï¼šä¸»ä¸­æ–­æ˜¯28
 
-    1£º×ÓÖĞ¶ÏµÄÓ²¼şÖĞ¶ÏºÅÎª1
+    1ï¼šå­ä¸­æ–­çš„ç¡¬ä»¶ä¸­æ–­å·ä¸º1
 
-    4£ºÎª¸ßµçÆ½´¥·¢
+    4ï¼šä¸ºé«˜ç”µå¹³è§¦å‘
 --------------------- 
-×÷Õß£ºqq_33513098 
-À´Ô´£ºCSDN 
-Ô­ÎÄ£ºhttps://blog.csdn.net/qq_33513098/article/details/88723282 
-°æÈ¨ÉùÃ÷£º±¾ÎÄÎª²©Ö÷Ô­´´ÎÄÕÂ£¬×ªÔØÇë¸½ÉÏ²©ÎÄÁ´½Ó£¡
+ä½œè€…ï¼šqq_33513098 
+æ¥æºï¼šCSDN 
+åŸæ–‡ï¼šhttps://blog.csdn.net/qq_33513098/article/details/88723282 
+ç‰ˆæƒå£°æ˜ï¼šæœ¬æ–‡ä¸ºåšä¸»åŸåˆ›æ–‡ç« ï¼Œè½¬è½½è¯·é™„ä¸Šåšæ–‡é“¾æ¥ï¼
 
 
-ÎªÊ²Ã´²åÈëÆ»¹ûÊÖ»ú,³µ»úusbÊÇ×ödeviceÄØ?
+ä¸ºä»€ä¹ˆæ’å…¥è‹¹æœæ‰‹æœº,è½¦æœºusbæ˜¯åšdeviceå‘¢?
 
 
 
 struct samsung_pin_bank_data {
-Óë
+ä¸
 struct samsung_pin_bank {
-µÄÇø±ğ£¿·Ö±ğÊÇÃèÊöÊ²Ã´µÄ£¿
+çš„åŒºåˆ«ï¼Ÿåˆ†åˆ«æ˜¯æè¿°ä»€ä¹ˆçš„ï¼Ÿ
 
 
 
-Èô¸É¸öÒı½Å»¹¿ÉÒÔ×é³ÉÒ»¸öpin group£¬ĞÎ³ÉÌØ¶¨µÄ¹¦ÄÜ¡£ÀıÈçpin numberÊÇ{ 0, 8, 16, 24 }ÕâËÄ¸öÒı½Å×éºÏĞÎ³ÉÒ»¸öpin group£¬Ìá¹©SPIµÄ¹¦ÄÜ¡£
+è‹¥å¹²ä¸ªå¼•è„šè¿˜å¯ä»¥ç»„æˆä¸€ä¸ªpin groupï¼Œå½¢æˆç‰¹å®šçš„åŠŸèƒ½ã€‚ä¾‹å¦‚pin numberæ˜¯{ 0, 8, 16, 24 }è¿™å››ä¸ªå¼•è„šç»„åˆå½¢æˆä¸€ä¸ªpin groupï¼Œæä¾›SPIçš„åŠŸèƒ½ã€‚
 
-ÎªºÎÓÖÓĞfunctionÕâ¸ö¸ÅÄîÄØ£¿Ê²Ã´ÊÇfunctionÄØ£¿SPIÊÇfunction£¬I2CÒ²ÊÇÒ»¸öfunction£¬µ±È»GPIOÒ²ÊÇÒ»¸öfunction¡£Ò»¸öfunctionÓĞ¿ÉÄÜ¶ÔÓ¦Ò»×é»òÕß¶à×épin¡£
+ä¸ºä½•åˆæœ‰functionè¿™ä¸ªæ¦‚å¿µå‘¢ï¼Ÿä»€ä¹ˆæ˜¯functionå‘¢ï¼ŸSPIæ˜¯functionï¼ŒI2Cä¹Ÿæ˜¯ä¸€ä¸ªfunctionï¼Œå½“ç„¶GPIOä¹Ÿæ˜¯ä¸€ä¸ªfunctionã€‚ä¸€ä¸ªfunctionæœ‰å¯èƒ½å¯¹åº”ä¸€ç»„æˆ–è€…å¤šç»„pinã€‚
 
-samsung_gpiolib_registerº¯Êı¾ÍÊÇ°Ñ¸÷¸öbank´ú±íµÄgpio chip×¢²áµ½GPIO subsystemÖĞ
+samsung_gpiolib_registerå‡½æ•°å°±æ˜¯æŠŠå„ä¸ªbankä»£è¡¨çš„gpio chipæ³¨å†Œåˆ°GPIO subsystemä¸­
 
-samsung_pinctrl_registerº¯ÊıµÄÖ÷Òª¹¦ÄÜÊÇ½«±¾pin controller×¢²áµ½pin control subsystem¡£
+samsung_pinctrl_registerå‡½æ•°çš„ä¸»è¦åŠŸèƒ½æ˜¯å°†æœ¬pin controlleræ³¨å†Œåˆ°pin control subsystemã€‚
 
 
  [root@localhost ntop-4.0.1]# lsusb
 
-//×ÜÏßºÅ      Éè±¸ºÅ          ³§ÉÌID(vid:pid)
+//æ€»çº¿å·      è®¾å¤‡å·          å‚å•†ID(vid:pid)
 
 Bus 001      Device 001:   ID 1d6b:0001
 
-struct pinctrl_desc *ctrldesc		//ÃèÊöÉè±¸Ê÷ÖĞµÄpinctrl
-struct pinctrl_pin_desc *pindesc,	//ÃèÊöÉè±¸Ê÷pinctrlÖĞµ¥¸öpin ½Å¡£
-struct samsung_pin_bank *bank;		//ÃèÊöµ¥¸öbank 
+struct pinctrl_desc *ctrldesc		//æè¿°è®¾å¤‡æ ‘ä¸­çš„pinctrl
+struct pinctrl_pin_desc *pindesc,	//æè¿°è®¾å¤‡æ ‘pinctrlä¸­å•ä¸ªpin è„šã€‚
+struct samsung_pin_bank *bank;		//æè¿°å•ä¸ªbank 
 
-struct pinctrl_dev *pctldev;				//pinctrl Éè±¸
-struct samsung_pinctrl_drv_data *drvdata	//½«×÷ÎªË½ÓĞÊı¾İ¸³Öµ¸øpctldev
+struct pinctrl_dev *pctldev;				//pinctrl è®¾å¤‡
+struct samsung_pinctrl_drv_data *drvdata	//å°†ä½œä¸ºç§æœ‰æ•°æ®èµ‹å€¼ç»™pctldev
 
 pinctrl_init_controller(struct pinctrl_desc *pctldesc, struct device *dev, void *driver_data)
 { 
@@ -1277,8 +1277,8 @@ pinctrl_init_controller(struct pinctrl_desc *pctldesc, struct device *dev, void 
 }
 
 
-ÄãËµ´íÁË Õı³£¿ª»úÊÇÖ»ÉÏACC    Ò»ÆğÉÏB+ºÍACC Õâ¸ö²Ù×÷Ö»ÓĞµÚÒ»´Î×°³µ²Å»áÓĞ   
-Õı³£¿ª»úÊÇÉÏACC   Õı³£¹Ø»úÊÇµôACC   
+ä½ è¯´é”™äº† æ­£å¸¸å¼€æœºæ˜¯åªä¸ŠACC    ä¸€èµ·ä¸ŠB+å’ŒACC è¿™ä¸ªæ“ä½œåªæœ‰ç¬¬ä¸€æ¬¡è£…è½¦æ‰ä¼šæœ‰   
+æ­£å¸¸å¼€æœºæ˜¯ä¸ŠACC   æ­£å¸¸å…³æœºæ˜¯æ‰ACC   
 
 
 root@Gemini:/sys/bus/usb/devices# ls 
@@ -1286,11 +1286,9 @@ root@Gemini:/sys/bus/usb/devices# ls
 2-0:1.0  3-0:1.0  5-0:1.0  usb1     usb3     usb5
 root@Gemini:/sys/bus/usb/devices# 
 
-1-0:1.0¾ÍÊÇinterfaceµÄÄ¿Â¼£¬±íÊ¾root hub1-port0ÉÏµÄconfiguration1µÄinterface0,
+1-0:1.0å°±æ˜¯interfaceçš„ç›®å½•ï¼Œè¡¨ç¤ºroot hub1-port0ä¸Šçš„configuration1çš„interface0,
 
-ÃüÃû¹æÔòÊÇ£ºroothub-port:configuration.interface.
-
-
+å‘½åè§„åˆ™æ˜¯ï¼šroothub-port:configuration.interface.
 
 
 
@@ -1298,12 +1296,14 @@ root@Gemini:/sys/bus/usb/devices#
 
 
 
-usbÊÇ´Óusb1¿ªÊ¼²¢·ÇÆäËûµÄÏñmmc i2c busÊÇ´Ó0¿ªÊ¼¡£ÈÎºÎusb host controller¶¼ÊÇÓëhubÍ¬Ê±´æÔÚ£¬ÕâÀïÒ²²»ÀıÍâ£¬1-0¾ÍÊÇ
-hub,1-1:ËµÃ÷ÊÇÔÚ1 portÉÏµÄ£¬1-1£º1.0Ò²¾ÍÊÇ1 portÉÏµÚÒ»¸ö½Ó¿Ú¡£
 
-±ÈÈçµçÄÔÖ÷»úÉÏÇ°ÃæµÄ2¸öusb portÆäÊµ¶¼ÊÇÒ»¸öhubÏÂÃæµÄ£¬ÎÒµÄµçÄÔÖ÷»úusb1ÉÏµÄµÚ5¸ö¶Ë¿Ú¹ÒÁË¸öhub,Í¬Ê±ÊÖ»ú²åÔÚ¸ÃhubÉÏµÄµÚ4¸öport£¬ÄÇÃ´½Úµã¸ÃÊÇÉ¶Ñù£¿1-5.4£º1. £¿ÕâĞ©¾ÍÊÇlinux usb½Úµã¹æ·¶¡£
 
-ÏÂÃæÊÇÎÒµÄÖ÷»ú¸ø³öµÄĞÅÏ¢£º
+usbæ˜¯ä»usb1å¼€å§‹å¹¶éå…¶ä»–çš„åƒmmc i2c busæ˜¯ä»0å¼€å§‹ã€‚ä»»ä½•usb host controlleréƒ½æ˜¯ä¸hubåŒæ—¶å­˜åœ¨ï¼Œè¿™é‡Œä¹Ÿä¸ä¾‹å¤–ï¼Œ1-0å°±æ˜¯
+hub,1-1:è¯´æ˜æ˜¯åœ¨1 portä¸Šçš„ï¼Œ1-1ï¼š1.0ä¹Ÿå°±æ˜¯1 portä¸Šç¬¬ä¸€ä¸ªæ¥å£ã€‚
+
+æ¯”å¦‚ç”µè„‘ä¸»æœºä¸Šå‰é¢çš„2ä¸ªusb portå…¶å®éƒ½æ˜¯ä¸€ä¸ªhubä¸‹é¢çš„ï¼Œæˆ‘çš„ç”µè„‘ä¸»æœºusb1ä¸Šçš„ç¬¬5ä¸ªç«¯å£æŒ‚äº†ä¸ªhub,åŒæ—¶æ‰‹æœºæ’åœ¨è¯¥hubä¸Šçš„ç¬¬4ä¸ªportï¼Œé‚£ä¹ˆèŠ‚ç‚¹è¯¥æ˜¯å•¥æ ·ï¼Ÿ1-5.4ï¼š1. ï¼Ÿè¿™äº›å°±æ˜¯linux usbèŠ‚ç‚¹è§„èŒƒã€‚
+
+ä¸‹é¢æ˜¯æˆ‘çš„ä¸»æœºç»™å‡ºçš„ä¿¡æ¯ï¼š
 root@hd:~$ ls /sys/bus/usb/devices/1-5.4/
 1-5.4:1.0/           avoid_reset_quirk    bMaxPacketSize0      dev                  ltm_capable          removable            version
 1-5.4:1.1/           bcdDevice            bMaxPower            devnum               manufacturer         remove               
@@ -1313,10 +1313,10 @@ root@hd:~$ ls /sys/bus/usb/devices/1-5.4/
 1-5.4:1.5/           bDeviceSubClass      configuration        idProduct            product              uevent               
 authorized           bmAttributes         descriptors          idVendor             quirks               urbnum    
 --------------------- 
-×÷Õß£ºeqwewr 
-À´Ô´£ºCSDN 
-Ô­ÎÄ£ºhttps://blog.csdn.net/linux_devices_driver/article/details/39482363 
-°æÈ¨ÉùÃ÷£º±¾ÎÄÎª²©Ö÷Ô­´´ÎÄÕÂ£¬×ªÔØÇë¸½ÉÏ²©ÎÄÁ´½Ó£¡
+ä½œè€…ï¼šeqwewr 
+æ¥æºï¼šCSDN 
+åŸæ–‡ï¼šhttps://blog.csdn.net/linux_devices_driver/article/details/39482363 
+ç‰ˆæƒå£°æ˜ï¼šæœ¬æ–‡ä¸ºåšä¸»åŸåˆ›æ–‡ç« ï¼Œè½¬è½½è¯·é™„ä¸Šåšæ–‡é“¾æ¥ï¼
 
 
 
@@ -1331,103 +1331,103 @@ authorized           bmAttributes         descriptors          idVendor         
  
  
  
-  ddr3 1600Ê²Ã´ÒâË¼
-ÊÇÖ¸ËüµÄÆµÂÊÊÇ1600MHzÂğ£¬ËüµÄ±¶ÆµÊÇ¶àÉÙ£¬ÍâÆµÄØ£¬ÄÇĞ©pc1600ÓÖÊÇÊ²Ã´ÄØ£¿ 
+  ddr3 1600ä»€ä¹ˆæ„æ€
+æ˜¯æŒ‡å®ƒçš„é¢‘ç‡æ˜¯1600MHzå—ï¼Œå®ƒçš„å€é¢‘æ˜¯å¤šå°‘ï¼Œå¤–é¢‘å‘¢ï¼Œé‚£äº›pc1600åˆæ˜¯ä»€ä¹ˆå‘¢ï¼Ÿ 
 
-ÎÒ¸æËßÄã£º
-1, ±¶ÆµºÍÍâÆµÊÇÕë¶Ô´¦ÀíÆ÷µÄ£¨Ö÷Æµ£½ÍâÆµX±¶Æµ£©£¬ºÍÄÚ´æÎŞ¹Ø¡£
-2,ÄÚ´æÉæ¼°Á½¸ö£ºµÚÒ»ÊÇÊµ¼Ê¹¤×÷ÆµÂÊ£¬µÚ¶şÊÇµÈĞ§ÆµÂÊ¡£
-DDR3 1600µÄÊµ¼ÊÆµÂÊÊÇ400MHZ£¬µÈĞ§ÆµÂÊÊÇ1600MHZ¡£¾ßÌå½âÊÍ£º
-DDRÒÑ¾­ÓĞ1¡¢2¡¢3´úÁË£¬²»¹ıÊµÖÊÃ»ÓĞ±ä¡£
-DDRÄÚ´æÊÇÈ¡´úSDRÄÚ´æµÄ£¬Òò´ËÃæÊÀµÄÊ±ºò£¬ĞÔÄÜÊÇ±È½ÏSDRÀ´ËµµÄ¡£DDR£¬µÚÒ»¸öDÊÇDoubleµÄÒâË¼£¬¼´Í¬Ò»ÖÜÆÚÄÚ£¬Êı¾İ´«ÊäÁ½´Î£¨SDRÖ»ÓĞÒ»´Î£©¡£Òò´Ë£¬DDRÄÚ´æµÄÊµ¼ÊÆµÂÊX2£¬¾ÍÊÇ¡°µÈĞ§ÆµÂÊ¡±£¨¼´Í¬ÑùĞÔÄÜÏÂ£¬SDRĞèÒª¶àÉÙÊµ¼ÊÆµÂÊ£©¡£
-DDR266Êµ¼ÊÆµÂÊ133MHZ£¬DDR333Êµ¼ÊÆµÂÊ166MHZ£¬DDR400Êµ¼ÊÆµÂÊ200MHZ
-DDR2 533Êµ¼ÊÆµÂÊ266.5MHZ£¬DDR2 667Êµ¼ÊÆµÂÊ333.5MHZ£¬DDR2 800Êµ¼ÊÆµÂÊ400MHZ
-DDR2 1066Êµ¼ÊÆµÂÊ533MHZ£¬DDR3 1066Êµ¼ÊÆµÂÊ533MHZ
-DDR3 1333Êµ¼ÊÆµÂÊ666.5MHZ£¬DDR3 1600Êµ¼ÊÆµÂÊ800MHZ 
-
-
+æˆ‘å‘Šè¯‰ä½ ï¼š
+1, å€é¢‘å’Œå¤–é¢‘æ˜¯é’ˆå¯¹å¤„ç†å™¨çš„ï¼ˆä¸»é¢‘ï¼å¤–é¢‘Xå€é¢‘ï¼‰ï¼Œå’Œå†…å­˜æ— å…³ã€‚
+2,å†…å­˜æ¶‰åŠä¸¤ä¸ªï¼šç¬¬ä¸€æ˜¯å®é™…å·¥ä½œé¢‘ç‡ï¼Œç¬¬äºŒæ˜¯ç­‰æ•ˆé¢‘ç‡ã€‚
+DDR3 1600çš„å®é™…é¢‘ç‡æ˜¯400MHZï¼Œç­‰æ•ˆé¢‘ç‡æ˜¯1600MHZã€‚å…·ä½“è§£é‡Šï¼š
+DDRå·²ç»æœ‰1ã€2ã€3ä»£äº†ï¼Œä¸è¿‡å®è´¨æ²¡æœ‰å˜ã€‚
+DDRå†…å­˜æ˜¯å–ä»£SDRå†…å­˜çš„ï¼Œå› æ­¤é¢ä¸–çš„æ—¶å€™ï¼Œæ€§èƒ½æ˜¯æ¯”è¾ƒSDRæ¥è¯´çš„ã€‚DDRï¼Œç¬¬ä¸€ä¸ªDæ˜¯Doubleçš„æ„æ€ï¼Œå³åŒä¸€å‘¨æœŸå†…ï¼Œæ•°æ®ä¼ è¾“ä¸¤æ¬¡ï¼ˆSDRåªæœ‰ä¸€æ¬¡ï¼‰ã€‚å› æ­¤ï¼ŒDDRå†…å­˜çš„å®é™…é¢‘ç‡X2ï¼Œå°±æ˜¯â€œç­‰æ•ˆé¢‘ç‡â€ï¼ˆå³åŒæ ·æ€§èƒ½ä¸‹ï¼ŒSDRéœ€è¦å¤šå°‘å®é™…é¢‘ç‡ï¼‰ã€‚
+DDR266å®é™…é¢‘ç‡133MHZï¼ŒDDR333å®é™…é¢‘ç‡166MHZï¼ŒDDR400å®é™…é¢‘ç‡200MHZ
+DDR2 533å®é™…é¢‘ç‡266.5MHZï¼ŒDDR2 667å®é™…é¢‘ç‡333.5MHZï¼ŒDDR2 800å®é™…é¢‘ç‡400MHZ
+DDR2 1066å®é™…é¢‘ç‡533MHZï¼ŒDDR3 1066å®é™…é¢‘ç‡533MHZ
+DDR3 1333å®é™…é¢‘ç‡666.5MHZï¼ŒDDR3 1600å®é™…é¢‘ç‡800MHZ 
 
 
 
-µ÷ÊÔ×Ü½á£º
-1. ÖĞ¶Ï´¦Àíº¯ÊıÖĞ²»ÄÜ¼ÓÌ«¶à´òÓ¡£¬»áÑÓ³¤ÖĞ¶Ï´¦ÀíÊ±¼ä£¬ÖĞ¶Ï´¦Àí²»¼°Ê±¡£
 
-2. ×¥²¨ĞÎ£¬²é¿´²¢·ÖÎö²¨ĞÎ¡£
-	a. ÖĞ¶Ï´¦ÀíÊÇ·ñ¼°Ê±¡£ÖÕ¶ËĞÅºÅºóÊÇ·ñÁ¢ÂíÓĞi2c¶Á²Ù×÷	
-	b. ÊÇ·ñÓĞÂ©ÖĞ¶Ï¡¢ÖĞ¶Ïµş¼Ó£¨ÖĞ¶Ï»¹Ã»´¦ÀíÍêÁíÒ»¸öÖĞ¶ÏÓÖÀ´ÁË£©
 
-3. ÇåÖĞ¶ÏµÄÊ±»ú¡£
-	a. ÖĞ¶Ïº¯ÊıÖĞÁ¢¼´ÇåÖĞ¶Ï£¬ÔÙ¶Ái2cÊı¾İ£¬´¦ÀíÖĞ¶Ï¡£
-	b. ÖĞ¶Ïº¯ÊıÖĞ¶Ái2cÊı¾İºó£¬ÇåÖĞ¶Ï£¬´¦ÀíÖĞ¶Ï¡£
-	b. ÖĞ¶Ïº¯ÊıÖĞ¶Ái2cÊı¾İºó£¬´¦ÀíÍêÖĞ¶Ï£¬ÇåÖĞ¶Ï
+è°ƒè¯•æ€»ç»“ï¼š
+1. ä¸­æ–­å¤„ç†å‡½æ•°ä¸­ä¸èƒ½åŠ å¤ªå¤šæ‰“å°ï¼Œä¼šå»¶é•¿ä¸­æ–­å¤„ç†æ—¶é—´ï¼Œä¸­æ–­å¤„ç†ä¸åŠæ—¶ã€‚
+
+2. æŠ“æ³¢å½¢ï¼ŒæŸ¥çœ‹å¹¶åˆ†ææ³¢å½¢ã€‚
+	a. ä¸­æ–­å¤„ç†æ˜¯å¦åŠæ—¶ã€‚ç»ˆç«¯ä¿¡å·åæ˜¯å¦ç«‹é©¬æœ‰i2cè¯»æ“ä½œ	
+	b. æ˜¯å¦æœ‰æ¼ä¸­æ–­ã€ä¸­æ–­å åŠ ï¼ˆä¸­æ–­è¿˜æ²¡å¤„ç†å®Œå¦ä¸€ä¸ªä¸­æ–­åˆæ¥äº†ï¼‰
+
+3. æ¸…ä¸­æ–­çš„æ—¶æœºã€‚
+	a. ä¸­æ–­å‡½æ•°ä¸­ç«‹å³æ¸…ä¸­æ–­ï¼Œå†è¯»i2cæ•°æ®ï¼Œå¤„ç†ä¸­æ–­ã€‚
+	b. ä¸­æ–­å‡½æ•°ä¸­è¯»i2cæ•°æ®åï¼Œæ¸…ä¸­æ–­ï¼Œå¤„ç†ä¸­æ–­ã€‚
+	b. ä¸­æ–­å‡½æ•°ä¸­è¯»i2cæ•°æ®åï¼Œå¤„ç†å®Œä¸­æ–­ï¼Œæ¸…ä¸­æ–­
 	
 	
-freescal Éè±¸Ê÷·ÖÎö£º
-Éè±¸Ê÷ÖĞ£ºarch\arm\boot\dts\imx6q.dtsiÖĞ			iomuxc: iomuxc@20e0000 {compatible = "fsl,imx6q-iomuxc";};
-kernelÖĞ£ºdrivers\pinctrl\freescale\pinctrl-imx6q.c ÖĞ .compatible = "fsl,imx6q-iomuxc",
+freescal è®¾å¤‡æ ‘åˆ†æï¼š
+è®¾å¤‡æ ‘ä¸­ï¼šarch\arm\boot\dts\imx6q.dtsiä¸­			iomuxc: iomuxc@20e0000 {compatible = "fsl,imx6q-iomuxc";};
+kernelä¸­ï¼šdrivers\pinctrl\freescale\pinctrl-imx6q.c ä¸­ .compatible = "fsl,imx6q-iomuxc",
 
 
 
 
-Èı¡¢LinuxÏµÍ³ÖĞUSBÉè±¸µÄ¼ÓÔØÓëĞ¶ÔØ
+ä¸‰ã€Linuxç³»ç»Ÿä¸­USBè®¾å¤‡çš„åŠ è½½ä¸å¸è½½
 
-µ±°ÑÒ»¸öUSBÉè±¸²åÈëµ½Ò»¸öUSB HUBµÄÄ³¸ö¶Ë¿ÚÊ±£¬¼¯ÖĞÆ÷¾Í»á¼ì²âµ½Éè±¸µÄ½ÓÈë£¬´Ó¶øÔÚÏÂÒ»´ÎÊÜµ½Ö÷»úÍ¨¹ıÖĞ¶Ï½»»¥²éÑ¯Ê±¾Í»áÏòÆä±¨¸æ¡£¼¯ÖĞÆ÷µÄ¶Ë¿ÚÔÚÃ»ÓĞÉè±¸½ÓÈëÊ±¶¼´¦ÓÚ¹Ø±Õ×´Ì¬£¬²åÈëÉè±¸Ö®ºóÒ²²»»á×Ô¶¯´ò¿ª£¬±ØĞëÓÉÖ÷»úÍ¨¹ı¿ØÖÆ½»»¥·¢³öÃüÁîÓèÒÔ´ò¿ª¡£ËùÒÔ£¬ÔÚµÃµ½¼¯ÖĞÆ÷µÄ±¨¸æÖ®ºó£¬Ö÷»úµÄUSBÇı¶¯³ÌĞò¾Í»áÎªĞÂ²åÈëµÄÉè±¸µ÷¶ÈÈô¸É¸ö¿ØÖÆ½»»¥£¬²¢Ïò¼¯ÖĞÆ÷·¢³ö´ò¿ªÕâ¸ö¶Ë¿ÚµÄÃüÁî£¬ÕâÑùĞÂ²åÈëµÄÉè±¸¾Í»á³öÏÖÔÚUSB×ÜÏßÉÏÁË£¬²¢Îª¸ÃÉè±¸·ÖÅäÎ¨Ò»µÄµØÖ·¡£
+å½“æŠŠä¸€ä¸ªUSBè®¾å¤‡æ’å…¥åˆ°ä¸€ä¸ªUSB HUBçš„æŸä¸ªç«¯å£æ—¶ï¼Œé›†ä¸­å™¨å°±ä¼šæ£€æµ‹åˆ°è®¾å¤‡çš„æ¥å…¥ï¼Œä»è€Œåœ¨ä¸‹ä¸€æ¬¡å—åˆ°ä¸»æœºé€šè¿‡ä¸­æ–­äº¤äº’æŸ¥è¯¢æ—¶å°±ä¼šå‘å…¶æŠ¥å‘Šã€‚é›†ä¸­å™¨çš„ç«¯å£åœ¨æ²¡æœ‰è®¾å¤‡æ¥å…¥æ—¶éƒ½å¤„äºå…³é—­çŠ¶æ€ï¼Œæ’å…¥è®¾å¤‡ä¹‹åä¹Ÿä¸ä¼šè‡ªåŠ¨æ‰“å¼€ï¼Œå¿…é¡»ç”±ä¸»æœºé€šè¿‡æ§åˆ¶äº¤äº’å‘å‡ºå‘½ä»¤äºˆä»¥æ‰“å¼€ã€‚æ‰€ä»¥ï¼Œåœ¨å¾—åˆ°é›†ä¸­å™¨çš„æŠ¥å‘Šä¹‹åï¼Œä¸»æœºçš„USBé©±åŠ¨ç¨‹åºå°±ä¼šä¸ºæ–°æ’å…¥çš„è®¾å¤‡è°ƒåº¦è‹¥å¹²ä¸ªæ§åˆ¶äº¤äº’ï¼Œå¹¶å‘é›†ä¸­å™¨å‘å‡ºæ‰“å¼€è¿™ä¸ªç«¯å£çš„å‘½ä»¤ï¼Œè¿™æ ·æ–°æ’å…¥çš„è®¾å¤‡å°±ä¼šå‡ºç°åœ¨USBæ€»çº¿ä¸Šäº†ï¼Œå¹¶ä¸ºè¯¥è®¾å¤‡åˆ†é…å”¯ä¸€çš„åœ°å€ã€‚
 
-HUBÇı¶¯³ÌĞòµ÷ÓÃº¯Êıusb_connect(struct usb_device *dev)ºÍusb_new_device(struct usb_device *dev)½âÎöÉè±¸µÄ¸÷ÖÖÃèÊö·ûĞÅÏ¢£¬·ÖÅä×ÊÔ´£¬²¢ÓëÏàÓ¦µÄÉè±¸Çı¶¯³ÌĞò½¨Á¢ÁªÏµ¡£
+HUBé©±åŠ¨ç¨‹åºè°ƒç”¨å‡½æ•°usb_connect(struct usb_device *dev)å’Œusb_new_device(struct usb_device *dev)è§£æè®¾å¤‡çš„å„ç§æè¿°ç¬¦ä¿¡æ¯ï¼Œåˆ†é…èµ„æºï¼Œå¹¶ä¸ç›¸åº”çš„è®¾å¤‡é©±åŠ¨ç¨‹åºå»ºç«‹è”ç³»ã€‚
 
-º¯Êıusb_new_deviceÖ÷ÒªÍê³ÉÒÔÏÂ¹¤×÷£º
+å‡½æ•°usb_new_deviceä¸»è¦å®Œæˆä»¥ä¸‹å·¥ä½œï¼š
 
-1.µ÷ÓÃusb_set_address°ÑĞÂ·ÖÅäµÄÉè±¸µØÖ·´«ËÍ¸øÉè±¸¡£
+1.è°ƒç”¨usb_set_addressæŠŠæ–°åˆ†é…çš„è®¾å¤‡åœ°å€ä¼ é€ç»™è®¾å¤‡ã€‚
 
-2.µ÷ÓÃusb_get_descriptor»ñµÃÉè±¸µÄÉè±¸ÃèÊö·û£¬µÃµ½Éè±¸¶ËµãµÄ°üµÄ×î´ó³¤¶È£¬½ÓÏÂÀ´µÄ¿ØÖÆ´«Êä°´Õâ¸öÊı¾İ°ü×î´ó³¤¶È½øĞĞ¡£
+2.è°ƒç”¨usb_get_descriptorè·å¾—è®¾å¤‡çš„è®¾å¤‡æè¿°ç¬¦ï¼Œå¾—åˆ°è®¾å¤‡ç«¯ç‚¹çš„åŒ…çš„æœ€å¤§é•¿åº¦ï¼Œæ¥ä¸‹æ¥çš„æ§åˆ¶ä¼ è¾“æŒ‰è¿™ä¸ªæ•°æ®åŒ…æœ€å¤§é•¿åº¦è¿›è¡Œã€‚
 
-3.µ÷ÓÃusb_get_configurationµÃµ½Éè±¸µÄËùÓĞÅäÖÃÃèÊö·û¡¢½Ó¿ÚÃèÊö·ûºÍ¶ËµãÃèÊö·ûĞÅÏ¢¡£
+3.è°ƒç”¨usb_get_configurationå¾—åˆ°è®¾å¤‡çš„æ‰€æœ‰é…ç½®æè¿°ç¬¦ã€æ¥å£æè¿°ç¬¦å’Œç«¯ç‚¹æè¿°ç¬¦ä¿¡æ¯ã€‚
 
-4.µ÷ÓÃusb_set_configuration¼¤»îµ±Ç°µÄÅäÖÃ×÷ÎªÄ¬ÈÏ¹¤×÷ÅäÖÃ¡£
+4.è°ƒç”¨usb_set_configurationæ¿€æ´»å½“å‰çš„é…ç½®ä½œä¸ºé»˜è®¤å·¥ä½œé…ç½®ã€‚
 
-5.ÔÚÄ¿Â¼¡°proc/bus/usb¡±ÖĞÎªÉè±¸´´½¨½Úµã¡£
+5.åœ¨ç›®å½•â€œproc/bus/usbâ€ä¸­ä¸ºè®¾å¤‡åˆ›å»ºèŠ‚ç‚¹ã€‚
 
-6.ÔÚUSB×ÓÏµÍ³ÖĞ£¬Í¨¹ıº¯Êıusb_find_driversºÍusb_find_interface_driver£¬ÎªÉè±¸µÄÃ¿Ò»¸ö½Ó¿ÚÑ°ÕÒÏàÓ¦µÄÇı¶¯³ÌĞò£¬Çı¶¯³ÌĞò¶Ô½Ó¿Ú½øĞĞÅäÖÃ²¢ÎªËüÃÇ·ÖÅäËùĞèµÄ×ÊÔ´¡£µ±Ã¿¸ö½Ó¿Ú±»³É¹¦Çı¶¯ºó£¬´ËÉè±¸¾ÍÄÜÕı³£¹¤×÷ÁË¡£
+6.åœ¨USBå­ç³»ç»Ÿä¸­ï¼Œé€šè¿‡å‡½æ•°usb_find_driverså’Œusb_find_interface_driverï¼Œä¸ºè®¾å¤‡çš„æ¯ä¸€ä¸ªæ¥å£å¯»æ‰¾ç›¸åº”çš„é©±åŠ¨ç¨‹åºï¼Œé©±åŠ¨ç¨‹åºå¯¹æ¥å£è¿›è¡Œé…ç½®å¹¶ä¸ºå®ƒä»¬åˆ†é…æ‰€éœ€çš„èµ„æºã€‚å½“æ¯ä¸ªæ¥å£è¢«æˆåŠŸé©±åŠ¨åï¼Œæ­¤è®¾å¤‡å°±èƒ½æ­£å¸¸å·¥ä½œäº†ã€‚
 
-Éè±¸°ÎÏÂÊ±£¬ÓëÖ®ÏàÁªµÄ¼¯ÏßÆ÷Ê×ÏÈ¼ì²âµ½Éè±¸µÄ°ÎÏÂĞÅºÅ£¬Í¨¹ıÖĞ¶Ï´«Êä½«ĞÅÏ¢´«ËÍ¸ø¼¯ÏßÆ÷µÄÇı¶¯£¬¼¯ÏßÆ÷µÄÇı¶¯ÏÈÑéÖ¤Éè±¸ÊÇ·ñ±»°ÎÏÂ£¬Èç¹ûÊÇÔòµ÷ÓÃusb_disconnect(struct usb_device **pdev)½øĞĞ´¦Àí¡£Éè±¸¶Ï¿ªºó£¬USBÏµÍ³ÕÒµ½Éè±¸µ±Ç°»î¶¯ÅäÖÃµÄÃ¿¸ö½Ó¿ÚµÄÇı¶¯³ÌĞò£¬µ÷ÓÃËüÃÇÌá¹©µÄdisconnect½Ó¿Úº¯Êı£¬ÖĞ¶ÏËüÃÇÓë¸÷¸ö½Ó¿ÚµÄÊı¾İ´«Êä²Ù×÷£¬ÊÍ·ÅËüÃÇÎªÃ¿¸ö½Ó¿Ú·ÖÅäµÄ×ÊÔ´¡£Èç¹û´ËÉè±¸ÊÇ¼¯ÏßÆ÷£¬Ôòµİ¹éµ÷ÓÃusb_disconnectÀ´´¦ÀíËüµÄ×ÓÉè±¸£¬ÊÍ·ÅÉè±¸µØÖ·£¬Í¨¹ıusbdevfs_remove_deviceº¯ÊıÊÍ·Å¸øÉè±¸´´½¨µÄÎÄ¼ş½Úµã£¬Í¨¹ıusb_free_devÊÍ·ÅUSBD¸øÉè±¸·ÖÅäµÄ×ÊÔ´¡£
-
-
-Usb Composite Device£¨Ò»°ã³ÆÎª¸´ºÏÉè±¸£©
-USB Accessory£¨USB Åä¼ş£©
-
-2.1 USB Accessoryµ×²ãÇı¶¯µÄÉè¼ÆÊµÏÖ
-2.1.1 Ê²Ã´ÊÇUSB compositeÉè±¸
-
-ÒòÎªÄ¿Ç°µÄAndroidÆ½Ì¨Éè±¸ÔÚÓëPC½øĞĞÁ¬½ÓÊ±£¬´ó¶¼±íÏÖÎªUSB CompositeÉè±¸£¬Òò´ËÕâÀïÓĞ±ØÒª¶ÔUSB CompositeÉè±¸½øĞĞÒ»ÏÂ½éÉÜ¡£
-Ê²Ã´ÊÇUSB CompositeÉè±¸ÄØ£¿¶ÔÓÚ´ó²¿·ÖUSB DeviceÉè±¸À´Ëµ£¬Ëü½ö½öÖ»ÓĞÒ»¸ö¹¦ÄÜ£¬±ÈÈç´ó²¿·ÖUÅÌ£¬µ¥¸öµÄUSBÊó±êµÈ£»µ«ÊÇÒ²ÓĞĞ©USBÉè±¸²»Ö¹ÊµÏÖÒ»¸ö¹¦ÄÜ£¬±ÈÈçÄ³Ğ©USBÉÏÍø¿¨ÓĞÎŞÏßÉÏÍøµÄ¹¦ÄÜ£¬Í¬Ê±»¹ÓĞUÅÌ´æ´¢µÄ¹¦ÄÜ£»ÓÖ±ÈÈçÓĞµÄÊó±êºÍ¼üÅÌ¶şºÏÒ»Éè±¸£¬ËüÖ»ÓĞÒ»¸öUSB½Ó¿Ú£¬È´Í¬Ê±Ö§³ÖÁËÊó±êºÍ¼üÅÌÁ½¸ö¹¦ÄÜ¡£
-
-ÕâÖÖÒ»¸öUSB½Ó¿ÚÀ©Õ¹³ö¶à¸öÉè±¸¹¦ÄÜµÄÊµÏÖ·½·¨ÓĞÁ½ÖÖ£¬Ò»ÖÖÊÇÔÚÉè±¸Íâ²¿»òÄÚ²¿¼ÓHubÀ©Õ¹£»ÁíÒ»ÖÖ¾ÍÊÇÒÔUsb Composite Device·½Ê½ÊµÏÖ£¨Ò»°ã³ÆÎª¸´ºÏÉè±¸£©¡£
-
-¸´ºÏÉè±¸ÆäÊµÖ»ÊÇÒ»¸öUSBÉè±¸£¬Ö»ÓĞÒ»¸öUSBÉè±¸µØÖ·£¬ËüÊµÏÖ¶à¸ö¹¦ÄÜµÄÔ­ÒòÖ÷ÒªÔÚÓÚËüÀ©Õ¹ÊµÏÖÁË¶à¸öUSB½Ó¿Ú£¬Ã¿¸ö½Ó¿Ú¾ßÓĞ²»Í¬µÄÉè±¸ÀàĞÍ¡£
-ÕâÀïÉæ¼°µ½USBĞ­ÒéµÄÒ»Ğ©ÖªÊ¶£¬ÓĞĞËÈ¤µÄ¶ÁÕß¿ÉÒÔÈ¥ÕÒ×ÊÁÏÁË½âÒ»ÏÂ£¬ÕâÀïÎÒÃÇÖØµãÊÇÒªÖªµÀAndroidÏÂ²ÉÓÃÁËUSB Composite DeviceÕâÖÖ·½Ê½À´ÊµÏÖÒ»¸öUSB¿ÚµÄÇé¿öÏÂÀ©Õ¹³ö¶à¸ö¹¦ÄÜÉè±¸£¬ÕâÖÖÇé¿öÏÂÒ»¸öUSB½Ó¿Ú£¨Interface£©±ã¶ÔÓ¦Ò»ÖÖÀàĞÍµÄ¹¦ÄÜÉè±¸£¬ĞèÒªÊµÏÖÓëÖ®¶ÔÓ¦µÄ¹¦ÄÜÇı¶¯¡£
+è®¾å¤‡æ‹”ä¸‹æ—¶ï¼Œä¸ä¹‹ç›¸è”çš„é›†çº¿å™¨é¦–å…ˆæ£€æµ‹åˆ°è®¾å¤‡çš„æ‹”ä¸‹ä¿¡å·ï¼Œé€šè¿‡ä¸­æ–­ä¼ è¾“å°†ä¿¡æ¯ä¼ é€ç»™é›†çº¿å™¨çš„é©±åŠ¨ï¼Œé›†çº¿å™¨çš„é©±åŠ¨å…ˆéªŒè¯è®¾å¤‡æ˜¯å¦è¢«æ‹”ä¸‹ï¼Œå¦‚æœæ˜¯åˆ™è°ƒç”¨usb_disconnect(struct usb_device **pdev)è¿›è¡Œå¤„ç†ã€‚è®¾å¤‡æ–­å¼€åï¼ŒUSBç³»ç»Ÿæ‰¾åˆ°è®¾å¤‡å½“å‰æ´»åŠ¨é…ç½®çš„æ¯ä¸ªæ¥å£çš„é©±åŠ¨ç¨‹åºï¼Œè°ƒç”¨å®ƒä»¬æä¾›çš„disconnectæ¥å£å‡½æ•°ï¼Œä¸­æ–­å®ƒä»¬ä¸å„ä¸ªæ¥å£çš„æ•°æ®ä¼ è¾“æ“ä½œï¼Œé‡Šæ”¾å®ƒä»¬ä¸ºæ¯ä¸ªæ¥å£åˆ†é…çš„èµ„æºã€‚å¦‚æœæ­¤è®¾å¤‡æ˜¯é›†çº¿å™¨ï¼Œåˆ™é€’å½’è°ƒç”¨usb_disconnectæ¥å¤„ç†å®ƒçš„å­è®¾å¤‡ï¼Œé‡Šæ”¾è®¾å¤‡åœ°å€ï¼Œé€šè¿‡usbdevfs_remove_deviceå‡½æ•°é‡Šæ”¾ç»™è®¾å¤‡åˆ›å»ºçš„æ–‡ä»¶èŠ‚ç‚¹ï¼Œé€šè¿‡usb_free_devé‡Šæ”¾USBDç»™è®¾å¤‡åˆ†é…çš„èµ„æºã€‚
 
 
+Usb Composite Deviceï¼ˆä¸€èˆ¬ç§°ä¸ºå¤åˆè®¾å¤‡ï¼‰
+USB Accessoryï¼ˆUSB é…ä»¶ï¼‰
+
+2.1 USB Accessoryåº•å±‚é©±åŠ¨çš„è®¾è®¡å®ç°
+2.1.1 ä»€ä¹ˆæ˜¯USB compositeè®¾å¤‡
+
+å› ä¸ºç›®å‰çš„Androidå¹³å°è®¾å¤‡åœ¨ä¸PCè¿›è¡Œè¿æ¥æ—¶ï¼Œå¤§éƒ½è¡¨ç°ä¸ºUSB Compositeè®¾å¤‡ï¼Œå› æ­¤è¿™é‡Œæœ‰å¿…è¦å¯¹USB Compositeè®¾å¤‡è¿›è¡Œä¸€ä¸‹ä»‹ç»ã€‚
+ä»€ä¹ˆæ˜¯USB Compositeè®¾å¤‡å‘¢ï¼Ÿå¯¹äºå¤§éƒ¨åˆ†USB Deviceè®¾å¤‡æ¥è¯´ï¼Œå®ƒä»…ä»…åªæœ‰ä¸€ä¸ªåŠŸèƒ½ï¼Œæ¯”å¦‚å¤§éƒ¨åˆ†Uç›˜ï¼Œå•ä¸ªçš„USBé¼ æ ‡ç­‰ï¼›ä½†æ˜¯ä¹Ÿæœ‰äº›USBè®¾å¤‡ä¸æ­¢å®ç°ä¸€ä¸ªåŠŸèƒ½ï¼Œæ¯”å¦‚æŸäº›USBä¸Šç½‘å¡æœ‰æ— çº¿ä¸Šç½‘çš„åŠŸèƒ½ï¼ŒåŒæ—¶è¿˜æœ‰Uç›˜å­˜å‚¨çš„åŠŸèƒ½ï¼›åˆæ¯”å¦‚æœ‰çš„é¼ æ ‡å’Œé”®ç›˜äºŒåˆä¸€è®¾å¤‡ï¼Œå®ƒåªæœ‰ä¸€ä¸ªUSBæ¥å£ï¼Œå´åŒæ—¶æ”¯æŒäº†é¼ æ ‡å’Œé”®ç›˜ä¸¤ä¸ªåŠŸèƒ½ã€‚
+
+è¿™ç§ä¸€ä¸ªUSBæ¥å£æ‰©å±•å‡ºå¤šä¸ªè®¾å¤‡åŠŸèƒ½çš„å®ç°æ–¹æ³•æœ‰ä¸¤ç§ï¼Œä¸€ç§æ˜¯åœ¨è®¾å¤‡å¤–éƒ¨æˆ–å†…éƒ¨åŠ Hubæ‰©å±•ï¼›å¦ä¸€ç§å°±æ˜¯ä»¥Usb Composite Deviceæ–¹å¼å®ç°ï¼ˆä¸€èˆ¬ç§°ä¸ºå¤åˆè®¾å¤‡ï¼‰ã€‚
+
+å¤åˆè®¾å¤‡å…¶å®åªæ˜¯ä¸€ä¸ªUSBè®¾å¤‡ï¼Œåªæœ‰ä¸€ä¸ªUSBè®¾å¤‡åœ°å€ï¼Œå®ƒå®ç°å¤šä¸ªåŠŸèƒ½çš„åŸå› ä¸»è¦åœ¨äºå®ƒæ‰©å±•å®ç°äº†å¤šä¸ªUSBæ¥å£ï¼Œæ¯ä¸ªæ¥å£å…·æœ‰ä¸åŒçš„è®¾å¤‡ç±»å‹ã€‚
+è¿™é‡Œæ¶‰åŠåˆ°USBåè®®çš„ä¸€äº›çŸ¥è¯†ï¼Œæœ‰å…´è¶£çš„è¯»è€…å¯ä»¥å»æ‰¾èµ„æ–™äº†è§£ä¸€ä¸‹ï¼Œè¿™é‡Œæˆ‘ä»¬é‡ç‚¹æ˜¯è¦çŸ¥é“Androidä¸‹é‡‡ç”¨äº†USB Composite Deviceè¿™ç§æ–¹å¼æ¥å®ç°ä¸€ä¸ªUSBå£çš„æƒ…å†µä¸‹æ‰©å±•å‡ºå¤šä¸ªåŠŸèƒ½è®¾å¤‡ï¼Œè¿™ç§æƒ…å†µä¸‹ä¸€ä¸ªUSBæ¥å£ï¼ˆInterfaceï¼‰ä¾¿å¯¹åº”ä¸€ç§ç±»å‹çš„åŠŸèƒ½è®¾å¤‡ï¼Œéœ€è¦å®ç°ä¸ä¹‹å¯¹åº”çš„åŠŸèƒ½é©±åŠ¨ã€‚
 
 
-¾Ù¸öÀı×Ó£º
-µ±ÎÒÃÇÊÖ»úÊ¹ÓÃOTGÏß½ÓUÅÌÊ±£¬Ò»°ãÊÖ»úOTGÏß£¬ÊÖ»ú¶ËÊ±miniÍ·£¬ÀïÃæµÄID±»½Óµ½ÁËGND£¬ÁíÒ»¶ËÊÇÕı³£USBµÄÄ¸×ù£¬Ö»ÓĞ4pin£¬Ã»ÓĞID½Å£¬Ïàµ±ÓÚĞü¿Õ¡£ÊÖ»ú¾ÍÊÇÉè±¸A£¬ÒòÎªID½Å±»Á¬µ½ÁËGND£¬ËùÒÔÊÖ»ú¶ËµÄUSB OTG¿ØÖÆÆ÷¶ÁÈ¡µ½IDµÄ×´Ì¬ÎªµÍ£¬Òò´ËÊÖ»ú¾Í×÷ÎªÖ÷Éè±¸¡£¶øUÅÌ¶ËIDĞü¿Õ£¬¹Ê±»µ±×ö´ÓÉè±¸B¡£
-×Ü½á£º
-µ±Éè±¸¼ì²âµ½USB_IDĞÅºÅÎªµÍÊ±£¬¸ÃÉè±¸Ó¦×÷ÎªHost£¨Ö÷»ú£¬Ò²³ÆAÉè±¸£©ÓÃ¡£
-µ±Éè±¸¼ì²âµ½USB_IDĞÅºÅÎª¸ßÊ±£¬¸ÃÉè±¸×÷ÎªSlave(ÍâÉè£¬Ò²³ÆBÉè±¸£©ÓÃ¡£
-Êµ¼ÊµÄUSBÁ¬½ÓÏßÖĞ£¬ÊÇÃ»ÓĞUSB_IDÕâ¸ùÏßµÄ¡£ ¶¼ÊÇÔÚ½Ó¿Ú²¿·ÖÖ±½ÓÀ­ËÀµÄµÄ¡£
-¶ÔÓÚHost¶Ë£¬Ö»Ğè½«Á¬½ÓÏßµÄUSB_ID pinºÍµØ¶Ì½Ó¼´¿É£¬
-¶ÔÓÚSlave¶Ë£¬USBÁ¬½ÓÏßµÄUSB_ID pinÊÇĞü¿ÕµÄ¡££¨Éè±¸ÄÚ²¿ÉÏÀ­£©¡£
+
+
+ä¸¾ä¸ªä¾‹å­ï¼š
+å½“æˆ‘ä»¬æ‰‹æœºä½¿ç”¨OTGçº¿æ¥Uç›˜æ—¶ï¼Œä¸€èˆ¬æ‰‹æœºOTGçº¿ï¼Œæ‰‹æœºç«¯æ—¶miniå¤´ï¼Œé‡Œé¢çš„IDè¢«æ¥åˆ°äº†GNDï¼Œå¦ä¸€ç«¯æ˜¯æ­£å¸¸USBçš„æ¯åº§ï¼Œåªæœ‰4pinï¼Œæ²¡æœ‰IDè„šï¼Œç›¸å½“äºæ‚¬ç©ºã€‚æ‰‹æœºå°±æ˜¯è®¾å¤‡Aï¼Œå› ä¸ºIDè„šè¢«è¿åˆ°äº†GNDï¼Œæ‰€ä»¥æ‰‹æœºç«¯çš„USB OTGæ§åˆ¶å™¨è¯»å–åˆ°IDçš„çŠ¶æ€ä¸ºä½ï¼Œå› æ­¤æ‰‹æœºå°±ä½œä¸ºä¸»è®¾å¤‡ã€‚è€ŒUç›˜ç«¯IDæ‚¬ç©ºï¼Œæ•…è¢«å½“åšä»è®¾å¤‡Bã€‚
+æ€»ç»“ï¼š
+å½“è®¾å¤‡æ£€æµ‹åˆ°USB_IDä¿¡å·ä¸ºä½æ—¶ï¼Œè¯¥è®¾å¤‡åº”ä½œä¸ºHostï¼ˆä¸»æœºï¼Œä¹Ÿç§°Aè®¾å¤‡ï¼‰ç”¨ã€‚
+å½“è®¾å¤‡æ£€æµ‹åˆ°USB_IDä¿¡å·ä¸ºé«˜æ—¶ï¼Œè¯¥è®¾å¤‡ä½œä¸ºSlave(å¤–è®¾ï¼Œä¹Ÿç§°Bè®¾å¤‡ï¼‰ç”¨ã€‚
+å®é™…çš„USBè¿æ¥çº¿ä¸­ï¼Œæ˜¯æ²¡æœ‰USB_IDè¿™æ ¹çº¿çš„ã€‚ éƒ½æ˜¯åœ¨æ¥å£éƒ¨åˆ†ç›´æ¥æ‹‰æ­»çš„çš„ã€‚
+å¯¹äºHostç«¯ï¼Œåªéœ€å°†è¿æ¥çº¿çš„USB_ID pinå’Œåœ°çŸ­æ¥å³å¯ï¼Œ
+å¯¹äºSlaveç«¯ï¼ŒUSBè¿æ¥çº¿çš„USB_ID pinæ˜¯æ‚¬ç©ºçš„ã€‚ï¼ˆè®¾å¤‡å†…éƒ¨ä¸Šæ‹‰ï¼‰ã€‚
 --------------------- 
-×÷Õß£ºĞ¡²Ë²Ë13 
-À´Ô´£ºCSDN 
-Ô­ÎÄ£ºhttps://blog.csdn.net/u010538116/article/details/80173538 
-°æÈ¨ÉùÃ÷£º±¾ÎÄÎª²©Ö÷Ô­´´ÎÄÕÂ£¬×ªÔØÇë¸½ÉÏ²©ÎÄÁ´½Ó£¡
+ä½œè€…ï¼šå°èœèœ13 
+æ¥æºï¼šCSDN 
+åŸæ–‡ï¼šhttps://blog.csdn.net/u010538116/article/details/80173538 
+ç‰ˆæƒå£°æ˜ï¼šæœ¬æ–‡ä¸ºåšä¸»åŸåˆ›æ–‡ç« ï¼Œè½¬è½½è¯·é™„ä¸Šåšæ–‡é“¾æ¥ï¼
 
 
 
 
-carplay Óëcarlife¹¦ÄÜÏàÍ¬
-eap Óëaoa ¹¦ÄÜÏàÍ¬
+carplay ä¸carlifeåŠŸèƒ½ç›¸åŒ
+eap ä¸aoa åŠŸèƒ½ç›¸åŒ
 
 
 
@@ -1435,23 +1435,43 @@ eap Óëaoa ¹¦ÄÜÏàÍ¬
 gpio controller(gc)
 struct gpio_chip *gc;
 
-pinctrl subsystem»áÎ¬»¤Ò»¸ögpio numberµ½pin numberµÄmap
-gpio numberÓë pin numberµÄ¹ØÏµ£¿
-ÔõÃ´Ìá¹©gpio numberºÍpin numberµÄmapÄØ£¿ÊÇÍ¨¹ıÒ»¸öÃû³ÆÎªgpio rangeµÄÊı¾İ½á¹¹(pinctrl subsystemÌá¹©µÄ£©
+pinctrl subsystemä¼šç»´æŠ¤ä¸€ä¸ªgpio numberåˆ°pin numberçš„map
+gpio numberä¸ pin numberçš„å…³ç³»ï¼Ÿ
+æ€ä¹ˆæä¾›gpio numberå’Œpin numberçš„mapå‘¢ï¼Ÿæ˜¯é€šè¿‡ä¸€ä¸ªåç§°ä¸ºgpio rangeçš„æ•°æ®ç»“æ„(pinctrl subsystemæä¾›çš„ï¼‰
 
 
 
-linux´óÎÄ¼ş·Ö°üÑ¹ËõºÍÅúÁ¿½âÑ¹ÃüÁîtar
-.gz¸ñÊ½
-·Ö°üÑ¹Ëõ£ºtar czf - xxx | split -b 1024m - xxx.tar.gz 	//xxx¿ÉÒÔÊÇÎÄ¼şÒ²¿ÉÒÔÊÇÄ¿Â¼£¬ ´óĞ¡¿ÉÒÔÊÇb¡¢k¡¢mÕâ3¸öµ¥Î»¡£
-ºÏ°ü½âÑ¹£ºcat xxx.tar.gz* | tar zvxf -
+linuxå¤§æ–‡ä»¶åˆ†åŒ…å‹ç¼©å’Œæ‰¹é‡è§£å‹å‘½ä»¤tar
+.gzæ ¼å¼
+åˆ†åŒ…å‹ç¼©ï¼štar czf - xxx | split -b 1024m - xxx.tar.gz 	//xxxå¯ä»¥æ˜¯æ–‡ä»¶ä¹Ÿå¯ä»¥æ˜¯ç›®å½•ï¼Œ å¤§å°å¯ä»¥æ˜¯bã€kã€mè¿™3ä¸ªå•ä½ã€‚
+åˆåŒ…è§£å‹ï¼šcat xxx.tar.gz* | tar zvxf -
 
-.bz2¸ñÊ½
-·Ö°üÑ¹Ëõ£ºtar -jcf - aaa | split -b 1400k - aaa.tar.bz2
-ºÏ°ü½âÑ¹£ºcat aaa.tar.bz2* | tar -jx -
+.bz2æ ¼å¼
+åˆ†åŒ…å‹ç¼©ï¼štar -jcf - aaa | split -b 1400k - aaa.tar.bz2
+åˆåŒ…è§£å‹ï¼šcat aaa.tar.bz2* | tar -jx -
 
 
 
-XargsÓÃ·¨Ïê½â
+Xargsç”¨æ³•è¯¦è§£
 http://blog.chinaunix.net/uid-29792372-id-5188534.html
 ls zh2.1_20180706.tar.gz* | xargs -i -t mv {} {}.zip
+
+
+imx6qç¼–è¯‘å‚æ•°é…ç½®ï¼š
+ubootå’Œkernelå‚æ•°éƒ½æ˜¯BoardConfig.mkæ–‡ä»¶ä¸­é…ç½®çš„ã€‚
+
+ubootå‚æ•°é…ç½®ï¼š
+	device/fsl/sabresd_6dq/BoardConfig.mk æ–‡ä»¶ä¸­
+		ifeq ($(TARGET_CUSTOMER_MODEL),FORYOU_S4)
+		TARGET_BOOTLOADER_CONFIG := 6q:mx6q_sabresd_foryou_s4_android_config 6dl:mx6dl_sabresd_android_config
+		endif 	
+	
+	TARGET_BOOTLOADER_CONFIGæ˜¯åœ¨ build/core/Makefileï¼š424è¡Œä¸­è¢«è°ƒç”¨çš„ã€‚
+		
+		
+		
+kernelå‚æ•°é…ç½®ï¼š
+	device/fsl/imx6/soc/imx6dq.mk æ–‡ä»¶ä¸­
+		TARGET_KERNEL_DEFCONF := imx6_android_$(TARGET_CUSTOMER_MODEL)_defconfig
+		
+		TARGET_KERNEL_DEFCONFæ˜¯åœ¨ build/core/Makefileï¼š831è¡Œä¸­è¢«è°ƒç”¨çš„ã€‚
