@@ -1493,3 +1493,102 @@ export TARGET_CUSTOMER_MODEL=$2
 }
 
 
+
+imx8系统编译环境配置：
+1.anzhuang ubuntu 16.04
+
+
+2.anzhuang sougou shurufa
+	https://blog.csdn.net/areigninhell/article/details/79696751
+
+
+3.anzhuang virturalbox
+	https://blog.csdn.net/weixin_43331296/article/details/83025126
+
+4.anzhuang source insight
+	https://blog.csdn.net/imyang2007/article/details/7654700
+	
+5.source insight 新建工程
+	https://blog.csdn.net/toddmi/article/details/7731512
+
+6.
+
+
+
+
+
+
+
+
+	How to Generate an SSH Key
+	 
+
+    From the Terminal or Git Bash, run ssh-keygen
+    Confirm the default path .ssh/id_rsa
+    Enter a passphrase (recommended) or leave it blank.
+    Remember this passphrase, as you will need it to unlock the
+    key whenever you use it.
+    Open ~/.ssh/id_rsa.pub and copy & paste the contents into
+    the box below, then click on "Add".
+    Note that id_rsa.pub is your public key and can be shared,
+    while id_rsa is your private key and should be kept secret.
+
+
+yzp@yzp-B85M-D2V:~$ du -sh imx-p9.0.0_2.1.0-auto-ga_a/
+71G	imx-p9.0.0_2.1.0-auto-ga_a/
+
+
+ubuntu如何安装gcc-arm-none-eabi:
+https://jingyan.baidu.com/article/eae078276fe0781fec5485e9.html
+
+
+ubuntu 安装cmake
+wget https://github.com/Kitware/CMake/releases/download/v3.13.2/cmake-3.13.2.tar.gz
+tar -xzvf cmake-3.13.2.tar.gz; cd cmake-3.13.2;
+sudo ./bootstrap
+sudo make
+sudo make install
+
+
+
+Ubuntu 安装adb
+https://blog.csdn.net/u011006622/article/details/77505444
+
+ubuntu Virtualbox识别USB设备
+https://www.cnblogs.com/ljjphysics/archive/2012/07/02/2572746.html
+
+
+
+串口调试利器--Minicom配置及使用详解
+https://www.cnblogs.com/wonux/p/5897127.html
+https://www.cnblogs.com/pipci/p/8474188.html
+ctrl-a + z 	//帮助信息
+ctrl-a + L 	//开始、停止打印保存为文件
+ctrl-a + o 	//设置串口信息
+ctrl-a + q 	//退出minicom应用
+ctrl-a + x 	//退出minicom应用
+
+
+yzp@yzp-B85M-D2V:~/imx-p9.0.0_2.1.0-auto-ga_a$ lsusb
+Bus 002 Device 002: ID 8087:8000 Intel Corp. 
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 014: ID 067b:2303 Prolific Technology, Inc. PL2303 Serial Port
+Bus 003 Device 015: ID 18d1:4ee7 Google Inc. 
+Bus 003 Device 003: ID 093a:2510 Pixart Imaging, Inc. Optical Mouse
+Bus 003 Device 004: ID 1c4f:0002 SiGma Micro Keyboard TRACER Gamma Ivory
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+yzp@yzp-B85M-D2V:~/imx-p9.0.0_2.1.0-auto-ga_a$ 
+
+
+
+uuu工具烧录：
+sudo ./uuu_imx_android_flash.sh -f imx8qxp -e
+
+
+
+
+fastboot工具烧录：
+sudo ./fastboot_imx_flashall.sh -f imx8qxp -a -e -D /imx_pi9.0/mek_8q_car/
