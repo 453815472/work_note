@@ -1584,6 +1584,38 @@ yzp@yzp-B85M-D2V:~/imx-p9.0.0_2.1.0-auto-ga_a$
 
 
 
+当mxc_v4l2_capture.c中的open函数中调用vidioc_int_g_ifparm的话，
+	v4l2_int_ioctl_1(struct v4l2_int_device *d, int cmd, void *arg)
+		find_ioctl();			//返回对应的v4l2_int_ioctl_func类型的处理函数
+
+
+
+
+#define V4L2_INT_WRAPPER_1(name, arg_type, asterisk)			\
+	static inline int vidioc_int_##name(struct v4l2_int_device *d,	\
+					    arg_type asterisk arg)	\
+	{								\
+		return v4l2_int_ioctl_1(d, vidioc_int_##name##_num,	\
+					(void *)(unsigned long)arg);	\
+	}
+
+
+
+struct v4l2_int_ioctl_desc {
+	int num;
+	v4l2_int_ioctl_func *func;
+};
+
+所以，struct v4l2_int_ioctl_desc中的num和func是由name决定的。
+这个vidioc_int_##name##_num描述就定义了一个num(vidioc_int_g_ifparm_num这样的序号值), 
+这个vidioc_int_##name描述就定义了一个func(vidioc_int_g_ifparm这样的处理函数)
+
+
+
+ V4L2_CAP_VIDEO_OVERLAY与V4L2_CAP_VIDEO_CAPTURE的区别
+https://blog.csdn.net/weixin_30788619/article/details/96341714
+		
+
 uuu工具烧录：
 sudo ./uuu_imx_android_flash.sh -f imx8qxp -e
 
@@ -1592,3 +1624,75 @@ sudo ./uuu_imx_android_flash.sh -f imx8qxp -e
 
 fastboot工具烧录：
 sudo ./fastboot_imx_flashall.sh -f imx8qxp -a -e -D /imx_pi9.0/mek_8q_car/
+
+
+usb驱动开发之USB协议枚举过程详解
+https://blog.csdn.net/charliewangg12/article/details/77890741
+
+Linux驱动发开，usb设备的probe全过程
+https://blog.csdn.net/kevinx_xu/article/details/23513117
+
+
+
+
+
+
+uboot和kernel参数都是BoardConfig.mk文件中配置的。
+
+uboot参数配置：
+	device/fsl/sabresd_6dq/BoardConfig.mk 文件中
+		ifeq ($(TARGET_CUSTOMER_MODEL),FORYOU_S4)
+		TARGET_BOOTLOADER_CONFIG := 6q:mx6q_sabresd_foryou_s4_android_config 6dl:mx6dl_sabresd_android_config
+		endif 	
+	
+	TARGET_BOOTLOADER_CONFIG是在 build/core/Makefile：424行中被调用的。
+		
+		
+		
+kernel参数配置：
+	device/fsl/imx6/soc/imx6dq.mk 文件中
+		TARGET_KERNEL_DEFCONF := imx6_android_$(TARGET_CUSTOMER_MODEL)_defconfig
+		
+		TARGET_KERNEL_DEFCONF是在 build/core/Makefile：831行中被调用的。
+		
+		
+		
+		
+# set sdp command name based on soc_name
+if [[ ${soc_name#imx8q} != ${soc_name} ]]; then		//如果是imx8q系列的soc，那就执行sdp="SDPS"
+    sdp="SDPS"
+fi		
+
+解析：
+https://blog.csdn.net/qq_43193797/article/details/90906007
+
+
+FB 的意思是 ：fastboot
+
+echo FB: flash gpt 				partition-table.img >> /tmp/uuu.lst			//把partition-table.img烧录进gpt分区，可是为什么从文档分区表中没看见有gpt分区？
+echo FB: flash bootloader0 		spl-imx8qxp.bin >> /tmp/uuu.lst
+echo FB: flash bootloader_a		bootloader-imx8qxp.img >> /tmp/uuu.lst
+echo FB: flash dtbo_a			dtbo-imx8qxp.img >> /tmp/uuu.lst
+....
+
+
+
+在Windows上安装xshell，并ssh虚拟机Ubuntu
+https://blog.csdn.net/dengjin20104042056/article/details/79123387
+
+
+
+深入理解 Android 系统升级
+https://blog.csdn.net/owenchan1987/article/details/77651954
+
+grep -rni "bootimage" ./
+grep -Rni "bootimage" ./
+
+使用 -R 查找的结果更详细，grep命令使用-R参数
+
+
+lunch:   lunch <product_name>-<build_variant>
+
+Android系统编译流程：
+三：make命令的执行过程：
+	1. 到device和vendor目录下查找所有的AndroidProducts.mk文件，并将所有AndroidProducts.mk文件路径赋值给PRODUCT_MAKEFILES 变量
