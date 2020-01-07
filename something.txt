@@ -1569,6 +1569,14 @@ ctrl-a + q 	//退出minicom应用
 ctrl-a + x 	//退出minicom应用
 
 
+VirtualBox启动报错--execute the kernel module by executing '/sbin/vboxconfig'的解决方法
+https://blog.csdn.net/ximingren/article/details/79200828
+
+
+
+
+
+
 yzp@yzp-B85M-D2V:~/imx-p9.0.0_2.1.0-auto-ga_a$ lsusb
 Bus 002 Device 002: ID 8087:8000 Intel Corp. 
 Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
