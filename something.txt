@@ -1704,3 +1704,17 @@ lunch:   lunch <product_name>-<build_variant>
 Android系统编译流程：
 三：make命令的执行过程：
 	1. 到device和vendor目录下查找所有的AndroidProducts.mk文件，并将所有AndroidProducts.mk文件路径赋值给PRODUCT_MAKEFILES 变量
+
+
+
+
+全编译：
+	make -j4
+Building U-Boot images：
+	make bootloader -j4
+	
+Building a kernel image：
+	make bootimage -j4
+	
+Building dtbo.img：
+	make dtboimage -j4
