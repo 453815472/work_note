@@ -1720,6 +1720,55 @@ Building dtbo.img：
 	make dtboimage -j4
 
 
+
+
+
+
+
+
+/*
+ * Legacy format image header,
+ * all data in network byte order (aka natural aka bigendian).
+ */
+typedef struct image_header {
+	uint32_t	ih_magic;	/* Image Header Magic Number	*/ 
+	uint32_t	ih_hcrc;	/* Image Header CRC Checksum	*/
+	uint32_t	ih_time;	/* Image Creation Timestamp	*/
+	uint32_t	ih_size;	/* Image Data Size		*/
+	uint32_t	ih_load;	/* Data	 Load  Address		*/
+	uint32_t	ih_ep;		/* Entry Point Address		*/
+	uint32_t	ih_dcrc;	/* Image Data CRC Checksum	*/
+	uint8_t		ih_os;		/* Operating System		*/
+	uint8_t		ih_arch;	/* CPU architecture		*/
+	uint8_t		ih_type;	/* Image Type			*/
+	uint8_t		ih_comp;	/* Compression Type		*/
+	uint8_t		ih_name[IH_NMLEN];	/* Image Name		*/
+} image_header_t;
+
+
+
+其中，ih_load；加载地址，表示内核运行的时候先把它放在哪里。
+     ih_ep；  入口地址，运行内核时，直接跳转到该地址执行，
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 一个ＵＳＢ控制器和一个Ｈｕｂ绑定在一起，专业一点称为“集成”，这个ｈｕｂ也被称为RootHub.
 USB协议规定所有的数据传输都必须由主机发起，
 ＵＳＢ通信最基本的形式是通过ＵＳＢ设备中一个叫Ｅｎｄｐｏｉｎｔ（端点）的东西，而主机和端点之间的数据传输是通过Ｐｉｐｅ（管道）。
